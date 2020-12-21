@@ -1,0 +1,30 @@
+{
+  "name": "daw-pri-2020",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "mongoose": "^5.11.8",
+    "morgan": "~1.9.1",
+    "pug": "2.0.0-beta11"
+  },
+  "description": "Trabalho Prático",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Catarinacg16/DAW-PRI-2020.git"
+  },
+  "author": "Catarina Gil, Hugo Cunha, Tânia Rocha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Catarinacg16/DAW-PRI-2020/issues"
+  },
+  "homepage": "https://github.com/Catarinacg16/DAW-PRI-2020#readme"
+}
