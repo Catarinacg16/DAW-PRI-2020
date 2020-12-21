@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
-var cors = require('cors');
+//var cors = require('cors');
 
 
 var mongoDB = 'mongodb://127.0.0.1/DAW-PRI-2020'
@@ -20,7 +20,9 @@ db.once('open', function(){
 
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var adminRouter = require('./routes/administrador');
+var consumidorRouter = require('./routes/consumidor');
+var produtorRouter = require('./routes/produtor');
 
 var app = express();
 
@@ -28,7 +30,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(cors());
+//app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -36,7 +38,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/Produtor', produtorRouter);
+app.use('/Consumidor', consumidorRouter);
+app.use('/Administrador', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

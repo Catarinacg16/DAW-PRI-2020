@@ -11,9 +11,11 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+    "loader": "^2.1.1",
     "mongoose": "^5.11.8",
     "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11"
+    "nodemon": "^2.0.6",
+    "pug": "^2.0.0-beta11"
   },
   "description": "Trabalho Prático",
   "main": "app.js",

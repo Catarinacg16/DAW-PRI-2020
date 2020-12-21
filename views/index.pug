@@ -1,5 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Listagem de Páginas
+  p HomePage 
+  ul
+    li
+      a(href="/consumidor/") Página do Consumidor      
+    li
+      a(href="/produtor/") Página do Produtor
+    li
+      a(href="/administrador/") Página do Administrador
