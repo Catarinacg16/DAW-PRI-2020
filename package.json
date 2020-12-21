@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dumpDatabase" : "mongodump -d DAW-PRI-2020",
-    "restoreDatabase":"mongorestore -d DAW-PRI-2020 dump/DAW-PRI-2020",
+    "dumpDatabase": "mongodump -d DAW-PRI-2020",
+    "restoreDatabase": "mongorestore -d DAW-PRI-2020 dump/DAW-PRI-2020",
     "start": "node ./bin/www"
   },
   "dependencies": {
