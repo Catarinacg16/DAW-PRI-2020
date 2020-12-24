@@ -12,4 +12,4 @@ var utilizadorSchema = new mongoose.Schema({
   password: String,
 });
 
-module.exports = mongoose.model("utilizador", utilizadorSchema);
+module.exports = mongoose.model("utilizadore", utilizadorSchema);
