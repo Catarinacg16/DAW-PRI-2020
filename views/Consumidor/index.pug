@@ -12,16 +12,19 @@ block content
                 h3
                   b=a.titulo
                 h5 
-                  b=a.autor 
-                  span.w3-opacity=a.dataRegisto
+                  |Autor :  
+                  b=a.autor
+                  span.w3-opacity 
+                    =a.dataRegisto
               .w3-container
                 p
-                 b=a.descricao
+                  |
+                  =a.descricao
                 .w3-row
                   .w3-col.m8.s12
                     p
                       button.w3-button.w3-padding-large.w3-white.w3-border
-                        b VER &raquo;
+                        a(href="/consumidor/recurso/"+a._id) VER &raquo;
                   .w3-col.m4.w3-hide-small
                     p
                       span.w3-padding-large.w3-right
