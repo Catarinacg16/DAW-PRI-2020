@@ -50,12 +50,10 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-  console.log("Serializar o user na sessao: " + JSON.stringify(user));
   done(null, user.id);
 });
 
 passport.deserializeUser((uid, done) => {
-  console.log("A desserialiazar o user: " + uid);
   Utilizador.lookUp({ _id: uid })
     .then((dados) => done(null, dados))
     .catch((erro) => {
@@ -71,6 +69,8 @@ app.use(logger("dev"));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
+
+
 app.use(
   session({
     genid: function (req) {
@@ -80,10 +80,9 @@ app.use(
     secret: "DAW-PRI-2020",
     resave: false,
     saveUninitialized: true,
-  })
-);
+  }));
 
-app.use(logger("dev"));
+
 app.use(express.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -95,9 +94,7 @@ app.use(passport.session());
 app.use("/", indexRouter);
 
 app.use(function (req, res, next) {
-  console.log("SessId: " + req.sessionID);
   if (req.user) {
-    console.log("mddlware IsLoggedIn? :" + req.user.id);
     next();
   } else res.render("login");
 });
