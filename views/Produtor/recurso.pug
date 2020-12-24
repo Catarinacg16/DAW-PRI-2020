@@ -45,8 +45,9 @@ block content
                 .w3-row
                   .w3-col.m8.s12
                     p
-                      button.w3-button.w3-padding-large.w3-white.w3-border
-                        a(href="kkkNotYet") Download &raquo;
+                      button.btn
+                       i.fa.fa-download
+                        |  Download
                   .w3-col.m4.w3-hide-small
                     p
                       span.w3-padding-large.w3-right
@@ -54,11 +55,14 @@ block content
                         span.w3-badge 2
                     p
                       span.w3-padding-large.w3-right
-                        b Pontuação &nbsp;
-                        span.w3-badge 1  
+                        b Pontuação : 
+                        - for (var i = 0; i < recurso.pontuacao; i++) {
+                            span.fa.fa-star.checked
+                        -}
                   
             // END BLOG ENTRIES
             // Posts
+            hr
             .w3-card.w3-margin
               .w3-container.w3-padding-white
                 h4 Comentarios
