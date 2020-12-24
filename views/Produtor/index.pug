@@ -14,7 +14,8 @@ block content
                 h5 
                   |Autor :  
                   b=a.autor
-                  span.w3-opacity=a.dataRegisto
+                  span.w3-opacity 
+                    =a.dataRegisto
               .w3-container
                 p
                   |
@@ -23,7 +24,7 @@ block content
                   .w3-col.m8.s12
                     p
                       button.w3-button.w3-padding-large.w3-white.w3-border
-                        b VER &raquo;
+                        a(href="/produtor/recurso/"+a._id) VER &raquo;
                   .w3-col.m4.w3-hide-small
                     p
                       span.w3-padding-large.w3-right

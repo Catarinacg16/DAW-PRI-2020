@@ -9,8 +9,8 @@ module.exports.list = function () {
 };
 
 // Retorna um recurso
-module.exports.lookUp = function (r) {
-  return Recurso.findOne(r).exec();
+module.exports.lookUp = function (id) {
+  return Recurso.findOne({ _id: id }).exec();
 };
 
 // Insere um novo recurso
