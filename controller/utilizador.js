@@ -10,7 +10,6 @@ module.exports.list = function () {
 
 // Retorna um Utilizador
 module.exports.lookUp = function (u) {
-  console.log("UserController: ")
   return Utilizador.findOne(u).exec();
 
 };

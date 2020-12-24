@@ -1,0 +1,76 @@
+
+extends header
+block content
+    // Blog entries
+    h1 Carregar novo Ficheiro
+    .w3-row
+        // Blog entries 
+        .w3-col.l8.s12
+          
+            // Blog entry    
+            .w3-card-4.w3-margin.w3-light-grey
+              .w3-container
+                form(action="/produtor/upload" method="POST", enctype="multipart/form-data")
+                    .container(id="fileInputGroup")
+                        .w3-half
+                            p
+                            .div
+                                label(for="vi") Visibilidade:                   
+                            .div
+                                select.form-control(type="text",name="vi")
+                                    option(value="value") Público
+                                    option(value="value") Privado
+                            p
+                            .div
+                                label(for="tipo") Tipo:
+                            .div
+                                select.form-control(type="text", name="tipo")
+                                    option(value="Tese") Tese
+                                    option(value="Relatório") Relatório
+                                    option(value="Artigo") Artigo
+                                    option(value="Aplicação") Aplicacão
+                                    option(value="Slides") Slides
+                                    option(value="Exames") Exames
+                                    option(value="Resoluções") Resoluções
+                            p
+                            .div
+                                label(for="desc") Descrição:
+                            .div
+                                input.form-control(type="text",placeholder="descrição",name="desc")
+                            p
+                            .div
+                                label(for="titulo") Título:
+                            .div
+                                input.form-control(type="text", placeholder="título",name="tit")
+                            p
+                            .div
+                                label(for="dc") Data de Criação:
+                            .div
+                                input.form-control(type="text",placeholder="AAAA-MM-DD",name="dc")
+                            p
+                            .div
+                                label(for="autor") Autor:
+                            .div(id="addAutor")
+                                input.form-control(type="text",placeholder="autor",name="autor")
+                                input.btn.btn-secondary.mr-5(type="button", onclick="addAutor()", value="+")                           
+                            p
+                            p
+                        
+                        .w3-half.w3-center
+                            .w3-card-4.w3-margin
+                                img.w3-image(src='/images/upload.png' width='150' height='80')
+                                input.custom-file-input(type="file", name="file", required)
+
+                        .w3.bottom   
+                            input.btn.btn-lg.btn-primary(type="submit",value="Submit")
+
+                  
+           
+        .w3-col.l4
+          .w3-card.w3-margin.w3-margin-top
+            .w3-container.w3-white
+              h4
+                b Ficheiros Carregados
+          hr
+    br
+    // END w3-content
