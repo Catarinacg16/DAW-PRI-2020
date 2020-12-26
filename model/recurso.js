@@ -12,6 +12,7 @@ var recursoSchema = new mongoose.Schema({
   produtor: String,
   pontuacao: Number,
   numPontuacoes: Number,
+  tags: [String]
 });
 
 module.exports = mongoose.model("recurso", recursoSchema);
