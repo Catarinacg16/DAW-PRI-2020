@@ -2,10 +2,10 @@
 var mongoose = require("mongoose");
 
 var comentarios = new mongoose.Schema({
-  id_Utilizador: Number,
+  id_utilizador: Number,
   nome_utilizador: String,
-  data_comentario: Date,
-  destricao: String,
+  data: Date,
+  descricao: String,
 });
 
 comentarios.add({ comentarios: [comentarios] }); //replies do proprio comentario (tem que ser aqui senao morre)

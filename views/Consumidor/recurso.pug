@@ -66,12 +66,14 @@ block content
                 each com in recurso.comentarios
                   li.w3-padding-16
                     b=com.nome_utilizador
-                    b=com.descricao
-                    span.w3-large=com.descricao
+                    br
+                    b=com.data
+                    br
+                    b=com.comentarios
                     span=com.descricao
                     .div(id="adiciona")
-                      input.btn.btn-secondary.mr-5(type="button", onclick="addi()", value="+")
-
+                      input.btn.btn-secondary.mr-5(type="button", onclick="addi("+com.comentarios+")", value="Ver replies")
+                br
             hr
         // END GRID
     br
