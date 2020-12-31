@@ -13,6 +13,9 @@ module.exports.lookUp = function (id) {
   return Recurso.findOne({ _id: id }).exec();
 };
 
+module.exports.lookUpbyTag = function (tag) {
+  return Recurso.find({ tags: tag }).exec();
+};
 // Insere um novo recurso
 module.exports.insert = function (r) {
   var novoRecurso = new Recurso(r);
