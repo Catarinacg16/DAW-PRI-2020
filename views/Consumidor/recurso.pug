@@ -51,11 +51,11 @@ block content
                     p
                       span.w3-padding-large.w3-right
                         b Comentários &nbsp;
-                        span.w3-badge 2
+                        span.w3-badge=recurso.comentarios.length
                     p
                       span.w3-padding-large.w3-right
                         b Pontuação &nbsp;
-                        span.w3-badge 1  
+                        span.w3-badge=recurso.pontuacao  
                   
             // END BLOG ENTRIES
             // Posts
@@ -63,22 +63,16 @@ block content
               .w3-container.w3-padding-white
                 h4 Comentarios
               ul.w3-ul.w3-hoverable.w3-white
-                li.w3-padding-16
-                  span.w3-large Lorem
-                  br
-                  span Sed mattis nunc
-                li.w3-padding-16
-                  span.w3-large Ipsum
-                  br
-                  span Praes tinci sed
-                li.w3-padding-16
-                  span.w3-large Dorum
-                  br
-                  span Ultricies congue
-                li.w3-padding-16.w3-hide-medium.w3-hide-small
-                  span.w3-large Mingsum
-                  br
-                  span Lorem ipsum dipsum
+                each com in recurso.comentarios
+                  li.w3-padding-16
+                    span.w3-large=com.nome_utilizador
+                    br
+                    span.w3-medium=com.data_comentario
+                    br
+                    span=com.descricao
+                    #adiciona
+                    input(type='button' value='Mostrar replies' onclick='addi()')
+
             hr
         // END GRID
     br

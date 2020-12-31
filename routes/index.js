@@ -12,12 +12,11 @@ router.get("/", function (req, res, next) {
 
 router.get("/logout", function (req, res, next) {
   req.logout();
-  res.clearCookie("connect.sid")
+  res.clearCookie("connect.sid");
   req.session.destroy((err) => {
     if (!err) res.redirect("/");
     else console.log("Erro no Logout");
   });
-  
 });
 
 router.get("/login", function (req, res, next) {
@@ -31,5 +30,9 @@ router.post(
     failureRedirect: "/login",
   })
 );
+
+router.get("/about", function (req, res, next) {
+  res.render("about");
+});
 
 module.exports = router;

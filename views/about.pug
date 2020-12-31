@@ -1,0 +1,40 @@
+extends layout
+
+block content
+    .w3-about-section
+        h1 About Us Page
+        p Some text about who we are and what we do.
+        p Resize the browser window to see that this page is responsive by the way.
+        h2(style='text-align:center') Our Team
+        
+    .w3-row
+        .w3-col
+          .w3-card
+            img(src='/w3images/team1.jpg' alt='Jane' style='width:100%')
+            .w3-container
+              h2 Ana Catarina Gil
+              p.title CEO &amp; Founder
+              p Some text that describes me lorem ipsum ipsum lorem.
+              p jane@example.com
+              p
+                button.button Contact
+        .w3-col
+          .w3-card
+            img(src='/w3images/team2.jpg' alt='Mike' style='width:100%')
+            .w3-container
+              h2 Hugo Cunha
+              p.title Art Director
+              p Some text that describes me lorem ipsum ipsum lorem.
+              p mike@example.com
+              p
+                button.button Contact
+        .w3-col
+          .w3-card
+            img.w3-circle.w3-margin-top(src='images/cherry.png' style='width:50%')
+            .w3-container
+              h2 Tânia Rocha
+              p.title FrontEnder e Regretter
+              p FUCK identation omg
+              p omeumail@kk
+              p
+                button.button Contact

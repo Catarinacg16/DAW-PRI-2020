@@ -9,7 +9,62 @@
     "autor": ["Luís Miguel Gomes dos Santos Reis Leitão"],
     "produtor": "tania@gmail.com",
     "pontuacao": 3,
-    "numPontuacoes": 2
+    "numPontuacoes": 2,
+    "comentarios": [
+      {
+        "id_utilizador": "tania@gmail.com",
+        "nome_utilizador": "Tânia Rocha",
+        "data_comentario": "21-12-2020",
+        "descricao": "primeiro comentario para teste",
+        "comentatios": [
+          {
+            "id_utilizador": "tania@gmail.com",
+            "nome_utilizador": "Tânia Rocha",
+            "data_comentario": "22-12-2020",
+            "descricao": "primeiro reply para teste",
+            "comentarios": []
+          }
+        ]
+      },
+      {
+        "id_utilizador": "tania@gmail.com",
+        "nome_utilizador": "Tânia Rocha",
+        "data_comentario": "21-12-2020",
+        "descricao": "segundo comentario para teste",
+        "comentatios": [
+          {
+            "id_utilizador": "tania@gmail.com",
+            "nome_utilizador": "Tânia Rocha",
+            "data_comentario": "21-12-2020",
+            "descricao": "segunda reply para teste",
+            "comentatios": [
+              {
+                "id_utilizador": "tania@gmail.com",
+                "nome_utilizador": "Tânia Rocha",
+                "data_comentario": "22-12-2020",
+                "descricao": " terceiraReply para teste",
+                "comentarios": []
+              }
+            ]
+          },
+          {
+            "id_utilizador": "tania@gmail.com",
+            "nome_utilizador": "Tânia Rocha",
+            "data_comentario": "21-12-2020",
+            "descricao": "terceiro comentario para teste",
+            "comentatios": [
+              {
+                "id_utilizador": "tania@gmail.com",
+                "nome_utilizador": "Tânia Rocha",
+                "data_comentario": "22-12-2020",
+                "descricao": "quarta reply para teste",
+                "comentarios": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   {
     "tipo": "Tese",
@@ -19,7 +74,10 @@
     "dataRegisto": "21-12-2020",
     "visibilidade": "Público",
     "autor": ["Luís Miguel Gomes dos Santos Reis Leitão"],
-    "produtor": "tania@gmail.com"
+    "produtor": "tania@gmail.com",
+    "pontuacao": 4,
+    "numPontuacoes": 1,
+    "comentarios": []
   },
   {
     "tipo": "Slides",
@@ -30,7 +88,10 @@
     "visibilidade": "value",
     "autor": "Novais",
     "produtor": "tania@gmail.com",
-    "mimetype": "application/pdf"
+    "mimetype": "application/pdf",
+    "pontuacao": 2,
+    "numPontuacoes": 10,
+    "comentarios": []
   },
   {
     "tipo": "Resoluções",
@@ -41,6 +102,17 @@
     "visibilidade": "value",
     "autor": ["jcr", "cata"],
     "produtor": "tania@gmail.com",
-    "mimetype": "application/pdf"
+    "mimetype": "application/pdf",
+    "pontuacao": 3,
+    "numPontuacoes": 2,
+    "comentarios": [
+      {
+        "id_utilizador": "tania@gmail.com",
+        "nome_utilizador": "Tânia Rocha",
+        "data_comentario": "22-12-2020",
+        "descricao": " coment para teste",
+        "comentarios": []
+      }
+    ]
   }
 ]
