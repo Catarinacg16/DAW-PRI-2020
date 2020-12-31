@@ -65,13 +65,12 @@ block content
               ul.w3-ul.w3-hoverable.w3-white
                 each com in recurso.comentarios
                   li.w3-padding-16
-                    span.w3-large=com.nome_utilizador
-                    br
-                    span.w3-medium=com.data_comentario
-                    br
+                    b=com.nome_utilizador
+                    b=com.descricao
+                    span.w3-large=com.descricao
                     span=com.descricao
-                    #adiciona
-                    input(type='button' value='Mostrar replies' onclick='addi()')
+                    .div(id="adiciona")
+                      input.btn.btn-secondary.mr-5(type="button", onclick="addi()", value="+")
 
             hr
         // END GRID

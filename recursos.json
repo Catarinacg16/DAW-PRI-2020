@@ -16,7 +16,7 @@
         "nome_utilizador": "Tânia Rocha",
         "data_comentario": "21-12-2020",
         "descricao": "primeiro comentario para teste",
-        "comentatios": [
+        "comentarios": [
           {
             "id_utilizador": "tania@gmail.com",
             "nome_utilizador": "Tânia Rocha",
@@ -31,13 +31,13 @@
         "nome_utilizador": "Tânia Rocha",
         "data_comentario": "21-12-2020",
         "descricao": "segundo comentario para teste",
-        "comentatios": [
+        "comentarios": [
           {
             "id_utilizador": "tania@gmail.com",
             "nome_utilizador": "Tânia Rocha",
             "data_comentario": "21-12-2020",
             "descricao": "segunda reply para teste",
-            "comentatios": [
+            "comentarios": [
               {
                 "id_utilizador": "tania@gmail.com",
                 "nome_utilizador": "Tânia Rocha",
@@ -52,7 +52,7 @@
             "nome_utilizador": "Tânia Rocha",
             "data_comentario": "21-12-2020",
             "descricao": "terceiro comentario para teste",
-            "comentatios": [
+            "comentarios": [
               {
                 "id_utilizador": "tania@gmail.com",
                 "nome_utilizador": "Tânia Rocha",
