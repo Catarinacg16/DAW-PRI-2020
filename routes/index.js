@@ -12,7 +12,7 @@ router.get("/", function (req, res, next) {
 
 router.get("/logout", function (req, res, next) {
   req.logout();
-  res.clearCookie("connect.sid");
+  res.clearCookie("totallyNotALoginCookieKeepScrolling");
   req.session.destroy((err) => {
     if (!err) res.redirect("/");
     else console.log("Erro no Logout");
@@ -20,19 +20,29 @@ router.get("/logout", function (req, res, next) {
 });
 
 router.get("/login", function (req, res, next) {
+  console.log('\u001b[31m'+"----LOGIN PAGE----")
   res.render("login");
 });
 
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/login",
-  })
+    session : true
+  }),
+  (req,res,next)=>{
+    if(req.isUnauthenticated()) {
+      console.log('\u001b[31m'+"LOGIN FAILED")
+      next();}
+      else res.redirect("/")
+      
+  }
 );
 
 router.get("/about", function (req, res, next) {
   res.render("about");
+});
+router.get("/registar", function (req, res, next) {
+  res.render("registar");
 });
 
 module.exports = router;
