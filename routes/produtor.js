@@ -33,7 +33,9 @@ router.get('/resultados', function (req, res) {
   //remove espaços em branco
   tag=tag.replace(/\s+/g, '');  
   //separa tags
+  
   tag = tag.split("#")
+  console.log(tag)
   if(tag.length>1){
     Recursos.lookUpbyTag(tag)
       .then((dados) => res.render("Produtor/index", { recursos: dados }))
@@ -56,7 +58,7 @@ router.post('/upload', upload.array('file'), function (req, res) {
   req.files.forEach((f, idx) => {
     console.log(f.path)
     let oldPath = f.path
-    let newPath = __dirname + '/../public/fileStore/' + f.originalname
+    let newPath = __dirname + '/../public/fileStore/' + req.body.
 
     fs.rename(oldPath, newPath, function (err) {
       if (err) {
@@ -71,13 +73,14 @@ router.post('/upload', upload.array('file'), function (req, res) {
         req.body.autor.forEach((a) => {
           req.body.tags.push(a)
         })
-        req.body.tags.forEach((t) => {
-          req.body.tags.push(t)
-        })
         Recursos.insert(req.body)
       }
     })
 
   })
   res.redirect('/produtor')
+})
+
+router.get('/download/:filename', (req, res) => {
+  res.download( __dirname + '/../public/fileStore/' + req.params.filename)
 })

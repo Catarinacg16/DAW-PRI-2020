@@ -7,7 +7,9 @@ var Recurso = require("../controller/recurso");
 /* GET home page. */
 router.get("/", function (req, res, next) {
   if (!req.isAuthenticated()) res.redirect("/login");
-  else res.render("index");
+  else if( req.user.nivel == "produtor" ) res.redirect("/produtor/")
+  else if( req.user.nivel == "consumidor" ) res.redirect("/consumidor/")
+  else if( req.user.nivel == "administrador" ) res.redirect("/administrador/")
 });
 
 router.get("/logout", function (req, res, next) {
