@@ -67,12 +67,13 @@ block content
                   li.w3-padding-16
                     b=com.nome_utilizador
                     br
+                    b=com.id_coment
                     b=com.data
                     br
-                    b=com.comentarios
                     span=com.descricao
-                    .div(id="adiciona")
-                      input.btn.btn-secondary.mr-5(type="button", onclick="addi("+com.comentarios+")", value="Ver replies")
+                    br
+                    .div(id="adiciona"+com.id_coment)
+                      input.btn.btn-secondary.mr-5(type="button" value="Ver replies" onclick="addi("+com.comentarios+","+com.id_coment+")" )
                 br
             hr
         // END GRID

@@ -1,12 +1,9 @@
 node_modules/*
-package-lock.json
-package-lock.json
-package-lock.json
 package.json
-sessions/68925c62-1425-41fa-9120-146f65f48911.json
-sessions/7188c3c7-dd25-4f3f-aee5-5b898e5fef2c.json.2815916919
+sessions/
 public/.DS_Store
 package-lock.json
+<<<<<<< HEAD
 package-lock.json
 package.json
 package.json
@@ -26,3 +23,6 @@ sessions/2a0f54fc-9ecd-48e4-a88c-a9953fc8a1f5.json
 sessions/229a2a37-7c64-426e-9e18-c473ccc2ee1c.json
 sessions/c6eb9b18-d444-4317-8001-db9bfd8b2f82.json
 recursos.json
+=======
+package.json
+>>>>>>> e53292091c65a8c794b9af11fdd07d836378d494
