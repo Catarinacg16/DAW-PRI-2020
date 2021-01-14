@@ -2,7 +2,8 @@
 var mongoose = require("mongoose");
 
 var comentarios = new mongoose.Schema({
-  id_utilizador: Number,
+  id_coment: Number,
+  id_utilizador: String,
   nome_utilizador: String,
   data: Date,
   descricao: String,
@@ -25,4 +26,4 @@ var recursoSchema = new mongoose.Schema({
   tags: [String],
 });
 
-module.exports = mongoose.model("recurso", recursoSchema);
+module.exports = mongoose.model("recursos", recursoSchema);

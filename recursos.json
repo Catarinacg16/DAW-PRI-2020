@@ -12,12 +12,14 @@
     "numPontuacoes": 2,
     "comentarios": [
       {
+        "id_coment": 1,
         "id_utilizador": "tania@gmail.com",
         "nome_utilizador": "Tânia Rocha",
         "data": "21-12-2020",
         "descricao": "primeiro comentario para teste",
         "comentarios": [
           {
+            "id_coment": 2,
             "id_utilizador": "tania@gmail.com",
             "nome_utilizador": "Tânia Rocha",
             "data": "22-12-2020",
@@ -27,18 +29,21 @@
         ]
       },
       {
+        "id_coment": 3,
         "id_utilizador": "tania@gmail.com",
         "nome_utilizador": "Tânia Rocha",
         "data": "21-12-2020",
         "descricao": "segundo comentario para teste",
         "comentarios": [
           {
+            "id_coment": 4,
             "id_utilizador": "tania@gmail.com",
             "nome_utilizador": "Tânia Rocha",
             "data": "21-12-2020",
             "descricao": "segunda reply para teste",
             "comentarios": [
               {
+                "id_coment": 5,
                 "id_utilizador": "tania@gmail.com",
                 "nome_utilizador": "Tânia Rocha",
                 "data": "22-12-2020",
@@ -48,12 +53,14 @@
             ]
           },
           {
+            "id_coment": 6,
             "id_utilizador": "tania@gmail.com",
             "nome_utilizador": "Tânia Rocha",
             "data": "21-12-2020",
             "descricao": "terceiro comentario para teste",
             "comentarios": [
               {
+                "id_coment": 7,
                 "id_utilizador": "tania@gmail.com",
                 "nome_utilizador": "Tânia Rocha",
                 "data": "22-12-2020",
@@ -107,6 +114,7 @@
     "numPontuacoes": 2,
     "comentarios": [
       {
+        "id_coment": 8,
         "id_utilizador": "tania@gmail.com",
         "nome_utilizador": "Tânia Rocha",
         "data": "22-12-2020",

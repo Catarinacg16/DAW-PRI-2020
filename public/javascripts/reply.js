@@ -1,20 +1,24 @@
 //para aparecer replies
-function addi(rec) {
+function addi(rec, id) {
   console.log(rec);
+  console.log(id);
+  //console.log(rec[0]);
   var file = $(
-    `
-    <ul class="w3-ul w3-hoverable w3-pink">
+    rec.comentarios.forEach((element) => {
+      ` 
           <li class="w3-padding-16">
                 <b> ${rec.nome_utilizador} </b>
                 <br></br>
                 <b> ${rec.data} </b>
                 <br></br>
                 <span> ${rec.descricao} </span>
-                <div id="adiciona">
-                    <input type="button" value="Mostrar replies" onclick="addi("+#{rec.comentarios}+")"/>
+                <div id="adiciona"+ ${rec.id_coment}>
+                    <input type="button" value="Mostrar replies" onclick="addi("+${rec.comentarios}+","+${rec.id_coment}+")"/>
                 </div>
             </li>
-    </ul>`
+
+     `;
+    })
   );
-  $("#adiciona").append(file);
+  $("#adiciona" + id).append(file);
 }
