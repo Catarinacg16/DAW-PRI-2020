@@ -64,6 +64,10 @@
           }
         ]
       }
+    ],
+    "tags": [
+      "teste",
+      "pontuação"
     ]
   },
   {
@@ -77,7 +81,11 @@
     "produtor": "tania@gmail.com",
     "pontuacao": 4,
     "numPontuacoes": 1,
-    "comentarios": []
+    "comentarios": [],
+    "tags": [
+      "tese",
+      "xml"
+    ]
   },
   {
     "tipo": "Slides",
@@ -91,7 +99,10 @@
     "mimetype": "application/pdf",
     "pontuacao": 2,
     "numPontuacoes": 10,
-    "comentarios": []
+    "comentarios": [],
+    "tags": [
+      "AI"
+    ]
   },
   {
     "tipo": "Resoluções",
