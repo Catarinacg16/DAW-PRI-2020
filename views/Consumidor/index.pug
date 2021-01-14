@@ -2,6 +2,10 @@ extends header
 block content
     // Blog entries
     h1 Página do Consumidor
+    //Colocar form num sitio mais bonitinho
+    form(action="/produtor/resultados" method="GET", enctype="multipart/form-data")
+      input.form-control(type="text",placeholder="Search...",name="search")
+      input.btn.btn-lg.btn-primary(type="submit",value="🔎")
     .w3-row
         // Blog entries 
         .w3-col

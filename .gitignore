@@ -12,9 +12,13 @@ package.json
 package.json
 sessions/46ff27e7-afb5-4329-b16f-cd86d31e61ac.json
 sessions/a88e0d84-9626-4751-9f5c-499b11afb8e3.json
+<<<<<<< HEAD
 sessions/08ee4961-9680-49df-8c37-a2f4a58e0076.json
 sessions/46ff27e7-afb5-4329-b16f-cd86d31e61ac.json
 sessions/21e7a205-304b-49d6-ad29-c03d28fea4b6.json
 sessions/64ab4399-8549-44c9-82a0-242cb370b94b.json
 public/images/.DS_Store
 .DS_Store
+=======
+sessions/4daed453-c5e5-41a5-aa7e-308ba841f53e.json
+>>>>>>> 4c2f3ed2d9a3c84381c0b4b42651d7e301100bb1

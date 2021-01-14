@@ -14,13 +14,13 @@
       {
         "id_utilizador": "tania@gmail.com",
         "nome_utilizador": "Tânia Rocha",
-        "data_comentario": "21-12-2020",
+        "data": "21-12-2020",
         "descricao": "primeiro comentario para teste",
         "comentarios": [
           {
             "id_utilizador": "tania@gmail.com",
             "nome_utilizador": "Tânia Rocha",
-            "data_comentario": "22-12-2020",
+            "data": "22-12-2020",
             "descricao": "primeiro reply para teste",
             "comentarios": []
           }
@@ -29,19 +29,19 @@
       {
         "id_utilizador": "tania@gmail.com",
         "nome_utilizador": "Tânia Rocha",
-        "data_comentario": "21-12-2020",
+        "data": "21-12-2020",
         "descricao": "segundo comentario para teste",
         "comentarios": [
           {
             "id_utilizador": "tania@gmail.com",
             "nome_utilizador": "Tânia Rocha",
-            "data_comentario": "21-12-2020",
+            "data": "21-12-2020",
             "descricao": "segunda reply para teste",
             "comentarios": [
               {
                 "id_utilizador": "tania@gmail.com",
                 "nome_utilizador": "Tânia Rocha",
-                "data_comentario": "22-12-2020",
+                "data": "22-12-2020",
                 "descricao": " terceiraReply para teste",
                 "comentarios": []
               }
@@ -50,13 +50,13 @@
           {
             "id_utilizador": "tania@gmail.com",
             "nome_utilizador": "Tânia Rocha",
-            "data_comentario": "21-12-2020",
+            "data": "21-12-2020",
             "descricao": "terceiro comentario para teste",
             "comentarios": [
               {
                 "id_utilizador": "tania@gmail.com",
                 "nome_utilizador": "Tânia Rocha",
-                "data_comentario": "22-12-2020",
+                "data": "22-12-2020",
                 "descricao": "quarta reply para teste",
                 "comentarios": []
               }
@@ -120,7 +120,7 @@
       {
         "id_utilizador": "tania@gmail.com",
         "nome_utilizador": "Tânia Rocha",
-        "data_comentario": "22-12-2020",
+        "data": "22-12-2020",
         "descricao": " coment para teste",
         "comentarios": []
       }

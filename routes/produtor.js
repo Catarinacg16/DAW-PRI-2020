@@ -30,10 +30,20 @@ module.exports = router;
 router.get('/resultados', function (req, res) {
   var queryObject = url.parse(req.url, true).query;
   var tag = queryObject.search;
-  console.log("entreiii")
-  Recursos.lookUpbyTag(tag)
-    .then((dados) => res.render("Produtor/index", { recursos: dados }))
-    .catch((e) => res.render("error", { error: e }));
+  //remove espaços em branco
+  tag=tag.replace(/\s+/g, '');  
+  //separa tags
+  tag = tag.split("#")
+  if(tag.length>1){
+    Recursos.lookUpbyTag(tag)
+      .then((dados) => res.render("Produtor/index", { recursos: dados }))
+      .catch((e) => res.render("error", { error: e }));
+  }
+  else {
+    Recursos.lookUpbyData(tag)
+      .then((dados) => res.render("Produtor/index", { recursos: dados }))
+      .catch((e) => res.render("error", { error: e }));
+  }
 });
 
 router.get("/upload", function (req, res) {
@@ -60,6 +70,9 @@ router.post('/upload', upload.array('file'), function (req, res) {
         req.body.tags= [req.body.titulo, req.body.descricao]
         req.body.autor.forEach((a) => {
           req.body.tags.push(a)
+        })
+        req.body.tags.forEach((t) => {
+          req.body.tags.push(t)
         })
         Recursos.insert(req.body)
       }
