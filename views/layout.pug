@@ -3,8 +3,10 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-
+    script(src="https://apis.google.com/js/platform.js" async defer)
+    meta(name="DAW-PRI-2020" content="60444557645-bj5v39h803mpd3ckfp5angdml6rhktdh.apps.googleusercontent.com")
   body.w3-white
+    script  window.fbAsyncInit = function() {    FB.init({      appId      : '452484752427783',      cookie     : true,      xfbml      : true,      version    : '{v9.0}'    });         FB.AppEvents.logPageView();           };  (function(d, s, id){     var js, fjs = d.getElementsByTagName(s)[0];     if (d.getElementById(id)) {return;}     js = d.createElement(s); js.id = id;     js.src = "https://connect.facebook.net/en_US/sdk.js";     fjs.parentNode.insertBefore(js, fjs);   }(document, 'script', 'facebook-jssdk'));   
     // Navbar (sit on top)
     .w3-top
       .w3-bar.w3-white.w3-wide.w3-padding.w3-card

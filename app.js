@@ -11,7 +11,7 @@ var cookieParser = require('cookie-parser')
 
 var session = require("express-session");
 var FileStore = require("session-file-store")(session);
-//var cors = require('cors');
+var cors = require('cors');
 
 var mongoDB = "mongodb://127.0.0.1/DAW-PRI-2020";
 mongoose.connect(mongoDB, {
@@ -29,6 +29,7 @@ db.once("open", function () {
 });
 
 var Utilizador = require("./controller/utilizador");
+Utilizador.list().then(data =>console.log(JSON.stringify(data))).catch(e=>console.log(e));
 
 var indexRouter = require("./routes/index");
 var adminRouter = require("./routes/administrador");
@@ -79,7 +80,7 @@ app.use(cookieParser());
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
-
+app.use(cors())
 
 app.use(
   session({ 
@@ -101,10 +102,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(function (req, res, next) {
-  console.log("ReqUser:"+ req.user)
-  console.log("Cookies:"+ JSON.stringify(req.cookies))
-  next();
+app.get("/devpanel",function (req, res) {
+  res.render("index")
 });
 app.use("/", indexRouter);
 

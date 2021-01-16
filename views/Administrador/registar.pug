@@ -1,0 +1,48 @@
+
+extends header
+block content
+    // Blog entries
+    h1 Registar utilizador
+    .w3-row
+        // Blog entries 
+        .w3-col.l8.s12
+
+            // Blog entry    
+            .w3-card-4.w3-margin.w3-light-grey
+                .w3-container
+                    form(action="/administrador/registar" method="POST")
+                        .container(id="fileInputGroup")
+                            p
+                            .div
+                                label(for="nivel") Nível de Autorização:                   
+                            .div
+                                select.form-control(type="text",name="nivel")
+                                    option(value="administrador") Administrador
+                                    option(value="produtor") Produtor
+                                    option(value="consumidor") Consumidor
+                            p
+                            .div
+                                label(for="nome") Nome:
+                                .div
+                                    input.form-control(type="text",name="nome")
+                            p
+                            .div
+                                label(for="email") Email:
+                            .div
+                                input.form-control(type="text",name="email")
+                            p
+                            .div
+                                label(for="filiacao") Filiação:
+                            .div
+                                select.form-control(type="text" name="filiacao")
+                                    option(value="estudante") Estudante
+                                    option(value="docente") Docente
+                                    option(value="outro") Outro
+                            p
+                            .div
+                                label(for="password") Password:
+                            .div
+                                input.form-control(type="password",name="password")                           
+                        .w3.bottom   
+                            input.btn.btn-lg.btn-primary(type="submit",value="Submit")
+    // END w3-content
