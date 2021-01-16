@@ -1,24 +1,22 @@
-//para aparecer replies
-function addi(rec, id) {
-  console.log(rec);
-  console.log(id);
-  //console.log(rec[0]);
-  var file = $(
-    rec.comentarios.forEach((element) => {
-      ` 
-          <li class="w3-padding-16">
-                <b> ${rec.nome_utilizador} </b>
-                <br></br>
-                <b> ${rec.data} </b>
-                <br></br>
-                <span> ${rec.descricao} </span>
-                <div id="adiciona"+ ${rec.id_coment}>
-                    <input type="button" value="Mostrar replies" onclick="addi("+${rec.comentarios}+","+${rec.id_coment}+")"/>
-                </div>
-            </li>
 
-     `;
-    })
-  );
-  $("#adiciona" + id).append(file);
+//para aparecer replies
+let addi = (com) => {
+  //document.write(rec.comentarios.length)
+  var div = document.getElementById(com.id_coment);
+  document.getElementById("b"+com.id_coment).style.visibility = "hidden"
+  com.comentarios.forEach((element) => {
+    var reply =   ` 
+    <li class="w3-padding-16">
+          <b> ${element.nome_utilizador} </b>
+          <br></br>
+          <b> ${element.data} </b>
+          <br></br>
+          <span> ${element.descricao} </span>
+          <div id=${element.id_coment}>
+              <input type="button" value="Ver replies" onclick=\`addi(${element})\`/>
+          </div>
+      </li>
+`;
+    $(div).append(reply);
+  })
 }

@@ -13,6 +13,13 @@ module.exports.lookUp = function (id) {
   return Recurso.findOne({ _id: id }).exec();
 };
 
+//Retorna comentario
+module.exports.lookUpCom = function (com_id) {
+  var rec = Recurso.list();
+  return rec.map((i)  => JSON.parse(i)).find((c) => c.id_coment === com_id);
+
+};
+
 module.exports.lookUpbyTag = function (taglist) {
   console.log("print taglist"+taglist)
   return Recurso.find({ tags: {$in : taglist} }).exec();
@@ -26,6 +33,11 @@ module.exports.lookUpbyData = function (data) {
 module.exports.insert = function (r) {
   var novoRecurso = new Recurso(r);
   return novoRecurso.save();
+};
+
+//Insere comentário num recurso
+module.exports.insertCom = function (r, com) {
+  return Recurso.findByIdAndUpdate(r, {$set: {"comentarios": com}}, {new: true});
 };
 
 // Remove um recurso

@@ -72,9 +72,19 @@ block content
                     br
                     span=com.descricao
                     br
-                    .div(id="adiciona"+com.id_coment)
-                      input.btn.btn-secondary.mr-5(type="button" value="Ver replies" onclick="addi("+com.comentarios+","+com.id_coment+")" )
+                    .div(id=com.id_coment)
+                      input.btn.btn-secondary.mr-5(type="button" id="b"+com.id_coment value="Ver replies" onclick=`addi( ${com} )`)
+                    p
+                    .div(id="addReply")
+                      input.btn.btn-secondary.mr-5(type="button", onclick="addReply()", value="Responder ⤵️")                           
+                .div
+                .w3-container
+                  form(action="/consumidor/recurso/"+recurso._id ,method="POST", enctype="form-data")
+                    li.w3-padding-16
+                      input.form-control(type="text",placeholder="comentário ...",name="descricao")
+                      input.btn.btn-lg.btn-primary(type="submit",value="Submit")
                 br
+
             hr
         // END GRID
     br
