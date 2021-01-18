@@ -13,8 +13,11 @@ router.get("/", function (req, res, next) {
 router.post('/recurso/:id', (req, res) =>{
 
   req.body.data=new Date().toISOString().substr(0, 16)
-  req.body.id_coment=Recursos.list().length
+
   Recursos.lookUp(req.params.id).then((dados) => {
+    req.body.id_coment=dados.comentarios.length+1
+    req.body.id_utilizador=req.user.email
+    req.body.nome_utilizador=req.user.nome
     dados.comentarios.push(req.body)
     console.log(dados.comentarios)
     Recursos.edit(req.params.id,dados)
@@ -32,9 +35,35 @@ router.get(/\/recurso\/[0-9a-zA-Z]*/, function (req, res, next) {
     .catch((e) => res.render("error", { error: e }));
 });
 
+router.post('/recurso/:idRecurso/:idComentario', (req, res) =>{
+  //req.body.data=new Date().toISOString().substr(0, 16)
+
+  Recursos.lookUp(req.params.idRecurso).then((dados) => {
+    req.body.id_coment=dados.comentarios.find(item => item.id_coment === parseInt(req.params.idComentario)).comentarios.length+100
+    req.body.id_utilizador=req.user.email
+    req.body.nome_utilizador=req.user.nome
+    dados.comentarios.find(item => item.id_coment === parseInt(req.params.idComentario)).comentarios.push(req.body)
+    console.log(dados.comentarios.find(item => item.id_coment === parseInt(req.params.idComentario)).comentarios)
+    Recursos.edit(req.params.idRecurso,dados)
+      .then((e) => res.redirect('/consumidor/recurso/'+req.params.idRecurso))
+      .catch((e) => res.render("error", { error: e }));
+    })
+    .catch((e) => res.render("error", { error: e }));
+    
+   res.redirect('/consumidor/recurso/'+req.params.idRecurso)
+})
+
 module.exports = router;
 
 router.get('/download/:filename', (req, res) => {
   res.download( __dirname + '/../public/fileStore/' + req.params.filename)
 })
 
+router.get("/logout", function (req, res, next) {
+  req.logout();
+  res.clearCookie("totallyNotALoginCookieKeepScrolling");
+  req.session.destroy((err) => {
+    if (!err) res.redirect("/");
+    else console.log("Erro no Logout");
+  });
+});

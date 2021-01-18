@@ -19,3 +19,12 @@ router.get('/', function(req, res, next) {
   res.render('Administrador/index');
 });
 module.exports = router;
+
+router.get("/logout", function (req, res, next) {
+  req.logout();
+  res.clearCookie("totallyNotALoginCookieKeepScrolling");
+  req.session.destroy((err) => {
+    if (!err) res.redirect("/");
+    else console.log("Erro no Logout");
+  });
+});

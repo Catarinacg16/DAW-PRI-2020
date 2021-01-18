@@ -84,3 +84,12 @@ router.post('/upload', upload.array('file'), function (req, res) {
 router.get('/download/:filename', (req, res) => {
   res.download( __dirname + '/../public/fileStore/' + req.params.filename)
 })
+
+router.get("/logout", function (req, res, next) {
+  req.logout();
+  res.clearCookie("totallyNotALoginCookieKeepScrolling");
+  req.session.destroy((err) => {
+    if (!err) res.redirect("/");
+    else console.log("Erro no Logout");
+  });
+});
