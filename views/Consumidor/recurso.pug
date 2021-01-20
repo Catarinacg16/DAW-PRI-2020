@@ -87,8 +87,8 @@ block content
                     .div(id=com.id_coment)
                       input.btn.btn-secondary.mr-5(type="button" id="b"+com.id_coment value="Ver replies" onclick=`addi( ${com} )`)
                     p
-                    .div(id="addReply")
-                      input.btn.btn-secondary.mr-5(type="button", onclick="addReply()", value="Responder ⤵️")                           
+                    .div(id="r"+com.id_coment)
+                      input.btn.btn-secondary.mr-5(type="button" onclick=`addReply(\"${recurso._id}\", ${com})` value="Responder ⤵️")                           
                 .div
                 .w3-container
                   form(action="/consumidor/recurso/"+recurso._id ,method="POST", enctype="form-data")
@@ -101,3 +101,4 @@ block content
         // END GRID
     br
     // END w3-content
+

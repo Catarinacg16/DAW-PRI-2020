@@ -2,6 +2,7 @@
 var mongoose = require("mongoose");
 
 var comentarios = new mongoose.Schema({
+  _id: Number,
   id_coment: Number,
   id_utilizador: String,
   nome_utilizador: String,

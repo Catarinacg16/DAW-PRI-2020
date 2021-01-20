@@ -1,4 +1,3 @@
-
 [
   {
     "tipo": "Sebenta",
@@ -7,7 +6,9 @@
     "dataCriacao": "01-07-2013",
     "dataRegisto": "21-12-2020",
     "visibilidade": "Público",
-    "autor": ["Luís Miguel Gomes dos Santos Reis Leitão"],
+    "autor": [
+      "Luís Miguel Gomes dos Santos Reis Leitão"
+    ],
     "produtor": "tania@gmail.com",
     "pontuacao": 3,
     "numPontuacoes": 2,
@@ -77,63 +78,5 @@
       "teste",
       "pontuação"
     ]
-  },
-  {
-    "tipo": "Tese",
-    "descricao": "Luís Miguel Gomes dos Santos Reis Leitão 'Duplicate Detection in XML Databases', Instituto Superior Técnico da Universidade Técnica de Lisboa (IST/UTL), Jul. 2013 (2013-07-01).",
-    "titulo": "Duplicate Detection in XML Databases",
-    "dataCriacao": "01-07-3013",
-    "dataRegisto": "21-12-2020",
-    "visibilidade": "Público",
-    "autor": ["Luís Miguel Gomes dos Santos Reis Leitão"],
-    "produtor": "tania@gmail.com",
-    "pontuacao": 4,
-    "numPontuacoes": 1,
-    "comentarios": [],
-    "tags": [
-      "tese",
-      "xml"
-    ]
-  },
-  {
-    "tipo": "Slides",
-    "descrição": "Slides de Agentes Inteligentes",
-    "titulo": "TP3-AI",
-    "dataCriacao": "2020-10-10",
-    "dataRegisto": "2020-12-24T15:11",
-    "visibilidade": "value",
-    "autor": "Novais",
-    "produtor": "tania@gmail.com",
-    "mimetype": "application/pdf",
-    "pontuacao": 2,
-    "numPontuacoes": 10,
-    "comentarios": [],
-    "tags": [
-      "AI"
-    ]
-  },
-  {
-    "tipo": "Resoluções",
-    "descrição": "Resolução hmtl",
-    "titulo": "json file ",
-    "dataCriacao": "2020-10-10",
-    "dataRegisto": "2020-12-24T16:33",
-    "visibilidade": "value",
-    "autor": ["jcr", "cata"],
-    "produtor": "tania@gmail.com",
-    "mimetype": "application/pdf",
-    "pontuacao": 3,
-    "numPontuacoes": 2,
-    "comentarios": [
-      {
-        "id_coment": 8,
-        "id_utilizador": "tania@gmail.com",
-        "nome_utilizador": "Tânia Rocha",
-        "data": "22-12-2020",
-        "descricao": " coment para teste",
-        "comentarios": []
-      }
-    ]
   }
 ]
-
