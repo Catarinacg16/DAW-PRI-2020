@@ -1,17 +1,22 @@
-extends layout
-
+extends header
 block content
-  .w3-container.w3-margin.w3-pale-blue
-      h1 Listagem de Páginas
-      p HomePage 
-      ul.w3-ul
-        li.w3-red
-          a(href="/consumidor/") Página do Consumidor      
-        li.w3-yellow
-          a(href="/produtor/") Página do Produtor
-        li.w3-green 
-          a(href="/administrador/") Página do Administrador
-        li.w3-pale-green
-          a(href="/administrador/registar") Registar utilizador [ADMIN ONLY]
-        li.w3-indigo
-          a(href="/logout") Logout
+  .w3-container.w3-margin.w3-white.w3-center
+    h1 DEVPANEL
+  .w3-container.w3-margin.w3-white.w3-center
+     hr
+     ul.w3-ul
+       li
+         a.w3-input.w3-border.w3-round.w3-button.w3-hover-purple.w3-light-gray(href="/consumidor/") Página do Consumidor  
+       br    
+       li
+         a.w3-input.w3-border.w3-round.w3-btn.w3-hover-purple.w3-light-gray(href="/produtor/") Página do Produtor
+       br
+       li
+         a.w3-input.w3-border.w3-round.w3-btn.w3-hover-purple.w3-light-gray(href="/administrador/") Página do Administrador
+       br
+       li
+         a.w3-input.w3-border.w3-round.w3-btn.w3-hover-purple.w3-light-gray(href="/administrador/registar") Registar utilizador [ADMIN ONLY]
+       br
+       li
+         a.w3-input.w3-border.w3-round.w3-button.w3-hover-purple.w3-light-gray(href="/logout") Logout
+       hr

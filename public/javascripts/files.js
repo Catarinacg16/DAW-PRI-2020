@@ -1,17 +1,17 @@
 let addAutor = () => {
-    let fileInput = `
+  let fileInput = `
             <div class="row mb-3">
-                <input class="form-control" type="text" placeholder="autor" name="autor" required="">
+                <input class="w3-input w3-border w3-round form-control" type="text" placeholder="autor" name="autor" required="">
             </div>
     `;
-    $("#addAutor").append(fileInput);
+  $("#addAutor").append(fileInput);
 };
 
 let addTag = () => {
-    let fileInput = `
+  let fileInput = `
             <div class="row mb-3">
-                <input class="form-control" type="text" placeholder="tag" name="tag" required="">
+                <input class="w3-input w3-border w3-round form-control" type="text" placeholder="tag" name="tag" required="">
             </div>
     `;
-    $("#addTag").append(fileInput);
+  $("#addTag").append(fileInput);
 };

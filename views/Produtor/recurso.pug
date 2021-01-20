@@ -1,17 +1,22 @@
 extends header
 block content
     // Blog entries
-    h1 Página de Recurso
+    // Blog entries
+    .w3-card-4.w3-margin.w3-white
+      .w3-container
+        h1 Página de Recurso
     .w3-row
         // Introduction menu
         .w3-col.l2
           // About Card
           .w3-card.w3-margin.w3-margin-top
             .w3-container.w3-white
+              img(src='/images/user.png' alt='Nature' style='width:100%')
               h4
-                b Nome do Uploader
+                b=produtor.nome
               p
-                | kkkk socorro
+                |
+                =produtor.filiacao
           hr
           // Labels / tags
           .w3-card.w3-margin
@@ -56,6 +61,10 @@ block content
                         span.w3-badge 2
                     p
                       span.w3-padding-large.w3-right
+                        b Downloads &nbsp;
+                        span.w3-badge 2
+                    p
+                      span.w3-padding-large.w3-right
                         b Pontuação : 
                         - for (var i = 0; i < recurso.pontuacao; i++) {
                             span.fa.fa-star.checked
@@ -63,27 +72,32 @@ block content
                   
             // END BLOG ENTRIES
             // Posts
-            hr
             .w3-card.w3-margin
               .w3-container.w3-padding-white
                 h4 Comentarios
               ul.w3-ul.w3-hoverable.w3-white
-                li.w3-padding-16
-                  span.w3-large Lorem
-                  br
-                  span Sed mattis nunc
-                li.w3-padding-16
-                  span.w3-large Ipsum
-                  br
-                  span Praes tinci sed
-                li.w3-padding-16
-                  span.w3-large Dorum
-                  br
-                  span Ultricies congue
-                li.w3-padding-16.w3-hide-medium.w3-hide-small
-                  span.w3-large Mingsum
-                  br
-                  span Lorem ipsum dipsum
+                each com in recurso.comentarios
+                  li.w3-padding-16
+                    b=com.nome_utilizador
+                    br
+                    b=com.id_coment
+                    b=com.data
+                    br
+                    span=com.descricao
+                    br
+                    .div(id=com.id_coment)
+                      input.btn.btn-secondary.mr-5(type="button" id="b"+com.id_coment value="Ver replies" onclick=`addi( ${com} )`)
+                    p
+                    .div(id="addReply")
+                      input.btn.btn-secondary.mr-5(type="button", onclick="addReply()", value="Responder ⤵️")                           
+                .div
+                .w3-container
+                  form(action="/consumidor/recurso/"+recurso._id ,method="POST", enctype="form-data")
+                    li.w3-padding-16
+                      input.form-control(type="text",placeholder="comentário ...",name="descricao")
+                      input.btn.btn-lg.btn-primary(type="submit",value="Submit")
+                br
+
             hr
         // END GRID
     br

@@ -11,7 +11,11 @@ module.exports.list = function () {
 // Retorna um Utilizador
 module.exports.lookUp = function (u) {
   return Utilizador.findOne(u).exec();
+};
 
+// Retorna um Utilizador por id
+module.exports.lookUpId = function (u) {
+  return Utilizador.findOne({ email: u }).exec();
 };
 
 // Insere um novo utilizador

@@ -1,17 +1,25 @@
 extends header
 block content
     // Blog entries
-    h1 Página do Produtor
     //Colocar form num sitio mais bonitinho
-    form(action="/produtor/resultados" method="GET", enctype="multipart/form-data")
-      input.form-control(type="text",placeholder="Search...",name="search")
-      input.btn.btn-lg.btn-primary(type="submit",value="🔎")
+    .w3-card-4.w3-margin.w3-white
+      .w3-container
+        h1 Página do Produtor
+        form(action="/produtor/resultados" method="GET", enctype="multipart/form-data")
+          input.form-control(type="text",placeholder="Search...",name="search")
+          input.btn.btn-lg.btn-primary(type="submit",value="🔎")
     .w3-row
         // Blog entries 
         .w3-col.l8.s12
           each a in recursos
-            // Blog entry    
+            // Blog entry   
+            -var i = 0 
             .w3-card-4.w3-margin.w3-white
+              img(src='/images/thin'+-i+'.png' alt='Nature' style='width:100%')
+              if(i<5) 
+              -i++
+              if(i>5)
+              - i=0
               .w3-container
                 h3
                   b=a.titulo
@@ -33,17 +41,22 @@ block content
                     p
                       span.w3-padding-large.w3-right
                         b Comentários &nbsp;
-                        span.w3-badge 2
+                        span.w3-badge=a.comentarios.length
+                    p
+                      span.w3-padding-large.w3-right
+                        b Downloads &nbsp;
+                        span.w3-badge 4 
                     p
                       span.w3-padding-large.w3-right
                         b Pontuação &nbsp;
-                        span.w3-badge 1  
+                        span.w3-badge=a.pontuacao 
                   
             // END BLOG ENTRIES
         // Introduction menu
         .w3-col.l4
           // About Card
           .w3-card.w3-margin.w3-margin-top
+            img(src='/images/ex2.png' alt='Nature' style="width:100%")
             .w3-container.w3-white
               h4
                 b Notifs do Admin
