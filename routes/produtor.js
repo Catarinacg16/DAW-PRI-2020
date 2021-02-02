@@ -60,10 +60,9 @@ router.post("/upload", upload.array("file"), function (req, res) {
   req.files.forEach((f, idx) => {
     console.log(f.path);
     let oldPath = f.path;
-    let newPath =
-      __dirname +
-      "/../public/fileStore/" +
-      req.body.fs.rename(oldPath, newPath, function (err) {
+    let newPath = __dirname + '/../public/fileStore/' + req.body.titulo;
+    console.log(newPath);
+    fs.rename(oldPath, newPath, function (err) {
         if (err) {
           res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
           res.write("<p> Erro: ao mover o ficheiro ...</p>");
@@ -71,10 +70,7 @@ router.post("/upload", upload.array("file"), function (req, res) {
         } else {
           var d = new Date().toISOString().substr(0, 16);
           req.body.dataRegisto = d;
-          req.body.tags = [req.body.titulo, req.body.descricao];
-          req.body.autor.forEach((a) => {
-            req.body.tags.push(a);
-          });
+          console.log (req.body);
           Recursos.insert(req.body);
         }
       });
