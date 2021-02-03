@@ -31,6 +31,23 @@ router.get(/\/recurso\/[0-9a-zA-Z]*/, function (req, res, next) {
     .catch((e) => res.render("error", { error: e }));
 });
 
+router.post("/recurso/:id", (req, res) => {
+  req.body.data = new Date().toISOString().substr(0, 16);
+
+  Recursos.lookUp(req.params.id)
+    .then((dados) => {
+      req.body.id_coment = dados.comentarios.length + 1;
+      req.body.id_utilizador = req.user.email;
+      req.body.nome_utilizador = req.user.nome;
+      dados.comentarios.push(req.body);
+      console.log(dados.comentarios);
+      Recursos.edit(req.params.id, dados)
+        .then((e) => res.redirect("/produtor/recurso/" + req.params.id))
+        .catch((e) => res.render("error", { error: e }));
+    })
+    .catch((e) => res.render("error", { error: e }));
+});
+
 router.get("/resultados", function (req, res) {
   var queryObject = url.parse(req.url, true).query;
   var tag = queryObject.search;
@@ -60,26 +77,28 @@ router.post("/upload", upload.array("file"), function (req, res) {
   req.files.forEach((f, idx) => {
     console.log(f.path);
     let oldPath = f.path;
-    let newPath = __dirname + '/../public/fileStore/' + req.body.titulo;
+    let newPath = __dirname + "/../public/fileStore/" + req.body.titulo;
     console.log(newPath);
     fs.rename(oldPath, newPath, function (err) {
-        if (err) {
-          res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-          res.write("<p> Erro: ao mover o ficheiro ...</p>");
-          res.end();
-        } else {
-          var d = new Date().toISOString().substr(0, 16);
-          req.body.dataRegisto = d;
-          console.log (req.body);
-          Recursos.insert(req.body);
-        }
-      });
+      if (err) {
+        res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+        res.write("<p> Erro: ao mover o ficheiro ...</p>");
+        res.end();
+      } else {
+        var d = new Date().toISOString().substr(0, 16);
+        req.body.dataRegisto = d;
+        console.log(req.body);
+        Recursos.insert(req.body, req.user.email);
+      }
+    });
   });
   res.redirect("/produtor");
 });
 
 module.exports = router;
-router.get("/download/:filename", (req, res) => {
+router.get("/download/:filename/:id", (req, res) => {
+  //console.log(req.params.id);
+  Recursos.addDownload(req.params.id);
   res.download(__dirname + "/../public/fileStore/" + req.params.filename);
 });
 

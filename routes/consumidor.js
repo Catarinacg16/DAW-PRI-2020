@@ -45,6 +45,7 @@ router.get(/\/recurso\/[0-9a-zA-Z]*/, function (req, res, next) {
 router.get("/download/:filename", (req, res) => {
   res.download(__dirname + "/../public/fileStore/" + req.params.filename);
 });
+
 router.post("/recurso/:idRecurso/:idComentario", (req, res) => {
   //req.body.data=new Date().toISOString().substr(0, 16)
 

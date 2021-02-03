@@ -6,9 +6,8 @@
     "dataCriacao": "01-07-2013",
     "dataRegisto": "21-12-2020",
     "visibilidade": "Público",
-    "autor": [
-      "Luís Miguel Gomes dos Santos Reis Leitão"
-    ],
+    "numDowns": 0,
+    "autor": ["Luís Miguel Gomes dos Santos Reis Leitão"],
     "produtor": "tania@gmail.com",
     "pontuacao": 3,
     "numPontuacoes": 2,
@@ -74,9 +73,6 @@
         ]
       }
     ],
-    "tags": [
-      "teste",
-      "pontuação"
-    ]
+    "tags": ["teste", "pontuação"]
   }
 ]

@@ -19,6 +19,7 @@ var recursoSchema = new mongoose.Schema({
   dataCriacao: Date,
   dataRegisto: Date,
   visibilidade: String,
+  numDowns: Number,
   autor: [String],
   produtor: String,
   pontuacao: Number,

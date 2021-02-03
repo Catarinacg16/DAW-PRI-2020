@@ -37,7 +37,7 @@ block content
                     p
                       button.w3-button.w3-padding-large.w3-white.w3-border
                         a(href="/produtor/recurso/"+a._id) VER &raquo;
-                  .w3-col.m4.w3-hide-small
+                  .w3-col.m6.w3-hide-small.w3-right
                     p
                       span.w3-padding-large.w3-right
                         b Comentários &nbsp;
@@ -45,11 +45,13 @@ block content
                     p
                       span.w3-padding-large.w3-right
                         b Downloads &nbsp;
-                        span.w3-badge 4 
+                        span.w3-badge=a.numDowns
                     p
                       span.w3-padding-large.w3-right
-                        b Pontuação &nbsp;
-                        span.w3-badge=a.pontuacao 
+                        b Pontuação : 
+                        - for (var i = 0; i < a.pontuacao; i++) {
+                            span.fa.fa-star.checked
+                        -}
                   
             // END BLOG ENTRIES
         // Introduction menu
@@ -65,7 +67,7 @@ block content
           hr
           // Posts
           .w3-card.w3-margin
-            .w3-container.w3-padding-white
+            .w3-container.w3-padding-white.w3-light-gray
               h4 Popular Posts
             ul.w3-ul.w3-hoverable.w3-white
               li.w3-padding-16
@@ -87,7 +89,7 @@ block content
           hr
           // Labels / tags
           .w3-card.w3-margin
-            .w3-container.w3-padding
+            .w3-container.w3-padding.w3-light-gray
               h4 Tags
             .w3-container.w3-white
               p
