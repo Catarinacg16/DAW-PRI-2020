@@ -9,6 +9,7 @@ var fs = require("fs");
 var jsonfile = require("jsonfile");
 var qs = require("query-string");
 var url = require("url");
+var {ingest} = require('./ingest');
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -56,6 +57,15 @@ router.get("/upload", function (req, res) {
   res.end();
 });
 
+router.post("/upload",upload.single('file'), function (req, res) {
+   var f =req.file;
+   var ret =ingest(f, req);
+  if(ret==true)
+    res.redirect("/produtor");
+  else
+    res.jsonp(ret);
+});
+/*
 router.post("/upload", upload.array("file"), function (req, res) {
   req.files.forEach((f, idx) => {
     console.log(f.path);
@@ -77,7 +87,7 @@ router.post("/upload", upload.array("file"), function (req, res) {
   });
   res.redirect("/produtor");
 });
-
+*/
 module.exports = router;
 router.get("/download/:filename", (req, res) => {
   res.download(__dirname + "/../public/fileStore/" + req.params.filename);

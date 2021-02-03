@@ -125,6 +125,7 @@ app.use(function (req, res, next) {
 app.use(
   "/Produtor",
   (req, res, next) => {
+    console.log(req.user);
     if (req.user.accessLevel < 2) res.render("401");
     else next();
   },
