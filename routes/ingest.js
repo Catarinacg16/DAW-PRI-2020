@@ -68,7 +68,8 @@ module.exports.ingest = function (f, req) {
             if(path.split('.')[1]=="zip") {
               var thiselemid= uuid();
               var thispath=__dirname+"/../tmp/";
-              fs.mkdirSync(thispath);
+              if(!fs.existsSync(thispath))
+                fs.mkdirSync(thispath);
               fs.writeFileSync(thispath+ thiselemid+ ".zip",zip.readFile(e))
               ret &= checkZipRecursive(thispath+ thiselemid+ ".zip");
               rmrf(thispath);
