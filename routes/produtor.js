@@ -123,7 +123,6 @@ router.post("/upload", upload.array("file"), function (req, res) {
 */
 module.exports = router;
 router.get("/download/:id", function (req, res) {
-
   var folderPath = __dirname + "/../public/fileStore/" + req.params.id + "/";
   fs.readdirSync(folderPath).forEach((file) => {
     Recursos.addDownload(req.params.id);

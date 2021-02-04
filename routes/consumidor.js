@@ -35,7 +35,10 @@ router.get(/\/recurso\/[0-9a-zA-Z]*/, function (req, res, next) {
     .then((dados) => {
       User.lookUpId(dados.produtor)
         .then((resp) => {
-          res.render("Consumidor/recurso", { recurso: dados, produtor: resp });
+          res.render("Consumidor/recurso", {
+            recurso: dados,
+            consumidor: resp,
+          });
         })
         .catch((er) => res.render("error", { error: er }));
     })
@@ -98,6 +101,14 @@ router.get("/resultados", function (req, res) {
   }
 });
 
+router.get("/download/:id", function (req, res) {
+  var folderPath = __dirname + "/../public/fileStore/" + req.params.id + "/";
+  fs.readdirSync(folderPath).forEach((file) => {
+    Recursos.addDownload(req.params.id);
+    res.download(folderPath + file);
+  });
+});
+
 module.exports = router;
 router.get("/logout", function (req, res, next) {
   req.logout();
@@ -106,4 +117,20 @@ router.get("/logout", function (req, res, next) {
     if (!err) res.redirect("/");
     else console.log("Erro no Logout");
   });
+});
+
+router.get("/profile", (req, res) => {
+  Recursos.lookUpProd(req.user.email)
+    .then((recs) => {
+      res.render("Consumidor/profile", {
+        produtor: req.user,
+      });
+    })
+    .catch((e) => res.render("error", { error: e }));
+});
+
+router.get("/rating/:id/:star", (req, res) => {
+  console.log("estrelas: " + req.params.star);
+  Recursos.addRating(req.params.id, req.params.star);
+  res.redirect("/consumidor/recurso/" + req.params.id);
 });
