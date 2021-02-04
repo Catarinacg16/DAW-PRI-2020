@@ -1,20 +1,25 @@
 var fs = require('fs');
 var manifest = JSON.parse(fs.readFileSync("./manifest.json"));
-var decompress = require('decompress');
+//var decompress = require('decompress');
 const getStream = require('get-stream')
 var Recursos = require("../controller/recurso")
+var sha = require("crypto-js/sha256");
+var AdmZip = require('adm-zip');
+var path = require('path');
+
+var { v4: uuid } = require("uuid");
 
 
 module.exports.ingest = function (f, req) {
     //VERIFICAÇAO
     
     let oldPath = f.path;
-    console.log(f.originalname);
     if(!checkFileName(f.originalname)) return "ZIP NAME";
   
     if(!(manifest.formatoExterno == f.mimetype.split('/')[1])) return "MIME TYPE";
-    if(!checkZipRecursive(__dirname+"/../"+oldPath)) return "SUBDIR";
-
+    var isValid= checkZipRecursive(__dirname+"/../"+oldPath);
+    if(!isValid) return "SUBDIR";
+    
 
     var d = new Date().toISOString().substr(0, 16);
     req.body.dataRegisto = d;
@@ -22,46 +27,89 @@ module.exports.ingest = function (f, req) {
     Recursos.insert(req.body).then(data=>{
     var id = data._id;
     let newPath = __dirname + '/../public/fileStore/' + id;
-    fs.mkdirSync(newPath);
+    
+
+    var cs =makeCheckSum(__dirname+"/../"+oldPath)
+      fs.mkdirSync(newPath);
+      fs.writeFileSync(newPath+"/manifest-sha256.txt",cs);
+
+    
     newPath+="/"+ f.originalname;
     fs.rename(oldPath, newPath, function (err) {
         if (err) {
           console.log( err+":Erro a mover o ficheiro")
         } 
       });
-    });
-    return true;
+
+  }).catch(e=>console.log(e));
+  return true;
+    
+
   };
 
+  function makeCheckSum(file){
+    var ret= "";
+    var zip = AdmZip(file);
+    zip.getEntries().forEach(e=>{
+          if(!e.isDirectory){
+          ret+=sha(zip.readFile(e).toString());
+          var pathbuilder =e.entryName;
+          ret+=" "+ pathbuilder + '\n';
+          }
+      });
+      return ret;
+  }
+
   function checkZipRecursive(file){
-      console.dir("file:"+file);
-    decompress(file,'dist').then(files=>{
-        files.forEach(e=>{
-            let  path =e.path.split('/');
-            if(path[path.length-1].split('.')[1]=="zip") return checkZipRecursive(e);
+    var zip=AdmZip(file);
+    var ret = true;
+    zip.getEntries().forEach(e=>{
+            let  path =e.name;
+            if(path.split('.')[1]=="zip") {
+              var thiselemid= uuid();
+              var thispath=__dirname+"/../tmp/";
+              fs.mkdirSync(thispath);
+              fs.writeFileSync(thispath+ thiselemid+ ".zip",zip.readFile(e))
+              ret &= checkZipRecursive(thispath+ thiselemid+ ".zip");
+              rmrf(thispath);
+            }
             else{
-               console.log("filefile:"+path[path.length-1]+ "   type:"+ e.type) 
-            if(e.type=="file" &&!checkFileName(path[path.length-1])) return false;
+            if(!e.isDirectory) ret&=checkFileName(path);
             }
         })
-    })
-    .catch(e=>console.log(e))
-    return true;
+        return ret;
 
   }
 
   function checkFileName(fileName){
     var name = fileName.split('.')[0];
     var exte = fileName.split('.')[1];
-    if(manifest.limiteCaracteres < fileName.length) return false;
+    var ret= true;
+    ret&= (name!=undefined && exte!= undefined) ;
 
-    if(!manifest.nomesProibidos.includes(name)){
+    ret&= (manifest.limiteCaracteres >= fileName.length);
 
-        if(!manifest.formatosInternos.includes(exte)) return false;
-        name.split('').forEach(element => {
-            if(manifest.caracteresProibidos.includes(element)) return false;
+    ret&= !manifest.nomesProibidos.includes(name);
+
+    ret&= manifest.formatosInternos.includes(exte);
+
+    name.split('').forEach(element => {
+        ret&= !manifest.caracteresProibidos.includes(element);
         });    
-        return true;
-    } else return false;
+    return ret;
     
   }
+
+function rmrf(dir_path) {
+    if (fs.existsSync(dir_path)) {
+        fs.readdirSync(dir_path).forEach(function(entry) {
+            var entry_path = path.join(dir_path, entry);
+            if (fs.lstatSync(entry_path).isDirectory()) {
+                rimraf(entry_path);
+            } else {
+                fs.unlinkSync(entry_path);
+            }
+        });
+        fs.rmdirSync(dir_path);
+    }
+}

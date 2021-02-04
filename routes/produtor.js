@@ -70,6 +70,7 @@ router.get("/upload", function (req, res) {
 });
 
 
+
 router.post("/upload",upload.array('file'), function (req, res) {
   req.files.forEach((f, idx) => {
     var n = req.files.length;
@@ -81,6 +82,7 @@ router.post("/upload",upload.array('file'), function (req, res) {
     
   });
 });
+
 /*
 router.post("/upload", upload.array("file"), function (req, res) {
   req.files.forEach((f, idx) => {
