@@ -133,7 +133,14 @@ router.get("/download/:id", function (req, res) {
 router.get("/profile", (req, res) => {
   Recursos.lookUpProd(req.user.email)
     .then((recs) => {
-      res.render("Produtor/profile", { produtor: req.user, recursos: recs });
+      var ponto = Recursos.getPontuacaoMedia(recs);
+      var downs = Recursos.getNumDownloads(recs);
+      res.render("Produtor/profile", {
+        produtor: req.user,
+        recursos: recs,
+        pontuacao: ponto,
+        downs: downs,
+      });
     })
     .catch((e) => res.render("error", { error: e }));
 });

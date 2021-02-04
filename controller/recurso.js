@@ -93,6 +93,27 @@ module.exports.insert = function (r) {
   return novoRecurso.save();
 };
 
+//devolve a pontuação média de recursos
+module.exports.getPontuacaoMedia = function (recursos) {
+  var ponto = 0;
+  var total = 0;
+  recursos.forEach((element) => {
+    ponto = ponto + parseInt(element["pontuacao"]);
+    total = total + 1;
+  });
+  ponto = ponto / total;
+  return ponto;
+};
+
+//devolve numero de downsloads
+module.exports.getNumDownloads = function (recursos) {
+  var total = 0;
+  recursos.forEach((element) => {
+    total = total + parseInt(element["numDowns"]);
+  });
+  return total;
+};
+
 //Insere comentário num recurso
 module.exports.insertCom = function (r, com) {
   return Recurso.findByIdAndUpdate(
