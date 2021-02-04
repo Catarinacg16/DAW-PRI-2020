@@ -4,7 +4,7 @@ block content
     // Blog entries
     .w3-card-4.w3-margin.w3-white
       .w3-container
-        h1 Página de Recurso
+        h1.w3-center Página de Recurso
     .w3-row
         // Introduction menu
         .w3-col.l2
@@ -12,16 +12,16 @@ block content
           .w3-card.w3-margin.w3-margin-top
             .w3-container.w3-white
               img(src='/images/user.png' alt='Nature' style='width:100%')
-              h4
-                b=produtor.nome
-              p
+              h4.w3-center
+                b.w3-center=produtor.nome
+              p.w3-center
                 |
                 =produtor.filiacao
           hr
           // Labels / tags
           .w3-card.w3-margin
             .w3-container.w3-padding.w3-light-gray
-              h4 Tags do post
+              h4.w3-center Tags do post
             .w3-container.w3-white
               p
                 span.w3-tag.w3-black.w3-margin-bottom Teses
@@ -74,6 +74,22 @@ block content
             // Posts
             .w3-card.w3-margin
               .w3-container.w3-padding-white.w3-light-gray
+                h4.w3-center Adicione Pontuação!
+              .w3-ul.w3-hoverable.w3-white 
+                  //form(action="/produtor/recurso/"+recurso._id ,method="POST", enctype="form-data")
+                  .rating
+                    input#e5(name='stars' type='radio' onclick="window.location='/produtor/rating/"+recurso._id+"/5';")
+                    label(for='e5') &star;
+                    input#e4(name='stars' type='radio' onclick="window.location='/produtor/rating/"+recurso._id+"/4'")
+                    label(for='e4') &star;
+                    input#e3(name='stars' type='radio' onclick="window.location='/produtor/rating/"+recurso._id+"/3'")
+                    label(for='e3') &star;
+                    input#e2(name='stars' type='radio' onclick="window.location='/produtor/rating/"+recurso._id+"/2'")
+                    label(for='e2') &star;
+                    input#e1(name='stars' type='radio' onclick="window.location='/produtor/rating/"+recurso._id+"/1'")
+                    label(for='e1') &star;
+            .w3-card.w3-margin
+              .w3-container.w3-padding-white.w3-light-gray
                 h4 Comentarios
               ul.w3-ul.w3-hoverable.w3-white
                 each com in recurso.comentarios
@@ -88,8 +104,8 @@ block content
                     .div(id=com.id_coment)
                       input.btn.btn-secondary.mr-5(type="button" id="b"+com.id_coment value="Ver replies" onclick=`addi( ${com} )`)
                     p
-                    .div(id="addReply")
-                      input.btn.btn-secondary.mr-5(type="button", onclick="addReply()", value="Responder ⤵️")                           
+                    .div(id="r"+com.id_coment)
+                      input.btn.btn-secondary.mr-5(type="button" onclick=`addReply(\"${recurso._id}\", ${com})` value="Responder ⤵️")                           
                 .div
                 .w3-container
                   form(action="/produtor/recurso/"+recurso._id ,method="POST", enctype="form-data")
