@@ -8,9 +8,11 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "adm-zip": "^0.5.2",
     "axios": "^0.21.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "crypto-js": "^4.0.0",
     "debug": "~2.6.9",
     "decompress": "^4.2.1",
     "express": "~4.16.1",

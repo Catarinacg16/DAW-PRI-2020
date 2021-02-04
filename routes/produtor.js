@@ -77,10 +77,14 @@ router.get("/upload", function (req, res) {
 router.post("/upload",upload.single('file'), function (req, res) {
    var f =req.file;
    var ret =ingest(f, req);
-  if(ret==true)
-    res.redirect("/produtor");
-  else
-    res.jsonp(ret);
+   console.log(ret);
+    if(ret==true)
+      res.redirect("/produtor");
+    else
+      res.jsonp(ret);
+
+
+  
 });
 /*
 router.post("/upload", upload.array("file"), function (req, res) {
