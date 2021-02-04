@@ -5,6 +5,7 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     script(src="/javascripts/files.js")
+    script(src='/javascripts/reply.js')
     script(src="/javascripts/jquery-3.5.1.min.js")
   body.w3-purple
     // Navbar (sit on top)
@@ -17,9 +18,9 @@ html
         .w3-right.w3-hide-small
           a.w3-bar-item.w3-button(href='/devpanel') DEVPANEL
           a.w3-bar-item.w3-button(href='/about') Sobre Nós          
-          a.w3-bar-item.w3-button(href='/produtor/meusUploads') Os meus Uploads
+          a.w3-bar-item.w3-button(href='#projects') Os meus Uploads
           a.w3-bar-item.w3-button(href="/produtor/upload") Novo Upload
-          a.w3-bar-item.w3-button(href='#projects') A minha Conta          
+          a.w3-bar-item.w3-button(href='/produtor/profile') A minha Conta          
           a.w3-bar-item.w3-button(href="/logout") Logout
     // Header
     header#home.w3-display-container.w3-content.w3-wide(style='max-width:1500px;')

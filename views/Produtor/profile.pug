@@ -1,0 +1,87 @@
+extends header
+block content
+    // Blog entries
+    //Colocar form num sitio mais bonitinho
+    .w3-card-4.w3-margin.w3-white
+      .w3-container
+        h1.w3-center Profile
+    .w3-row
+        // Introduction menu
+        .w3-col.l3.w3-center
+          // About Card
+          .w3-card.w3-margin.w3-margin-top
+            .w3-container.w3-white
+              img(src='/images/user.png' alt='Nature' style='width:100%')
+              h4.w3-center
+                b.w3-center=produtor.nome
+              p.w3-center
+                |
+                =produtor.filiacao
+          
+          .w3-card.w3-margin
+            .w3-container.w3-padding-white.w3-light-gray
+              h4 Informação sobre o Produtor
+            ul.w3-ul.w3-hoverable.w3-white
+              li.w3-padding-16
+                span.w3-large Número de Posts
+                br
+                span=recursos.length
+              li.w3-padding-16
+                span.w3-large Pontuação Média
+                br
+                - for (var i = 0; i <pontuacao; i++) {
+                    span.fa.fa-star.checked
+                -}
+              li.w3-padding-16
+                span.w3-large Número de Downloads
+                br
+                span=downs
+          hr         
+        // Blog entries 
+        .w3-col.l9.s12
+          .w3-card-4.w3-margin.w3-white
+            .w3-container
+              h1.w3-center Posts do Utilizador
+          each a in recursos
+            // Blog entry   
+            -var i = 0 
+            .w3-card-4.w3-margin.w3-white
+              img(src='/images/thin'+-i+'.png' alt='Nature' style='width:100%')
+              if(i<5) 
+              -i++
+              if(i>5)
+              - i=0
+              .w3-container
+                h3
+                  b=a.titulo
+                h5 
+                  |Autor :  
+                  b=a.autor
+                  span.w3-opacity 
+                    =a.dataRegisto
+              .w3-container
+                p
+                  |
+                  =a.descricao
+                .w3-row
+                  .w3-col.m8.s12
+                    p
+                      button.w3-button.w3-padding-large.w3-white.w3-border
+                        a(href="/produtor/recurso/"+a._id) VER &raquo;
+                  .w3-col.m6.w3-hide-small.w3-right
+                    p
+                      span.w3-padding-large.w3-right
+                        b Comentários &nbsp;
+                        span.w3-badge=a.comentarios.length
+                    p
+                      span.w3-padding-large.w3-right
+                        b Downloads &nbsp;
+                        span.w3-badge=a.numDowns
+                    p
+                      span.w3-padding-large.w3-right
+                        b Pontuação : 
+                        - for (var i = 0; i < a.pontuacao; i++) {
+                            span.fa.fa-star.checked
+                        -}
+                  
+            // END BLOG ENTRIES
