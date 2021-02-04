@@ -81,9 +81,14 @@ block content
            .w3-container
                 .w3-card.w3-margin.w3-margin-top
                   .w3-container.w3-white
+                    #style-default.scrollbar
+                     .force-overflow
                     h4
                       b Ficheiros Carregados
-                hr                 
+                      
+                             each a in recursos
+                                     a(href="http://localhost:3000/produtor/recurso/"+a._id )= a.titulo
+                                
                         
            
   

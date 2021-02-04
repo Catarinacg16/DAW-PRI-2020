@@ -1,0 +1,102 @@
+extends header
+block content
+    // Blog entries
+    .w3-card-4.w3-margin.w3-white
+      .w3-container
+        h1 Meus Uploads
+    .w3-row
+        // Blog entries 
+        .w3-col.l8.s12
+          each a in recursos
+            // Blog entry   
+            -var i = 0 
+            .w3-card-4.w3-margin.w3-white
+              img(src='/images/thin'+-i+'.png' alt='Nature' style='width:100%')
+              if(i<5) 
+              -i++
+              if(i>5)
+              - i=0
+              .w3-container
+                iframe(classname='doc' src='{`https://docs.google.com/gview?url=file:///Users/catarinagil/Downloads/AI_TP3.pdf&embedded=true`}')
+                h3
+                  b=a.titulo
+                h5 
+                  |Autor :  
+                  b=a.autor
+                  span.w3-opacity 
+                    =a.dataRegisto
+              .w3-container
+                p
+                  |
+                  =a.descricao
+                .w3-row
+                  .w3-col.m8.s12
+                    p
+                      button.w3-button.w3-padding-large.w3-white.w3-border
+                        a(href="/produtor/editar/"+a._id) Editar &raquo;
+                  .w3-col.m6.w3-hide-small.w3-right
+                    p
+                      span.w3-padding-large.w3-right
+                        b Comentários &nbsp;
+                        span.w3-badge=a.comentarios.length
+                    p
+                      span.w3-padding-large.w3-right
+                        b Downloads &nbsp;
+                        span.w3-badge=a.numDowns
+                    p
+                      span.w3-padding-large.w3-right
+                        b Pontuação : 
+                        - for (var i = 0; i < a.pontuacao; i++) {
+                            span.fa.fa-star.checked
+                        -}
+                  
+            // END BLOG ENTRIES
+        // Introduction menu
+        .w3-col.l4
+          // About Card
+          .w3-card.w3-margin.w3-margin-top
+            img(src='/images/ex2.png' alt='Nature' style="width:100%")
+            .w3-container.w3-white
+              h4
+                b Notifs do Admin
+              p
+                | kkkk socorro
+          hr
+          // Posts
+          .w3-card.w3-margin
+            .w3-container.w3-padding-white.w3-light-gray
+              h4 Popular Posts
+            ul.w3-ul.w3-hoverable.w3-white
+              li.w3-padding-16
+                span.w3-large Lorem
+                br
+                span Sed mattis nunc
+              li.w3-padding-16
+                span.w3-large Ipsum
+                br
+                span Praes tinci sed
+              li.w3-padding-16
+                span.w3-large Dorum
+                br
+                span Ultricies congue
+              li.w3-padding-16.w3-hide-medium.w3-hide-small
+                span.w3-large Mingsum
+                br
+                span Lorem ipsum dipsum
+          hr
+          // Labels / tags
+          .w3-card.w3-margin
+            .w3-container.w3-padding.w3-light-gray
+              h4 Tags
+            .w3-container.w3-white
+              p
+                span.w3-tag.w3-black.w3-margin-bottom Teses
+                span.w3-tag.w3-light-grey.w3-small.w3-margin-bottom Exercicios Resolvidos
+                span.w3-tag.w3-light-grey.w3-small.w3-margin-bottom Testes
+                span.w3-tag.w3-light-grey.w3-small.w3-margin-bottom Material
+                span.w3-tag.w3-light-grey.w3-small.w3-margin-bottom Sebentas
+                span.w3-tag.w3-light-grey.w3-small.w3-margin-bottom Apontamentos
+          // END Introduction Menu
+        // END GRID
+    br
+    // END w3-content
