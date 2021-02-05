@@ -1,22 +1,27 @@
 extends header
 block content
     // Blog entries
-    h1 Página de Recurso
+    // Blog entries
+    .w3-card-4.w3-margin.w3-white
+      .w3-container
+        h1.w3-center Página de Recurso
     .w3-row
         // Introduction menu
         .w3-col.l2
           // About Card
           .w3-card.w3-margin.w3-margin-top
             .w3-container.w3-white
-              h4
-                b Nome do Uploader
-              p
-                | kkkk socorro
+              img(src='/images/user.png' alt='Nature' style='width:100%')
+              h4.w3-center
+                b.w3-center=produtor.nome
+              p.w3-center
+                |
+                =produtor.filiacao
           hr
           // Labels / tags
           .w3-card.w3-margin
-            .w3-container.w3-padding
-              h4 Tags do post
+            .w3-container.w3-padding.w3-light-gray
+              h4.w3-center Tags do post
             .w3-container.w3-white
               p
                 span.w3-tag.w3-black.w3-margin-bottom Teses
@@ -45,40 +50,70 @@ block content
                 .w3-row
                   .w3-col.m8.s12
                     p
-                      button.w3-button.w3-padding-large.w3-white.w3-border
-                        a(href="kkkNotYet") Download &raquo;
-                  .w3-col.m4.w3-hide-small
+                    a.w3-button.w3-padding-large.w3-purple.w3-border(href="/administrador/download/"+recurso._id)
+                     h6
+                       b.fa.fa-download
+                        |  Download
+                  .w3-col.m6.w3-hide-small.w3-right
                     p
                       span.w3-padding-large.w3-right
                         b Comentários &nbsp;
-                        span.w3-badge 2
+                        span.w3-badge=recurso.comentarios.length
                     p
                       span.w3-padding-large.w3-right
-                        b Pontuação &nbsp;
-                        span.w3-badge 1  
+                        b Downloads &nbsp;
+                        span.w3-badge=recurso.numDowns
+                    p
+                      span.w3-padding-large.w3-right
+                        b Pontuação : 
+                        - for (var i = 0; i < recurso.pontuacao; i++) {
+                            span.fa.fa-star.checked
+                        -}
                   
             // END BLOG ENTRIES
             // Posts
             .w3-card.w3-margin
-              .w3-container.w3-padding-white
+              .w3-container.w3-padding-white.w3-light-gray
+                h4.w3-center Adicione Pontuação!
+              .w3-ul.w3-hoverable.w3-white 
+                  .rating
+                    input#e5(name='stars' type='radio' onclick="window.location='/administrador/rating/"+recurso._id+"/5';")
+                    label(for='e5') &star;
+                    input#e4(name='stars' type='radio' onclick="window.location='/administrador/rating/"+recurso._id+"/4'")
+                    label(for='e4') &star;
+                    input#e3(name='stars' type='radio' onclick="window.location='/administrador/rating/"+recurso._id+"/3'")
+                    label(for='e3') &star;
+                    input#e2(name='stars' type='radio' onclick="window.location='/administrador/rating/"+recurso._id+"/2'")
+                    label(for='e2') &star;
+                    input#e1(name='stars' type='radio' onclick="window.location='/administrador/rating/"+recurso._id+"/1'")
+                    label(for='e1') &star;
+            .w3-card.w3-margin
+              .w3-container.w3-padding-white.w3-light-gray
                 h4 Comentarios
-              ul.w3-ul.w3-hoverable.w3-white
-                li.w3-padding-16
-                  span.w3-large Lorem
-                  br
-                  span Sed mattis nunc
-                li.w3-padding-16
-                  span.w3-large Ipsum
-                  br
-                  span Praes tinci sed
-                li.w3-padding-16
-                  span.w3-large Dorum
-                  br
-                  span Ultricies congue
-                li.w3-padding-16.w3-hide-medium.w3-hide-small
-                  span.w3-large Mingsum
-                  br
-                  span Lorem ipsum dipsum
+              ul.w3-ul.w3-white
+                each com in recurso.comentarios
+                  li.w3-padding-16
+                    b=com.nome_utilizador
+                    br
+                    b=com.id_coment
+                    b=com.data
+                    br
+                    span=com.descricao
+                    br
+                    .div(id=com.id_coment)
+                      input.w3-button.w3-light-gray(type="button" id="b"+com.id_coment value="Ver replies" onclick=`addi( ${com} )`)
+                    p
+                    .div(id="r"+com.id_coment)
+                      input.w3-button.w3-light-gray(type="button" onclick=`addReply(\"${recurso._id}\", ${com})` value="Responder ⤵️")                           
+                    hr
+                .div
+                .w3-container
+                  form(action="/administrador/recurso/"+recurso._id ,method="POST", enctype="form-data")
+                    li.w3-padding-16
+                      input.w3-input.w3-border.w3-round.form-control(type="text",placeholder="Comentário ...",name="descricao")
+                      input.w3-button.w3-padding-large.w3-purple.w3-border(type="submit",value="Submit")
+                br
+
             hr
         // END GRID
     br

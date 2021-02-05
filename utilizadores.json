@@ -1,13 +1,20 @@
-{
-  "utilizador": [
-    {
-      "nome": "Tânia Filipa",
-      "email": "tania@gmail.com",
-      "filiacao": "estudante",
-      "nivel": "produtor",
-      "dataRegisto": "21-12-2020",
-      "dataUltimoAcesso": "22-12-2020",
-      "password": "tania"
-    }
-  ]
-}
+[
+  {
+    "nome": "JCR",
+    "email": "jcr@gmail.com",
+    "filiacao": "Docente",
+    "nivel": "produtor",
+    "dataRegisto": "21-12-2020",
+    "dataUltimoAcesso": "22-12-2018",
+    "password": "jcr"
+  },
+  {
+    "nome": "admin",
+    "email": "admin@gmail.com",
+    "filiacao": "admin",
+    "nivel": "admin",
+    "dataRegisto": "21-12-2020",
+    "dataUltimoAcesso": "22-12-2020",
+    "password": "admin"
+  }
+]

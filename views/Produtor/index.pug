@@ -4,10 +4,12 @@ block content
     //Colocar form num sitio mais bonitinho
     .w3-card-4.w3-margin.w3-white
       .w3-container
-        h1 Página do Produtor
+        h1.w3-col.l3.w3-center Página do Produtor
+        br
         form(action="/produtor/resultados" method="GET", enctype="multipart/form-data")
-          input.form-control(type="text",placeholder="Search...",name="search")
-          input.btn.btn-lg.btn-primary(type="submit",value="🔎")
+          input.w3-input.w3-border.w3-round.form-control.w3-col.l3.w3-left(type="text",placeholder="Search...",name="search")
+          input.w3-button.w3-border.w3-light-gray(type="submit",value="🔎")
+       
     .w3-row
         // Blog entries 
         .w3-col.l8.s12
