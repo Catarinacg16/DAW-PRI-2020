@@ -89,6 +89,14 @@ router.get("/editar/:id", function (req, res) {
     .catch((e) => res.render("error", { error: e }));
 });
 
+router.get("/remove/:id", function (req, res) {
+  Recursos.remove(req.params.id)
+  .then(() => {   
+    res.redirect("/produtor/meusUploads");
+  })
+  .catch((e) => res.render("error", { error: e }));
+});
+
 router.get("/upload", function (req, res) {
   var user = req.user.email;
   console.log(user);
@@ -102,15 +110,11 @@ router.get("/upload", function (req, res) {
 router.post("/editar/:id", upload.single("file"), function (req, res) {
   var id =req.params.id;
   Recursos.edit(id, req.body)
-    .then(() => {
-      var user = req.user.email;
-      Recursos.lookUpByUser(user)
-        .then((dados) => {
-          res.render("Produtor/meusUploads", { recursos: dados })
-        })
-        .catch((e) => res.render("error", { error: e }))
-    .catch((e) => res.render("error", { error: e }));
+    .then(() => {   
+      res.redirect("/produtor/meusUploads");
     })
+    .catch((e) => res.render("error", { error: e }));
+    
 });
 
 
