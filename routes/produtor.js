@@ -6,10 +6,12 @@ var User = require("../controller/utilizador");
 var multer = require("multer");
 var upload = multer({ dest: "../uploads/" });
 var fs = require("fs");
+var is_zip = require('is-zip-file');
 var jsonfile = require("jsonfile");
 var qs = require("query-string");
 var url = require("url");
 var { ingest } = require("./ingest");
+const { Console } = require("console");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -78,6 +80,13 @@ router.get("/meusUploads", function (req, res) {
     })
     .catch((e) => res.render("error", { error: e }));
 });
+router.get("/editar/:id", function (req, res) {
+  Recursos.lookUp(req.params.id)
+    .then((dados) => {
+      res.render("Produtor/editRecurso", { recursos: dados, produtor: req.user})
+    })
+    .catch((e) => res.render("error", { error: e }));
+});
 
 router.get("/upload", function (req, res) {
   var user = req.user.email;
@@ -89,14 +98,26 @@ router.get("/upload", function (req, res) {
     .catch((e) => res.render("error", { error: e }));
 });
 
-router.post("/upload", upload.array("file"), function (req, res) {
-  req.files.forEach((f, idx) => {
-    var n = req.files.length;
-    var ret = ingest(f, req, n);
+router.post("/editar/:id", upload.single("file"), function (req, res) {
+  var id =req.params.id;
+  Recursos.edit(id, req.body)
+    .then(() => {
+      var user = req.user.email;
+      Recursos.lookUpByUser(user)
+        .then((dados) => {
+          res.render("Produtor/meusUploads", { recursos: dados })
+        })
+        .catch((e) => res.render("error", { error: e }))
+    .catch((e) => res.render("error", { error: e }));
+    })
+});
+
+
+router.post("/upload", upload.single("file"), function (req, res) {
+    var ret = ingest(f, req);
     if (ret == true) res.redirect("/produtor");
     else res.jsonp(ret);
   });
-});
 
 /*
 router.post("/upload", upload.array("file"), function (req, res) {
@@ -123,11 +144,18 @@ router.post("/upload", upload.array("file"), function (req, res) {
 */
 module.exports = router;
 router.get("/download/:id", function (req, res) {
-
   var folderPath = __dirname + "/../public/fileStore/" + req.params.id + "/";
   fs.readdirSync(folderPath).forEach((file) => {
-    Recursos.addDownload(req.params.id);
-    res.download(folderPath + file);
+    is_zip.isZip(folderPath + file, function(err, is) {
+      if(err) {
+        console.log('Error while checking if file is zip : ' + err);
+      }
+      else {
+        console.log(file)
+        Recursos.addDownload(req.params.id);
+        res.download(folderPath + file);
+     }
+    })
   });
 });
 

@@ -1,0 +1,85 @@
+
+extends header
+block content
+    // Blog entries
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    .w3-card-4.w3-margin.w3-white
+      .w3-container
+         h1 Carregar novo Ficheiro
+    .w3-row
+        // Blog entries 
+        .w3-col.l9        
+            // Blog entry    
+            .w3-card-4.w3-margin.w3-white
+              .w3-container
+                form.w3-center(action="/produtor/editar/"+recursos._id method="POST", enctype="multipart/form-data")
+                    .w3-container.w3-center(id="fileInputGroup")
+                        //.w3-half.w3-purple                          
+                        .w3-center
+                            .w3-card.w3-margin.w3-margin-top
+                              .w3-container.w3-white
+                                h4
+                                  b Upload de Ficheiros
+                            hr
+                            p
+                            br
+                            .div
+                                label(for="visibilidade") Visibilidade:                   
+                            .div
+                                select.w3-input.w3-border.w3-round.form-control(type="text",value=recursos.visibilidade,name="visibilidade")
+                                    option(value="Público") Público
+                                    option(value="Privado") Privado
+                            p
+                            .div
+                                label(for="tipo") Tipo:
+                            .div
+                                select.w3-input.w3-border.w3-round.form-control(type="text", value=recursos.tipo, name="tipo")
+                                    option(value="Tese") Tese
+                                    option(value="Relatório") Relatório
+                                    option(value="Artigo") Artigo
+                                    option(value="Aplicação") Aplicacão
+                                    option(value="Slides") Slides
+                                    option(value="Exames") Exames
+                                    option(value="Resoluções") Resoluções
+                            p
+                            .div
+                                label(for="desc") Descrição:
+                            .div
+                                input.w3-input.w3-border.w3-round.form-control(type="text",value=recursos.descricao,name="descricao")
+                            p
+                            .div
+                                label(for="titulo") Título:
+                            .div
+                                input.w3-input.w3-border.w3-round.form-control(type="text", value=recursos.titulo,name="titulo")
+                            p
+                            .div
+                                label(for="dc") Data de Criação:
+                            .div
+                                input.w3-input.w3-border.w3-round.form-control(type="text",value=recursos.dataCriacao, name="dataCriacao")
+                            hr
+                            .div
+                                label(for="autor") Autor:
+                            .div(id="addAutor")
+                                each a in recursos.autor
+                                    input.w3-input.w3-border.w3-round.form-control(type="text",value=a,name="autor")
+                                    input.w3-input.w3-border.w3-round.form-control(type="button", onclick="removeAutor()", value="X")
+                                input.w3-input.w3-border.w3-round.form-control(type="button", onclick="addAutor()", value="Adicionar Autor")                           
+                            hr
+                            .div
+                                label(for="tags") Adicionar tags:
+                                p
+                            .div(id="addTag")
+                                each a in recursos.tags
+                                    td 
+                                        input.w3-input.w3-border.w3-round.form-control(type="text",value=a,name="tag")
+                                    td 
+                                        input.btn.btn-primary(id= a, type='button', value='Delete')
+                                input.w3-input.w3-border.w3-round.form-control(type="button", onclick="addTag()", value="Adicionar Tag")                               
+
+                            .w3.bottom   
+                                input.w3-button.w3-padding-large.w3-purple.w3-border(type="submit",value="Submit")
+                            p
+        
+          
+    br
+    // END w3-content
