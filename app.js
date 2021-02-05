@@ -29,9 +29,6 @@ db.once("open", function () {
 });
 
 var Utilizador = require("./controller/utilizador");
-Utilizador.list()
-  .then((data) => console.log(JSON.stringify(data)))
-  .catch((e) => console.log(e));
 
 var indexRouter = require("./routes/index");
 var adminRouter = require("./routes/administrador");

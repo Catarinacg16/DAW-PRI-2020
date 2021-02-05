@@ -3,7 +3,11 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body.w3-white
+    script(src="/javascripts/jquery-3.5.1.min.js")
+    script(src="/javascripts/files.js")
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    script(src='/javascripts/reply.js')
+  body.w3-purple
     // Navbar (sit on top)
     .w3-top
       .w3-bar.w3-white.w3-wide.w3-padding.w3-card
@@ -17,7 +21,7 @@ html
           a.w3-bar-item.w3-button(href='/about') Sobre Nós
           a.w3-bar-item.w3-button(href="/logout") Logout
     // Header
-    header#home.w3-display-container.w3-content.w3-wide(style='max-width:1500px;')
+    header.w3-display-container.w3-content.w3-wide(style='max-width:1500px;')
       img(src='/images/oi.png' alt='Natur' style="width:100%;padding-top:3.4%")
       .w3-display-middle.w3-margin-top.w3-center
         h1.w3-xxlarge.w3-text-white

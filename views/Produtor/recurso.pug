@@ -50,11 +50,11 @@ block content
                 .w3-row
                   .w3-col.m8.s12
                     p
-                    a.w3-bar-item.w3-button(href="/produtor/download/"+recurso._id)
-                      button.btn
-                       i.fa.fa-download
+                    a.w3-button.w3-padding-large.w3-purple.w3-border(href="/produtor/download/"+recurso._id)
+                     h6
+                       b.fa.fa-download
                         |  Download
-                  .w3-col.m4.w3-hide-small
+                  .w3-col.m6.w3-hide-small.w3-right
                     p
                       span.w3-padding-large.w3-right
                         b Comentários &nbsp;
@@ -91,7 +91,7 @@ block content
             .w3-card.w3-margin
               .w3-container.w3-padding-white.w3-light-gray
                 h4 Comentarios
-              ul.w3-ul.w3-hoverable.w3-white
+              ul.w3-ul.w3-white
                 each com in recurso.comentarios
                   li.w3-padding-16
                     b=com.nome_utilizador
@@ -102,16 +102,17 @@ block content
                     span=com.descricao
                     br
                     .div(id=com.id_coment)
-                      input.btn.btn-secondary.mr-5(type="button" id="b"+com.id_coment value="Ver replies" onclick=`addi( ${com} )`)
+                      input.w3-button.w3-light-gray(type="button" id="b"+com.id_coment value="Ver replies" onclick=`addi( ${com} )`)
                     p
                     .div(id="r"+com.id_coment)
-                      input.btn.btn-secondary.mr-5(type="button" onclick=`addReply(\"${recurso._id}\", ${com})` value="Responder ⤵️")                           
+                      input.w3-button.w3-light-gray(type="button" onclick=`addReply(\"${recurso._id}\", ${com})` value="Responder ⤵️")                           
+                    hr
                 .div
                 .w3-container
                   form(action="/produtor/recurso/"+recurso._id ,method="POST", enctype="form-data")
                     li.w3-padding-16
-                      input.form-control(type="text",placeholder="comentário ...",name="descricao")
-                      input.btn.btn-lg.btn-primary(type="submit",value="Submit")
+                      input.w3-input.w3-border.w3-round.form-control(type="text",placeholder="Comentário ...",name="descricao")
+                      input.w3-button.w3-padding-large.w3-purple.w3-border(type="submit",value="Submit")
                 br
 
             hr

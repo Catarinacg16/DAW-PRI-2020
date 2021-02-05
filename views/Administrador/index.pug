@@ -1,81 +1,65 @@
 extends header
 block content
     // Blog entries
-    h1 Página do Consumidor
-    .w3-row
-        // Blog entries
-        .w3-col.l8.s12
-          // Blog entry    
-          .w3-card-4.w3-margin.w3-white
-            .w3-container
-              h3
-                b POST
-              h5
-                | Tese JCR, 
-                span.w3-opacity DATA
-            .w3-container
-              p
-                | Descricao
-              .w3-row
-                .w3-col.m8.s12
-                  p
-                    button.w3-button.w3-padding-large.w3-white.w3-border
-                      b VER &raquo;
-                .w3-col.m4.w3-hide-small
-                  p
-                    span.w3-padding-large.w3-right
-                      b Comentários &nbsp;
-                      span.w3-badge 2
-                  p
-                    span.w3-padding-large.w3-right
-                      b Pontuação &nbsp;
-                      span.w3-badge 1
-          // END BLOG ENTRIES
+    .w3-card-4.w3-margin.w3-white
+      .w3-container
+        h1.w3-center Painel do Administrador
+    .w3-row.w3-center
         // Introduction menu
         .w3-col.l4
           // About Card
           .w3-card.w3-margin.w3-margin-top
             .w3-container.w3-white
+              br
+              br
+              br
               h4
-                b Notifs do Admin
-              p
-                | kkkk socorro
-          hr
-          // Posts
-          .w3-card.w3-margin
-            .w3-container.w3-padding-white
-              h4 Popular Posts
-            ul.w3-ul.w3-hoverable.w3-white
-              li.w3-padding-16
-                span.w3-large Lorem
-                br
-                span Sed mattis nunc
-              li.w3-padding-16
-                span.w3-large Ipsum
-                br
-                span Praes tinci sed
-              li.w3-padding-16
-                span.w3-large Dorum
-                br
-                span Ultricies congue
-              li.w3-padding-16.w3-hide-medium.w3-hide-small
-                span.w3-large Mingsum
-                br
-                span Lorem ipsum dipsum
-          hr
-          // Labels / tags
-          .w3-card.w3-margin
-            .w3-container.w3-padding
-              h4 Tags
+                input.w3-button.w3-padding-large.w3-hoverable.w3-white.w3-round(type="button" onclick="window.location='/administrador/recursos'" value="Gerir Recursos")
+              br
+              br
+              br
+        .w3-col.l4
+          // About Card
+          .w3-card.w3-margin.w3-margin-top
             .w3-container.w3-white
-              p
-                span.w3-tag.w3-black.w3-margin-bottom Teses
-                span.w3-tag.w3-light-grey.w3-small.w3-margin-bottom Exercicios Resolvidos
-                span.w3-tag.w3-light-grey.w3-small.w3-margin-bottom Testes
-                span.w3-tag.w3-light-grey.w3-small.w3-margin-bottom Material
-                span.w3-tag.w3-light-grey.w3-small.w3-margin-bottom Sebentas
-                span.w3-tag.w3-light-grey.w3-small.w3-margin-bottom Apontamentos
-          // END Introduction Menu
-        // END GRID
+              br
+              br
+              br
+              h4
+                input.w3-bold.w3-button.w3-padding-large.w3-hoverable.w3-white.w3-round(type="button" onclick="window.location='/administrador/utilizadores'" value="Gerir Utilizadores") 
+              br
+              br
+              br
+        .w3-col.l4
+          // About Card
+          .w3-card.w3-margin.w3-margin-top
+            .w3-container.w3-white
+              br
+              br
+              br
+              h4
+                input.w3-button.w3-padding-large.w3-hoverable.w3-white.w3-round(type="button" onclick="window.location='/administrador/anuncios'" value="Gerir Anuncios")
+              br
+              br
+              br
+         
         br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+
     // END w3-content

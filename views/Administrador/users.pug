@@ -1,0 +1,31 @@
+extends header
+block content
+    .w3-card-4.w3-margin.w3-white
+      .w3-container
+        h1.w3-center Gerir Utilizadores
+    .w3-card-4.w3-margin.w3-white
+      .w3-container
+        br
+        table.w3-table-all.w3-centered
+            tr
+              th Nome de Utilizador
+              th Email
+              th Filiação
+              th Nível
+              th Data de Criação
+              th Opçoes
+            each e in users
+              tr
+                td=e.nome
+                td=e.email
+                td=e.filiacao 
+                td=e.nivel
+                td=e.dataRegisto
+                td 
+                  button.w3-button.w3-purple.w3-border
+                        a(href="/administrador/Recurso/"+e._id) Editar &raquo;
+                  button.w3-button.w3-purple.w3-border
+                        a(href="/administrador/delete/"+e._id) Eliminar &raquo;
+                  button.w3-button.w3-purple.w3-border
+                        a(href="/administrador/profile/"+e._id) Ver Perfil &raquo;
+        br
