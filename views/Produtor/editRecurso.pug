@@ -60,21 +60,26 @@ block content
                             .div
                                 label(for="autor") Autor:
                             .div(id="addAutor")
+                                input.w3-input.w3-border.w3-round.form-control(type="button", onclick="addAutor()", value="Adicionar Autor")
                                 each a in recursos.autor
-                                    input.w3-input.w3-border.w3-round.form-control(type="text",value=a,name="autor")
-                                    input.w3-input.w3-border.w3-round.form-control(type="button", onclick="removeAutor()", value="X")
-                                input.w3-input.w3-border.w3-round.form-control(type="button", onclick="addAutor()", value="Adicionar Autor")                           
+                                    td 
+                                        .div(id="remAutor"+a)
+                                            input.w3-input.w3-threequarter.w3-border.w3-round.form-control(type="text",value=a,name="autor")
+                                            input.w3-input.w3-quarter.w3-light-grey.w3-button.w3-right.w3-border(type="button", onclick=`remAutor(\"${a}\")`, value="X")
+                                                           
                             hr
                             .div
                                 label(for="tags") Adicionar tags:
                                 p
                             .div(id="addTag")
+                                input.w3-input.w3-border.w3-round.form-control(type="button", onclick=`addTag()`, value="Adicionar Tag")
                                 each a in recursos.tags
                                     td 
-                                        input.w3-input.w3-border.w3-round.form-control(type="text",value=a,name="tag")
-                                    td 
-                                        input.btn.btn-primary(id= a, type='button', value='Delete')
-                                input.w3-input.w3-border.w3-round.form-control(type="button", onclick="addTag()", value="Adicionar Tag")                               
+                                        .div(id="remTag"+a)
+                                            input.w3-input.w3-threequarter.w3-border.w3-round.form-control(type="text",value=a,name="tags")
+                                            input.w3-input.w3-quarter.w3-light-grey.w3-button.w3-right.w3-border(type="button", onclick=`remTag(\"${a}\")`, value="X")
+
+                                                               
 
                             .w3.bottom   
                                 input.w3-button.w3-padding-large.w3-purple.w3-border(type="submit",value="Submit")
