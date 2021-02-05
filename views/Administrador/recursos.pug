@@ -2,6 +2,39 @@ extends header
 block content
     .w3-card-4.w3-margin.w3-white
       .w3-container
-        h1.w3-center Ferir Recursos
-        
-    table.w3-table-all.w3-centered
+        h1.w3-center Gerir Recursos
+    .w3-card-4.w3-margin.w3-white
+      .w3-container
+        br
+        table.w3-table-all.w3-centered
+            tr
+              th Título
+              th Tipo
+              th Visibilidade
+              th Data de Registo
+              th Produtor
+              th Opçoes
+            each e in recursos
+              tr
+                td=e.titulo
+                td=e.tipo
+                td=e.visibilidade
+                td=e.dataRegisto 
+                td 
+                  -for(var i =0; i<produtores.length;i++){
+                      -if(produtores[i].email === e.produtor){
+                     
+                        a(href="/administrador/profile/"+produtores[i]._id)=produtores[i].nome
+                      -}                       
+                  -}
+                  
+                  
+                  =e.produtor.nome
+                td 
+                  button.w3-button.w3-purple.w3-border
+                        a(href="/administrador/recurso/edit/"+e._id) Editar &raquo;
+                  button.w3-button.w3-purple.w3-border
+                        a(href="/administrador/deleter/"+e._id) Eliminar &raquo;
+                  button.w3-button.w3-purple.w3-border
+                        a(href="/administrador/recurso/"+e._id) Ver Detalhes &raquo;
+        br

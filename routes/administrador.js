@@ -2,6 +2,7 @@ var express = require("express");
 const Utilizador = require("../controller/utilizador");
 var router = express.Router();
 const Recursos = require("../controller/recurso");
+const { symlinkSync } = require("fs");
 
 /* GET Form registar utilizador*/
 router.get("/registar", function (req, res, next) {
@@ -21,6 +22,22 @@ router.get("/", function (req, res, next) {
 });
 module.exports = router;
 
+router.get("/recursos", function (req, res, next) {
+  Recursos.list()
+    .then((dados) => {
+      Utilizador.list()
+        .then((prod) => {
+          //console.log(prod);
+          res.render("Administrador/recursos", {
+            recursos: dados,
+            produtores: prod,
+          });
+        })
+        .catch((e) => res.render("error", { error: e }));
+    })
+    .catch((e) => res.render("error", { error: e }));
+});
+
 router.get("/utilizadores", (req, res) => {
   Utilizador.list()
     .then((lista) => {
@@ -36,6 +53,24 @@ router.get("/logout", function (req, res, next) {
     if (!err) res.redirect("/");
     else console.log("Erro no Logout");
   });
+});
+
+router.post("/recurso/:id", (req, res) => {
+  console.log("um hello");
+  req.body.data = new Date().toISOString().substr(0, 16);
+
+  Recursos.lookUp(req.params.id)
+    .then((dados) => {
+      req.body.id_coment = dados.comentarios.length + 1;
+      req.body.id_utilizador = req.user.email;
+      req.body.nome_utilizador = req.user.nome;
+      dados.comentarios.push(req.body);
+      console.log(dados.comentarios);
+      Recursos.edit(req.params.id, dados)
+        .then((e) => res.redirect("/administrador/recurso/" + req.params.id))
+        .catch((e) => res.render("error", { error: e }));
+    })
+    .catch((e) => res.render("error", { error: e }));
 });
 
 router.get("/profile/:id", (req, res) => {
