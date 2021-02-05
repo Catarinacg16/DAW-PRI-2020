@@ -12,6 +12,7 @@ var qs = require("query-string");
 var url = require("url");
 var { ingest } = require("./ingest");
 const { Console } = require("console");
+var { isAccessible} = require("./access");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -114,7 +115,7 @@ router.post("/editar/:id", upload.single("file"), function (req, res) {
 
 
 router.post("/upload", upload.single("file"), function (req, res) {
-    var ret = ingest(f, req);
+    var ret = ingest(req.file, req);
     if (ret == true) res.redirect("/produtor");
     else res.jsonp(ret);
   });
@@ -152,11 +153,17 @@ router.get("/download/:id", function (req, res) {
       }
       else {
         console.log(file)
-        Recursos.addDownload(req.params.id);
-        res.download(folderPath + file);
+        
      }
     })
   });
+  var ret = isAccessible(folderPath);
+        if(ret==false){
+          console.log("Ficheiro Corrompido") 
+      }else {
+        Recursos.addDownload(req.params.id);
+        res.download(ret);
+      }
 });
 
 router.get("/profile", (req, res) => {

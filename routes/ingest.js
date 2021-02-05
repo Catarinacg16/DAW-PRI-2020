@@ -14,11 +14,11 @@ module.exports.ingest = function (f, req) {
     //VERIFICAÇAO
     
     let oldPath = f.path;
-    if(!checkFileName(f.originalname)) return "ZIP NAME";
+    if(!checkFileName(f.originalname)) return "Erro no nome";
   
-    if(!(manifest.formatoExterno == f.mimetype.split('/')[1])) return "MIME TYPE";
+    if(!(manifest.formatoExterno == f.mimetype.split('/')[1])) return "Erro no formato Externo";
     var isValid= checkZipRecursive(__dirname+"/../"+oldPath);
-    if(!isValid) return "SUBDIR";
+    if(!isValid) return "Erro nos ficheiros internos";
     
 
     var d = new Date().toISOString().substr(0, 16);
