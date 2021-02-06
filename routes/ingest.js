@@ -101,7 +101,7 @@ module.exports.ingest = function (f, req) {
     
   }
 
-function rmrf(dir_path) {
+  module.exports.rmrf = function rmrf(dir_path) {
     if (fs.existsSync(dir_path)) {
         fs.readdirSync(dir_path).forEach(function(entry) {
             var entry_path = path.join(dir_path, entry);

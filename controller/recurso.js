@@ -30,9 +30,15 @@ module.exports.lookUpCom = function (com_id) {
 };
 
 module.exports.lookUpbyTag = function (taglist) {
-  console.log("print taglist" + taglist);
-  return Recurso.find({ tags: { $in: taglist } }).exec();
-};
+  console.log(taglist+"\n")
+  return Recurso.find({$or:
+       [
+       { tags: {$in : taglist}},
+       { autor: {$in : taglist}},
+       //{ titulo: {$in : taglist}}        
+       ]
+      }).exec();
+}
 
 module.exports.addDownload = function (id) {
   Recurso.findOne({ _id: id }, { numDowns: 1 })
@@ -81,8 +87,9 @@ module.exports.addRating = function (id, rating) {
 module.exports.lookUpbyData = function (data) {
   return Recurso.find({
     $or: [
-      { titulo: { $regex: ".*" + data + ".*" } },
-      { descricao: ".*" + data + ".*" },
+      //{ titulo: { $regex: ".*" + data + ".*" } },
+      { titulo:  "Testes"  },
+      { descricao:  "Testes"  },
     ],
   }).exec();
 };

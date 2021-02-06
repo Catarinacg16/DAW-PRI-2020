@@ -2,6 +2,7 @@ var express = require("express");
 const passport = require("passport");
 var router = express.Router();
 var Recursos = require("../controller/recurso");
+var recurso = require("../model/recurso");
 var User = require("../controller/utilizador");
 var multer = require("multer");
 var upload = multer({ dest: "../uploads/" });
@@ -55,21 +56,29 @@ router.post("/recurso/:id", (req, res) => {
 router.get("/resultados", function (req, res) {
   var queryObject = url.parse(req.url, true).query;
   var tag = queryObject.search;
-  //remove espaços em branco
-  tag = tag.replace(/\s+/g, "");
-  //separa tags
-
+  var newList=[];
   tag = tag.split("#");
-  console.log(tag);
-  if (tag.length > 1) {
-    Recursos.lookUpbyTag(tag)
-      .then((dados) => res.render("Produtor/index", { recursos: dados }))
-      .catch((e) => res.render("error", { error: e }));
-  } else {
-    Recursos.lookUpbyData(tag)
-      .then((dados) => res.render("Produtor/index", { recursos: dados }))
-      .catch((e) => res.render("error", { error: e }));
+  if (tag.length>1) {
+    tag=tag.slice(1)
+
+    tag.forEach((str) => {
+      var n =str.length
+      if (str.charAt(n-1)==' '){
+        str = str.substring(0, str.length - 1)
+      }
+      if (str.includes(' ')){
+        newList.push (str.substr(0,str.indexOf(' ')))
+        newList.push (str.substr(str.indexOf(' ')+1))
+      }
+      else newList.push(str)
+    });
   }
+  else newList.push(tag)
+  
+  Recursos.lookUpbyTag(newList)
+    .then((dados) => res.render("Produtor/index", { recursos: dados }))
+    .catch((e) => res.render("error", { error: e }));
+ 
 });
 
 router.get("/meusUploads", function (req, res) {
