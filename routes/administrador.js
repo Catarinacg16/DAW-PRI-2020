@@ -148,6 +148,22 @@ router.get("/deletea/:id", function (req, res) {
     .catch((e) => res.render("error", { error: e }));
 });
 
+router.get("/deleteu/:id", function (req, res) {
+  Utilizador.remove(req.params.id)
+    .then(() => {
+      res.redirect("/administrador/utilizadores");
+    })
+    .catch((e) => res.render("error", { error: e }));
+});
+
+router.get("/deletec/:re/:id", function (req, res) {
+  Recursos.removeCom(req.params.re, req.params.id)
+    .then(() => {
+      res.redirect("/administrador/recurso/" + req.params.re);
+    })
+    .catch((e) => res.render("error", { error: e }));
+});
+
 router.post("/editar/:id", upload.single("file"), function (req, res) {
   var id = req.params.id;
   Recursos.edit(id, req.body)
@@ -193,4 +209,72 @@ router.get(/\/recurso\/[0-9a-zA-Z]*/, function (req, res, next) {
         .catch((er) => res.render("error", { error: er }));
     })
     .catch((e) => res.render("error", { error: e }));
+});
+
+router.get("/editProfile/:id", upload.single("file"), (req, res) => {
+  var id = req.params.id;
+  var pathAvatar = "/fileStore/avatares/" + id;
+  try {
+    if (!fs.existsSync(__dirname + "/../public" + pathAvatar)) {
+      pathAvatar = "/images/user.png";
+    }
+  } catch (err) {
+    console.error(err);
+  }
+  Utilizador.lookUpID(id)
+    .then((dados) => {
+      res.render("Administrador/editProfile", {
+        user: dados,
+        path: pathAvatar,
+      });
+    })
+    .catch((e) => res.render("error", { error: e }));
+});
+
+router.post("/editPerfil/:id", upload.single("file"), (req, res) => {
+  var id = req.params.id;
+  if (req.file != null) {
+    let oldPath = __dirname + "/../" + req.file.path;
+    let newPath = __dirname + "/../public/fileStore/avatares/" + id;
+    console.log(oldPath + "   " + newPath);
+    fs.rename(oldPath, newPath, function (err) {
+      if (err) {
+        res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+        res.write("<p> Erro: ao mover o ficheiro da quarentena...</p>");
+        res.end();
+      } else {
+        if (
+          (req.body.password == req.body.password2 &&
+            !(req.body.password == undefined)) ||
+          req.body.password == undefined
+        ) {
+          console.log(req.body);
+          delete req.body.password2;
+          console.log(req.body);
+
+          Utilizador.editP(id, req.body)
+            .then(() => {
+              res.redirect("/administrador/utilizadores");
+            })
+            .catch((e) => res.render("error", { error: e }));
+        }
+      }
+    });
+  } else {
+    if (
+      (req.body.password == req.body.password2 &&
+        !(req.body.password == undefined)) ||
+      req.body.password == undefined
+    ) {
+      console.log(req.body);
+      delete req.body.password2;
+      console.log(req.body);
+
+      Utilizador.editP(id, req.body)
+        .then(() => {
+          res.redirect("/administrador/utilizadores");
+        })
+        .catch((e) => res.render("error", { error: e }));
+    }
+  }
 });

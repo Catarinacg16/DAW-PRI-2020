@@ -13,12 +13,15 @@ var qs = require("query-string");
 var url = require("url");
 var { ingest } = require("./ingest");
 const { Console } = require("console");
-var { isAccessible,getUncompressedFromId, previewFacilitator} = require("./access");
+var {
+  isAccessible,
+  getUncompressedFromId,
+  previewFacilitator,
+} = require("./access");
 
 const utilizador = require("../model/utilizador");
 
 const Anuncios = require("../controller/anuncio");
-
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -28,7 +31,12 @@ router.get("/", function (req, res, next) {
         .then((an) => {
           Recursos.listByDown()
             .then((top) => {
-              res.render("Produtor/index", { recursos: dados, notif: an, topRec: top });
+              res.render("Produtor/index", {
+                recursos: dados,
+                notif: an,
+                topRec: top,
+                eu: req.user.email,
+              });
             })
             .catch((e) => res.render("error", { error: e }));
         })
@@ -44,8 +52,12 @@ router.get(/\/recurso\/[0-9a-zA-Z]*/, function (req, res, next) {
     .then((dados) => {
       User.lookUpId(dados.produtor)
         .then((resp) => {
-          let ffp= previewFacilitator(dados._id);
-          res.render("Produtor/recurso", { recurso: dados, produtor: resp, path:ffp});
+          let ffp = previewFacilitator(dados._id);
+          res.render("Produtor/recurso", {
+            recurso: dados,
+            produtor: resp,
+            path: ffp,
+          });
         })
         .catch((er) => res.render("error", { error: er }));
     })
@@ -112,11 +124,10 @@ router.get("/editar/:id", function (req, res) {
 router.get("/remove/:id", function (req, res) {
   Recursos.remove(req.params.id)
 
-  .then(() => {   
-    res.redirect("/produtor/profile");
-  })
-  .catch((e) => res.render("error", { error: e }));
-
+    .then(() => {
+      res.redirect("/produtor/profile");
+    })
+    .catch((e) => res.render("error", { error: e }));
 });
 
 router.get("/upload", function (req, res) {
@@ -133,9 +144,8 @@ router.post("/editar/:id", upload.single("file"), function (req, res) {
   var id = req.params.id;
   Recursos.edit(id, req.body)
 
-    .then(() => {   
+    .then(() => {
       res.redirect("/produtor/profile");
-
     })
     .catch((e) => res.render("error", { error: e }));
 });
@@ -191,13 +201,13 @@ router.get("/download/:id", function (req, res) {
 });
 
 router.get("/profile", (req, res) => {
-  var pathAvatar = "/fileStore/avatares/"+req.user._id;
+  var pathAvatar = "/fileStore/avatares/" + req.user._id;
   try {
-    if (!fs.existsSync( __dirname + "/../public" + pathAvatar)) {
-      pathAvatar="/images/user.png"
+    if (!fs.existsSync(__dirname + "/../public" + pathAvatar)) {
+      pathAvatar = "/images/user.png";
     }
-  } catch(err) {
-    console.error(err)
+  } catch (err) {
+    console.error(err);
   }
   Recursos.lookUpProd(req.user.email)
     .then((recs) => {
@@ -208,76 +218,75 @@ router.get("/profile", (req, res) => {
         recursos: recs,
         pontuacao: ponto,
         downs: downs,
-        path: pathAvatar
+        path: pathAvatar,
       });
     })
     .catch((e) => res.render("error", { error: e }));
 });
 
-router.get("/editarProfile/",upload.single("file"),(req, res) => {
-  console.log(req.user._id)
-  var pathAvatar = "/fileStore/avatares/"+req.user._id;
+router.get("/editarProfile/", upload.single("file"), (req, res) => {
+  console.log(req.user._id);
+  var pathAvatar = "/fileStore/avatares/" + req.user._id;
   try {
-    if (!fs.existsSync( __dirname + "/../public"+ pathAvatar)) {
-      pathAvatar="/images/user.png"
+    if (!fs.existsSync(__dirname + "/../public" + pathAvatar)) {
+      pathAvatar = "/images/user.png";
     }
-  } catch(err) {
-    console.error(err)
+  } catch (err) {
+    console.error(err);
   }
   User.lookUpID(req.user._id)
     .then((dados) => {
-      res.render("Produtor/editProfile", { user: dados, path:pathAvatar})
+      res.render("Produtor/editProfile", { user: dados, path: pathAvatar });
     })
     .catch((e) => res.render("error", { error: e }));
 });
 
-router.post("/editarPerfil/",upload.single('file'),(req, res) => {
-  
-  if(req.file!=null){
-    let oldPath = __dirname + '/../' + req.file.path;
-    let newPath = __dirname + '/../public/fileStore/avatares/' + req.user._id
-    console.log(oldPath + "   "+ newPath)
-    fs.rename(oldPath, newPath, function(err) {
-      if(err) {
-          res.writeHead(200, {'Content-Type':'text/html; charset=utf-8'})
-          res.write('<p> Erro: ao mover o ficheiro da quarentena...</p>')
-          res.end()
-      }
-      else{
-        if ((req.body.password == req.body.password2 && !(req.body.password==undefined) )|| req.body.password==undefined){
-          console.log(req.body)
+router.post("/editarPerfil/", upload.single("file"), (req, res) => {
+  if (req.file != null) {
+    let oldPath = __dirname + "/../" + req.file.path;
+    let newPath = __dirname + "/../public/fileStore/avatares/" + req.user._id;
+    console.log(oldPath + "   " + newPath);
+    fs.rename(oldPath, newPath, function (err) {
+      if (err) {
+        res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+        res.write("<p> Erro: ao mover o ficheiro da quarentena...</p>");
+        res.end();
+      } else {
+        if (
+          (req.body.password == req.body.password2 &&
+            !(req.body.password == undefined)) ||
+          req.body.password == undefined
+        ) {
+          console.log(req.body);
           delete req.body.password2;
-          console.log(req.body)
-          
+          console.log(req.body);
+
           User.editP(req.user._id, req.body)
-            .then(() => {   
+            .then(() => {
               res.redirect("/produtor/profile");
             })
             .catch((e) => res.render("error", { error: e }));
-            
         }
       }
-    })
-  }else{
-    if ((req.body.password == req.body.password2 && !(req.body.password==undefined) )|| req.body.password==undefined){
-      console.log(req.body)
+    });
+  } else {
+    if (
+      (req.body.password == req.body.password2 &&
+        !(req.body.password == undefined)) ||
+      req.body.password == undefined
+    ) {
+      console.log(req.body);
       delete req.body.password2;
-      console.log(req.body)
-      
+      console.log(req.body);
+
       User.editP(req.user._id, req.body)
-        .then(() => {   
+        .then(() => {
           res.redirect("/produtor/profile");
         })
         .catch((e) => res.render("error", { error: e }));
-        
     }
   }
-  
-
-    
 });
-
-
 
 router.get("/logout", function (req, res, next) {
   req.logout();

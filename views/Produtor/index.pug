@@ -14,6 +14,7 @@ block content
         // Blog entries 
         .w3-col.l8.s12
           each a in recursos
+           -if(!(a.visibilidade === "Privado" && !(a.produtor === eu)) ) {
             // Blog entry   
             -var i = 0 
             .w3-card-4.w3-margin.w3-white
@@ -54,6 +55,7 @@ block content
                         - for (var i = 0; i < a.pontuacao; i++) {
                             span.fa.fa-star.checked
                         -}
+           -}             
                   
             // END BLOG ENTRIES
         // Introduction menu
