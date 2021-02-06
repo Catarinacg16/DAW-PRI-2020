@@ -9,9 +9,8 @@ module.exports.list = function () {
 };
 // Retorna lista de recursos
 module.exports.listByDown = function () {
-  return Recurso.find().sort({numDowns: -1}).limit(5).exec();
+  return Recurso.find().sort({ numDowns: -1 }).limit(5).exec();
 };
-
 
 // Retorna um recurso
 module.exports.lookUp = function (id) {
@@ -35,15 +34,15 @@ module.exports.lookUpCom = function (com_id) {
 };
 
 module.exports.lookUpbyTag = function (taglist) {
-  console.log(taglist+"\n")
-  return Recurso.find({$or:
-       [
-       { tags: {$in : taglist}},
-       { autor: {$in : taglist}},
-       //{ titulo: {$in : taglist}}        
-       ]
-      }).exec();
-}
+  console.log(taglist + "\n");
+  return Recurso.find({
+    $or: [
+      { tags: { $in: taglist } },
+      { autor: { $in: taglist } },
+      //{ titulo: {$in : taglist}}
+    ],
+  }).exec();
+};
 
 module.exports.addDownload = function (id) {
   Recurso.findOne({ _id: id }, { numDowns: 1 })
@@ -93,8 +92,8 @@ module.exports.lookUpbyData = function (data) {
   return Recurso.find({
     $or: [
       //{ titulo: { $regex: ".*" + data + ".*" } },
-      { titulo:  "Testes"  },
-      { descricao:  "Testes"  },
+      { titulo: "Testes" },
+      { descricao: "Testes" },
     ],
   }).exec();
 };
@@ -138,6 +137,13 @@ module.exports.insertCom = function (r, com) {
 // Remove um recurso
 module.exports.remove = function (id) {
   return Recurso.deleteOne({ _id: id });
+};
+
+module.exports.removeCom = function (re, id) {
+  return Recurso.update(
+    { _id: re },
+    { $pull: { comentarios: { id_coment: id } } }
+  );
 };
 
 // Edita um recurso

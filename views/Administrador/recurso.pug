@@ -110,7 +110,7 @@ block content
                       input.w3-button.w3-light-gray(type="button" onclick=`addReply(\"${recurso._id}\", ${com},admin)` value="Responder ⤵️")                           
                     hr
                     button.w3-button.w3-purple.w3-border
-                      a(href="/administrador/deletec/"+com.id_coment) Eliminar &raquo;
+                      a(href="/administrador/deletec/"+recurso._id+"/"+com.id_coment) Eliminar &raquo;
                 .div
                 .w3-container
                   form(action="/administrador/recurso/"+recurso._id ,method="POST", enctype="form-data")
