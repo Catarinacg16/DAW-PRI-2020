@@ -24,10 +24,12 @@ router.post("/registar", function (req, res, next) {
 
 /* POST Form registar anuncio*/
 router.post("/anunciado", function (req, res, next) {
+  console.log(req.body);
   var d = new Date().toISOString().substr(0, 16);
   req.body.dataCriacao = d;
   req.body.autor = req.user.email;
   req.body.ativo = 1;
+  Anuncios.desativaGeral("1");
   Anuncios.insert(req.body)
     .then((data) => res.redirect("/administrador/anuncios"))
     .catch((e) => res.render("error", { error: e }));
@@ -67,7 +69,6 @@ router.get("/utilizadores", (req, res) => {
 router.get("/anuncios", (req, res) => {
   Anuncios.list()
     .then((lista) => {
-      console.log(lista);
       res.render("Administrador/anuncios", { anuncios: lista });
     })
     .catch((e) => res.render("error", { error: e }));
@@ -83,7 +84,6 @@ router.get("/logout", function (req, res, next) {
 });
 
 router.post("/recurso/:id", (req, res) => {
-  console.log("um hello");
   req.body.data = new Date().toISOString().substr(0, 16);
 
   Recursos.lookUp(req.params.id)
@@ -92,7 +92,7 @@ router.post("/recurso/:id", (req, res) => {
       req.body.id_utilizador = req.user.email;
       req.body.nome_utilizador = req.user.nome;
       dados.comentarios.push(req.body);
-      console.log(dados.comentarios);
+      //console.log(dados.comentarios);
       Recursos.edit(req.params.id, dados)
         .then((e) => res.redirect("/administrador/recurso/" + req.params.id))
         .catch((e) => res.render("error", { error: e }));
@@ -129,12 +129,14 @@ router.get("/ativar/:id", function (req, res) {
     .then((anun) => {
       if (anun.ativo != 1) anun.ativo = 1;
       else anun.ativo = 0;
+      Anuncios.desativaGeral(id);
       Anuncios.edit(id, anun)
         .then(() => {
           res.redirect("/administrador/anuncios");
         })
         .catch((e) => res.render("error", { error: e }));
     })
+
     .catch((e) => res.render("error", { error: e }));
 });
 

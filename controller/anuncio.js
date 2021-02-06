@@ -28,3 +28,22 @@ module.exports.insert = function (u) {
   var novoAn = new Anuncio(u);
   return novoAn.save();
 };
+
+module.exports.desativaGeral = function (id) {
+  this.list()
+    .then((dados) => {
+      dados.forEach((anun) => {
+        if (anun._id != id) {
+          anun.ativo = 0;
+          this.edit(anun._id, anun)
+            .then(console.log("atualizou"))
+            .catch((e) => res.render("error", { error: e }));
+        }
+      });
+    })
+    .catch((e) => res.render("error", { error: e }));
+};
+
+module.exports.getAnuncio = function () {
+  return Anuncio.findOne({ ativo: 1 }).exec();
+};
