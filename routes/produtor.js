@@ -90,19 +90,14 @@ router.get("/resultados", function (req, res) {
   } else newList.push(tag);
 
   Recursos.lookUpbyTag(newList)
-    .then((dados) => res.render("Produtor/index", { recursos: dados }))
-    .catch((e) => res.render("error", { error: e }));
-});
-
-router.get("/meusUploads", function (req, res) {
-  var user = req.user.email;
-  Recursos.lookUpByUser(user)
     .then((dados) => {
-      res.render("Produtor/meusUploads", { recursos: dados }),
-        console.log(dados);
+      Recursos.listByDown()
+            .then((top) => {res.render("Produtor/index", { recursos: dados, topRec:top })})
+            .catch((e) => res.render("error", { error: e }));
     })
     .catch((e) => res.render("error", { error: e }));
 });
+
 router.get("/editar/:id", function (req, res) {
   Recursos.lookUp(req.params.id)
     .then((dados) => {
