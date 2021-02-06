@@ -97,7 +97,7 @@ module.exports.ingest = function (f, req) {
     ret&= caseInsensitiveIncludes(manifest.formatosInternos,exte);
 
     name.split('').forEach(element => {
-        ret&= !caseInsensitiveIncludes(manifest.caracteresProibidos,element);
+        ret&= !manifest.caracteresProibidos.includes(element);
         });    
     return ret;
     
