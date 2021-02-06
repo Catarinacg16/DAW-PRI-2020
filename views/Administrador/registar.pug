@@ -2,21 +2,27 @@
 extends header
 block content
     // Blog entries
-    h1 Registar utilizador
-    .w3-row
+    .w3-card-4.w3-margin.w3-white
+      .w3-container
+        h1.w3-center Registar utilizador
+    .w3-row.w3-center
         // Blog entries 
+        .w3-col.l2.sl2
+            .w3-card-4.w3-purple
+                    .w3-container
         .w3-col.l8.s12
 
             // Blog entry    
-            .w3-card-4.w3-margin.w3-light-grey
+            .w3-card-4.w3-margin.w3-white
                 .w3-container
                     form(action="/administrador/registar" method="POST")
                         .container(id="fileInputGroup")
+                            br
                             p
                             .div
                                 label(for="nivel") Nível de Autorização:                   
                             .div
-                                select.form-control(type="text",name="nivel")
+                                select.w3-input.w3-border.w3-round.form-control(type="text",name="nivel")
                                     option(value="administrador") Administrador
                                     option(value="produtor") Produtor
                                     option(value="consumidor") Consumidor
@@ -24,17 +30,17 @@ block content
                             .div
                                 label(for="nome") Nome:
                                 .div
-                                    input.form-control(type="text",name="nome")
+                                    input.w3-input.w3-border.w3-round.form-control(type="text",name="nome")
                             p
                             .div
                                 label(for="email") Email:
                             .div
-                                input.form-control(type="text",name="email")
+                                input.w3-input.w3-border.w3-round.form-control(type="text",name="email")
                             p
                             .div
                                 label(for="filiacao") Filiação:
                             .div
-                                select.form-control(type="text" name="filiacao")
+                                select.w3-input.w3-border.w3-round.form-control(type="text" name="filiacao")
                                     option(value="estudante") Estudante
                                     option(value="docente") Docente
                                     option(value="outro") Outro
@@ -42,7 +48,9 @@ block content
                             .div
                                 label(for="password") Password:
                             .div
-                                input.form-control(type="password",name="password")                           
+                                input.w3-input.w3-border.w3-round.form-control(type="password",name="password")                           
+                        hr
                         .w3.bottom   
-                            input.btn.btn-lg.btn-primary(type="submit",value="Submit")
+                            input.w3-button.w3-padding-large.w3-purple.w3-border(type="submit",value="Submit")
+                        br
     // END w3-content

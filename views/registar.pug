@@ -1,28 +1,61 @@
-extends layout
-
+extends header
 block content
-    .w3-margin
-        .w3-card(style='width:75% ;margin:auto')
-            .w3-white.w3-center     
+    // Blog entries
+    .w3-card-4.w3-margin.w3-white
+      .w3-container
+        h1.w3-center Página de Registo
+    .w3-row.w3-center
+        // Blog entries 
+        .w3-col.l2.sl2
+            .w3-card-4.w3-purple
+                    .w3-container
+        .w3-col.l8.s12
+
+            // Blog entry    
+            .w3-card-4.w3-margin.w3-white
                 .w3-container
-                    h2.heading-w3-agile Login
-                    .w3-center
-                      img.w3-circle.w3-margin-top(src='/images/LO.png' alt='Avatar' style='width:200px')
-                      br
-                      .w3-center
-                        .w3-section(style='width:74% ;margin:auto')
-                            form(action='/login' method='POST')
-                                label
-                                  b Email
-                                input.w3-input.w3-border.w3-margin-bottom(type='text' placeholder='Email' name='email' required='')
-                                label
-                                  b Password
-                                input.w3-input.w3-border(type='password'  placeholder='Password' name='password' required='')
-                                br
-                                input.w3-btn.w3-purple(type="submit" value="Enviar")
-                                .w3-padding.w3-hide-small
-                                      | Forgot 
-                                      a(href='#') password?
-                                hr
-                        .w3-container.w3-border-top.w3-padding-16.w3-light-gray
-                          button.w3-button.w3-pink.w-section.w3-padding(hrf='/registar') Registar                    
+                    form(action="/registar" method="POST")
+                        .container(id="fileInputGroup")
+                            br
+                            p
+                            .div
+                                label(for="nivel") Tipo de Utilizador:                   
+                            .div
+                                select.w3-input.w3-border.w3-round.form-control(type="text",name="nivel" required)
+                                    option(value="produtor") Produtor
+                                    option(value="consumidor") Consumidor
+                            p
+                            .div
+                                label(for="nome") Nome:
+                                .div
+                                    input.w3-input.w3-border.w3-round.form-control(type="text",name="nome" required)
+                            p
+                            .div
+                                label(for="email") Email:
+                            .div
+                                input.w3-input.w3-border.w3-round.form-control(type="text",name="email" required)
+                            p
+                            .div
+                                label(for="filiacao") Filiação:
+                            .div
+                                select.w3-input.w3-border.w3-round.form-control(type="text" name="filiacao" required)
+                                    option(value="estudante") Estudante
+                                    option(value="docente") Docente
+                                    option(value="outro") Outro
+                            p
+                            .div
+                                label(for="password") Password:
+                            .div
+                                input#password.w3-input.w3-border.w3-round.form-control(type="password" name="password" onkeyup='check();' required)  
+                            p
+                            .div
+                                label(for="password") Repita password:
+                            .div
+                                input#confirm_password.w3-input.w3-border.w3-round.form-control(type="password" name='confirm_password' onkeyup='check();' required)  
+                            span#message
+
+                        hr
+                        .w3.bottom   
+                            input.w3-button.w3-padding-large.w3-purple.w3-border(type="submit",value="Submit")
+                        br
+    // END w3-content

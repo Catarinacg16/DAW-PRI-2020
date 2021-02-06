@@ -267,6 +267,10 @@ a {
 .w3-centered tr td {
   text-align: center;
 }
+.w3-cent {
+  float: center;
+}
+
 .w3-table td,
 .w3-table th,
 .w3-table-all td,
