@@ -1,4 +1,4 @@
-//  Utilizador model
+//Utilizador model
 var mongoose = require("mongoose");
 
 var utilizadorSchema = new mongoose.Schema({
@@ -8,7 +8,6 @@ var utilizadorSchema = new mongoose.Schema({
   nivel: String,
   dataRegisto: Date,
   dataUltimoAcesso: Date,
-  visibilidade: String,
   password: String,
 });
 

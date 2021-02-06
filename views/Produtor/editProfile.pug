@@ -1,0 +1,47 @@
+
+
+extends header
+block content
+    // Blog entries
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    .w3-card-4.w3-margin.w3-white
+      .w3-container
+         h1 Perfil ✏️
+    .w3-row
+        // Blog entries 
+        .w3-col.l9        
+            // Blog entry    
+            .w3-card-4.w3-margin.w3-white
+              .w3-container
+                form.w3-center(action="/produtor/editarPerfil" method="POST", enctype="multipart/form-data")
+                    .w3-container.w3-center(id="fileInputGroup")
+                        //.w3-half.w3-purple                          
+                        .w3-center
+                            .w3-card.w3-margin.w3-margin-top
+                              .w3-container.w3-white
+                                h4
+                                  b Editar Perfil
+                            hr
+                            p
+                            br
+                            p
+                            .div
+                                label(for="nome") Nome:
+                            .div
+                                input.w3-input.w3-border.w3-round.form-control(type="text" name="nome" value=user.nome )
+                            p
+                            .div
+                                label(for="filiacao") Filiação:                   
+                            .div
+                                select.w3-input.w3-border.w3-round.form-control(type="text" name="filiacao" value=user.filiacao )
+                                    option(value="Estudante") Estudante
+                                    option(value="Docente") Docente
+                            p
+                            .div(id="btnn")
+                                input.w3-input.w3-border.w3-round.form-control(type="button",id="btn", onclick=`changePass()`, value="Alerar Password")
+                                                                                        
+                            .w3.bottom   
+                                input.w3-button.w3-padding-large.w3-purple.w3-border(type="submit",value="Submit")
+         
+    br
+    // END w3-content

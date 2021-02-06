@@ -14,6 +14,7 @@ var url = require("url");
 var { ingest } = require("./ingest");
 const { Console } = require("console");
 var { isAccessible} = require("./access");
+const utilizador = require("../model/utilizador");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -193,6 +194,35 @@ router.get("/profile", (req, res) => {
     })
     .catch((e) => res.render("error", { error: e }));
 });
+
+router.get("/editarProfile/",(req, res) => {
+  User.lookUpID(req.user._id)
+    .then((dados) => {
+      res.render("Produtor/editProfile", { user: dados})
+    })
+    .catch((e) => res.render("error", { error: e }));
+    
+});
+
+router.post("/editarPerfil/",(req, res) => {
+  console.log(req.body.nome)
+  if (req.body.password == req.body.password2){
+    console.log(req.body.nome)
+    delete req.body.password2;
+    console.log(req.body.password2)
+    /*
+    User.edit(req.user._id, req.body)
+      .then(() => {   
+        res.redirect("/produtor/profile");
+      })
+      .catch((e) => res.render("error", { error: e }));
+      */
+  }
+  res.redirect("/produtor/profile");
+    
+});
+
+
 
 router.get("/logout", function (req, res, next) {
   req.logout();
