@@ -7,7 +7,7 @@ var User = require("../controller/utilizador");
 var multer = require("multer");
 var upload = multer({ dest: "../uploads/" });
 var fs = require("fs");
-var is_zip = require('is-zip-file');
+var is_zip = require("is-zip-file");
 var jsonfile = require("jsonfile");
 var qs = require("query-string");
 var url = require("url");
@@ -15,10 +15,21 @@ var { ingest } = require("./ingest");
 const { Console } = require("console");
 var { isAccessible,getUncompressedFromId, previewFacilitator} = require("./access");
 
+const utilizador = require("../model/utilizador");
+
+const Anuncios = require("../controller/anuncio");
+
+
 /* GET home page. */
 router.get("/", function (req, res, next) {
   Recursos.list()
-    .then((dados) => res.render("Produtor/index", { recursos: dados }))
+    .then((dados) => {
+      Anuncios.getAnuncio()
+        .then((an) => {
+          res.render("Produtor/index", { recursos: dados, notif: an });
+        })
+        .catch((e) => res.render("error", { error: e }));
+    })
     .catch((e) => res.render("error", { error: e }));
 });
 
@@ -57,29 +68,26 @@ router.post("/recurso/:id", (req, res) => {
 router.get("/resultados", function (req, res) {
   var queryObject = url.parse(req.url, true).query;
   var tag = queryObject.search;
-  var newList=[];
+  var newList = [];
   tag = tag.split("#");
-  if (tag.length>1) {
-    tag=tag.slice(1)
+  if (tag.length > 1) {
+    tag = tag.slice(1);
 
     tag.forEach((str) => {
-      var n =str.length
-      if (str.charAt(n-1)==' '){
-        str = str.substring(0, str.length - 1)
+      var n = str.length;
+      if (str.charAt(n - 1) == " ") {
+        str = str.substring(0, str.length - 1);
       }
-      if (str.includes(' ')){
-        newList.push (str.substr(0,str.indexOf(' ')))
-        newList.push (str.substr(str.indexOf(' ')+1))
-      }
-      else newList.push(str)
+      if (str.includes(" ")) {
+        newList.push(str.substr(0, str.indexOf(" ")));
+        newList.push(str.substr(str.indexOf(" ") + 1));
+      } else newList.push(str);
     });
-  }
-  else newList.push(tag)
-  
+  } else newList.push(tag);
+
   Recursos.lookUpbyTag(newList)
     .then((dados) => res.render("Produtor/index", { recursos: dados }))
     .catch((e) => res.render("error", { error: e }));
- 
 });
 
 router.get("/meusUploads", function (req, res) {
@@ -94,17 +102,22 @@ router.get("/meusUploads", function (req, res) {
 router.get("/editar/:id", function (req, res) {
   Recursos.lookUp(req.params.id)
     .then((dados) => {
-      res.render("Produtor/editRecurso", { recursos: dados, produtor: req.user})
+      res.render("Produtor/editRecurso", {
+        recursos: dados,
+        produtor: req.user,
+      });
     })
     .catch((e) => res.render("error", { error: e }));
 });
 
 router.get("/remove/:id", function (req, res) {
   Recursos.remove(req.params.id)
+
   .then(() => {   
-    res.redirect("/produtor/meusUploads");
+    res.redirect("/produtor/profile");
   })
   .catch((e) => res.render("error", { error: e }));
+
 });
 
 router.get("/upload", function (req, res) {
@@ -118,21 +131,21 @@ router.get("/upload", function (req, res) {
 });
 
 router.post("/editar/:id", upload.single("file"), function (req, res) {
-  var id =req.params.id;
+  var id = req.params.id;
   Recursos.edit(id, req.body)
+
     .then(() => {   
-      res.redirect("/produtor/meusUploads");
+      res.redirect("/produtor/profile");
+
     })
     .catch((e) => res.render("error", { error: e }));
-    
 });
 
-
 router.post("/upload", upload.single("file"), function (req, res) {
-    var ret = ingest(req.file, req);
-    if (ret == true) res.redirect("/produtor");
-    else res.jsonp(ret);
-  });
+  var ret = ingest(req.file, req);
+  if (ret == true) res.redirect("/produtor");
+  else res.jsonp(ret);
+});
 
 /*
 router.post("/upload", upload.array("file"), function (req, res) {
@@ -161,26 +174,32 @@ module.exports = router;
 router.get("/download/:id", function (req, res) {
   var folderPath = __dirname + "/../public/fileStore/" + req.params.id + "/";
   fs.readdirSync(folderPath).forEach((file) => {
-    is_zip.isZip(folderPath + file, function(err, is) {
-      if(err) {
-        console.log('Error while checking if file is zip : ' + err);
+    is_zip.isZip(folderPath + file, function (err, is) {
+      if (err) {
+        console.log("Error while checking if file is zip : " + err);
+      } else {
+        console.log(file);
       }
-      else {
-        console.log(file)
-        
-     }
-    })
+    });
   });
   var ret = isAccessible(folderPath);
-        if(ret==false){
-          console.log("Ficheiro Corrompido") 
-      }else {
-        Recursos.addDownload(req.params.id);
-        res.download(ret);
-      }
+  if (ret == false) {
+    console.log("Ficheiro Corrompido");
+  } else {
+    Recursos.addDownload(req.params.id);
+    res.download(ret);
+  }
 });
 
 router.get("/profile", (req, res) => {
+  var pathAvatar = "/fileStore/avatares/"+req.user._id;
+  try {
+    if (!fs.existsSync( __dirname + "/../public" + pathAvatar)) {
+      pathAvatar="/images/user.png"
+    }
+  } catch(err) {
+    console.error(err)
+  }
   Recursos.lookUpProd(req.user.email)
     .then((recs) => {
       var ponto = Recursos.getPontuacaoMedia(recs);
@@ -190,10 +209,76 @@ router.get("/profile", (req, res) => {
         recursos: recs,
         pontuacao: ponto,
         downs: downs,
+        path: pathAvatar
       });
     })
     .catch((e) => res.render("error", { error: e }));
 });
+
+router.get("/editarProfile/",upload.single("file"),(req, res) => {
+  console.log(req.user._id)
+  var pathAvatar = "/fileStore/avatares/"+req.user._id;
+  try {
+    if (!fs.existsSync( __dirname + "/../public"+ pathAvatar)) {
+      pathAvatar="/images/user.png"
+    }
+  } catch(err) {
+    console.error(err)
+  }
+  User.lookUpID(req.user._id)
+    .then((dados) => {
+      res.render("Produtor/editProfile", { user: dados, path:pathAvatar})
+    })
+    .catch((e) => res.render("error", { error: e }));
+});
+
+router.post("/editarPerfil/",upload.single('file'),(req, res) => {
+  
+  if(req.file!=null){
+    let oldPath = __dirname + '/../' + req.file.path;
+    let newPath = __dirname + '/../public/fileStore/avatares/' + req.user._id
+    console.log(oldPath + "   "+ newPath)
+    fs.rename(oldPath, newPath, function(err) {
+      if(err) {
+          res.writeHead(200, {'Content-Type':'text/html; charset=utf-8'})
+          res.write('<p> Erro: ao mover o ficheiro da quarentena...</p>')
+          res.end()
+      }
+      else{
+        if ((req.body.password == req.body.password2 && !(req.body.password==undefined) )|| req.body.password==undefined){
+          console.log(req.body)
+          delete req.body.password2;
+          console.log(req.body)
+          
+          User.editP(req.user._id, req.body)
+            .then(() => {   
+              res.redirect("/produtor/profile");
+            })
+            .catch((e) => res.render("error", { error: e }));
+            
+        }
+      }
+    })
+  }else{
+    if ((req.body.password == req.body.password2 && !(req.body.password==undefined) )|| req.body.password==undefined){
+      console.log(req.body)
+      delete req.body.password2;
+      console.log(req.body)
+      
+      User.editP(req.user._id, req.body)
+        .then(() => {   
+          res.redirect("/produtor/profile");
+        })
+        .catch((e) => res.render("error", { error: e }));
+        
+    }
+  }
+  
+
+    
+});
+
+
 
 router.get("/logout", function (req, res, next) {
   req.logout();

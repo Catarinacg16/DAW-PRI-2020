@@ -1,0 +1,60 @@
+extends header
+block content
+    // Blog entries
+    //Colocar form num sitio mais bonitinho
+    .w3-card-4.w3-margin.w3-white
+      .w3-container
+        h1.w3-center Gestão de Anuncios
+    .w3-row 
+      .w3-col.l9.s12
+        .w3-card-4.w3-margin.w3-white
+            .w3-container
+              br
+              h3.w3-center Listagem de Anúncios
+              br
+              table.w3-table-all.w3-centered
+                  tr
+                    th Descrição
+                    th Administrador
+                    th Data de Criação
+                    th Esta Ativo?
+                    th Opçoes
+                  each e in anuncios
+                    tr
+                      td=e.anuncio
+                      td=e.autor
+                      td=e.dataCriacao 
+                      td 
+                            -if(e.ativo == 1){
+                                span Sim
+                            -}
+                            -else
+                                span Não  
+                      td 
+                        button.w3-button.w3-purple.w3-border
+                              a(href="/administrador/ativar/"+e._id) Ativar/Desativar &raquo;
+                        button.w3-button.w3-purple.w3-border
+                              a(href="/administrador/deletea/"+e._id) Eliminar &raquo;
+              br
+      .w3-col.l3.s12
+        form.w3-container.w3-card-4.w3-white.w3-margin(action='/administrador/anunciado'  method="POST")
+         .container(id="fileInputGroup")
+          h2.w3-center Criar Novo Anuncio
+          .w3-row.w3-section
+            .w3-col(style='width:50px')
+              i.w3-xxlarge.fa.fa-pencil
+            .w3-rest
+              input.w3-input.w3-border( type='text', placeholder='Anúncio', name="anuncio")
+          button.w3-button.w3-block.w3-section.w3-purple.w3-ripple.w3-padding(type = "submit") Criar
+
+
+
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+

@@ -16,9 +16,6 @@ let addi = (com) => {
           <b> ${element.data} </b>
           <br></br>
           <span> ${element.descricao} </span>
-          <div id=${element.id_coment}>
-              <input type="button" value="Ver replies" onclick="addi('${element}')"/>
-          </div>
       </li>
       </ul>
 `;
@@ -26,14 +23,29 @@ let addi = (com) => {
   });
 };
 
-let addReply = (rec, com) => {
+/* para o caso
+
+          <div id=${element.id_coment}>
+              <input type="button" value="Ver replies" onclick="addi('${element}')"/>
+          </div>
+          */
+
+let addReply = (rec, com, nivel) => {
   console.log("entreii");
   var div = document.getElementById("r" + com.id_coment);
   if (typeof div != "undefined" && div != null) {
     // Exists.
     console.log("EnCONTREI");
   } else console.log("not found");
-  var path = "/consumidor/recurso/" + rec + "/" + com.id_coment;
+  if (nivel === "consumidor") {
+    var path = "/consumidor/recurso/" + rec + "/" + com.id_coment;
+  } else {
+    if (nivel === "produtor") {
+      var path = "/consumidor/recurso/" + rec + "/" + com.id_coment;
+    } else if (nivel === "admin") {
+      var path = "/administrador/recurso/" + rec + "/" + com.id_coment;
+    }
+  }
   var reply = ` 
       <form action=${path} method="POST" enctype="form-data">
         <li class="w3-padding-16"><input class="form-control" type="text" placeholder="comentário ..." name="descricao" />

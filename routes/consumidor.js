@@ -4,10 +4,17 @@ var Recursos = require("../controller/recurso");
 var User = require("../controller/utilizador");
 var url = require("url");
 
+const Anuncios = require("../controller/anuncio");
 /* GET home page. */
 router.get("/", function (req, res, next) {
   Recursos.list()
-    .then((dados) => res.render("Consumidor/index", { recursos: dados }))
+    .then((dados) => {
+      Anuncios.getAnuncio()
+        .then((an) => {
+          res.render("Consumidor/index", { recursos: dados, notif: an });
+        })
+        .catch((e) => res.render("error", { error: e }));
+    })
     .catch((e) => res.render("error", { error: e }));
 });
 

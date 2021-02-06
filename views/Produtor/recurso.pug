@@ -107,7 +107,7 @@ block content
                       input.w3-button.w3-light-gray(type="button" id="b"+com.id_coment value="Ver replies" onclick=`addi( ${com} )`)
                     p
                     .div(id="r"+com.id_coment)
-                      input.w3-button.w3-light-gray(type="button" onclick=`addReply(\"${recurso._id}\", ${com})` value="Responder ⤵️")                           
+                      input.w3-button.w3-light-gray(type="button" onclick=`addReply(\"${recurso._id}\", ${com},produtor)` value="Responder ⤵️")                           
                     hr
                 .div
                 .w3-container
