@@ -52,11 +52,11 @@ router.get(/\/recurso\/[0-9a-zA-Z]*/, function (req, res, next) {
     .then((dados) => {
       User.lookUpId(dados.produtor)
         .then((resp) => {
-          // let ffp = previewFacilitator(dados._id);
+          let ffp = previewFacilitator(dados._id);
           res.render("Produtor/recurso", {
             recurso: dados,
             produtor: resp,
-            //path: ffp,
+            path: ffp,
           });
         })
         .catch((er) => res.render("error", { error: er }));

@@ -7,9 +7,7 @@ let addi = (com) => {
   com.comentarios.forEach((element) => {
     var reply = ` 
     <ul class="w3-ul w3-hoverable w3-light-gray">
-    <script type="text/javascript">
-   document.getElementById("b" + ${com.id_coment}).style.visibility='visible';
-</script>
+   
     <li class="w3-padding-16">
           <b> ${element.nome_utilizador} </b>
           <br></br>
