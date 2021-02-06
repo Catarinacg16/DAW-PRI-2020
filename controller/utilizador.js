@@ -38,3 +38,25 @@ module.exports.remove = function (id) {
 module.exports.edit = function (id, u) {
   return Utilizador.findByIdAndUpdate(id, u, { new: true });
 };
+
+module.exports.editP = function (id, b) {
+  if(b.password!=null){
+    return Utilizador.updateOne(
+      {_id: id},
+      {
+        $set : {nome: b.nome},
+        $set :{filiacao: b.filiacao},
+        $set :{password: b.password}
+      }
+    );
+  }
+  else {
+    return Utilizador.updateOne(
+      {_id: id},
+      {
+        $set : {nome: b.nome},
+        $set :{filiacao: b.filiacao},
+      }
+    );
+  }
+};

@@ -11,7 +11,7 @@ block content
           // About Card
           .w3-card.w3-margin.w3-margin-top
             .w3-container.w3-white
-              img(src='/images/user.png' alt='Nature' style='width:100%')
+              img(src=path alt='Nature' style='width:60%')
               h4.w3-center
                 b.w3-center=produtor.nome
               p.w3-center
@@ -19,6 +19,7 @@ block content
               p.w3-center
                 button.w3-button.w3-padding-large.w3-white.w3-border
                         a(href="/produtor/editarProfile/") Editar
+                        
 
           
           .w3-card.w3-margin
@@ -71,6 +72,9 @@ block content
                     p
                       button.w3-button.w3-padding-large.w3-white.w3-border
                         a(href="/produtor/recurso/"+a._id) VER &raquo;
+                    p
+                      button.w3-button.w3-purple.w3-border
+                        a(href="/produtor/editar/"+a._id) Editar &raquo;
                   .w3-col.m6.w3-hide-small.w3-right
                     p
                       span.w3-padding-large.w3-right
