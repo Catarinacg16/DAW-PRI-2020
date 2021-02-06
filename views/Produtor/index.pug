@@ -64,31 +64,22 @@ block content
             .w3-container.w3-white
               h4
                 b Notificação do Sistema
-              p
-                |
-                =notif.anuncio
+              //p
+              //  |
+              //  =notif.anuncio
           hr
           // Posts
           .w3-card.w3-margin
             .w3-container.w3-padding-white.w3-light-gray
               h4 Popular Posts
             ul.w3-ul.w3-hoverable.w3-white
-              li.w3-padding-16
-                span.w3-large Lorem
-                br
-                span Sed mattis nunc
-              li.w3-padding-16
-                span.w3-large Ipsum
-                br
-                span Praes tinci sed
-              li.w3-padding-16
-                span.w3-large Dorum
-                br
-                span Ultricies congue
-              li.w3-padding-16.w3-hide-medium.w3-hide-small
-                span.w3-large Mingsum
-                br
-                span Lorem ipsum dipsum
+              each a in topRec
+                li.w3-padding-16
+                  span.w3-large
+                    a(href="http://localhost:3000/produtor/recurso/"+a._id )= a.titulo
+                  br
+                  span=a.tipo
+               
           hr
           // Labels / tags
           .w3-card.w3-margin

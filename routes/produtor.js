@@ -26,7 +26,11 @@ router.get("/", function (req, res, next) {
     .then((dados) => {
       Anuncios.getAnuncio()
         .then((an) => {
-          res.render("Produtor/index", { recursos: dados, notif: an });
+          Recursos.listByDown()
+            .then((top) => {
+              res.render("Produtor/index", { recursos: dados, notif: an, topRec: top });
+            })
+            .catch((e) => res.render("error", { error: e }));
         })
         .catch((e) => res.render("error", { error: e }));
     })

@@ -7,6 +7,11 @@ var Recurso = require("../model/recurso");
 module.exports.list = function () {
   return Recurso.find().exec();
 };
+// Retorna lista de recursos
+module.exports.listByDown = function () {
+  return Recurso.find().sort({numDowns: -1}).limit(5).exec();
+};
+
 
 // Retorna um recurso
 module.exports.lookUp = function (id) {
