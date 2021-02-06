@@ -72,7 +72,7 @@ block content
             .w3-card.w3-margin            
               .w3-container.w3-padding-white.w3-light-gray
                 | Preview 
-                embed(src=path, width="1000", height="500")    
+            // embed(src=path, width="1000", height="500")    
             // END BLOG ENTRIES
             // Posts
             .w3-card.w3-margin
@@ -108,7 +108,7 @@ block content
                       input.w3-button.w3-light-gray(type="button" id="b"+com.id_coment value="Ver replies" onclick=`addi( ${com} )`)
                     p
                     .div(id="r"+com.id_coment)
-                      input.w3-button.w3-light-gray(type="button" onclick=`addReply(\"${recurso._id}\", ${com},produtor)` value="Responder ⤵️")                           
+                      input.w3-button.w3-light-gray(type="button" onclick=`addReply(\"${recurso._id}\", ${com})` value="Responder ⤵️")                           
                     hr
                 .div
                 .w3-container
