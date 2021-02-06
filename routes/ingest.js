@@ -32,14 +32,16 @@ module.exports.ingest = function (f, req) {
     var cs =makeCheckSum(__dirname+"/../"+oldPath)
       fs.mkdirSync(newPath);
       fs.writeFileSync(newPath+"/manifest-sha256.txt",cs);
-
     
+    fs.writeFileSync(newPath+"/bag.txt",`{"zipName":"${f.originalname}"}`)
+
     newPath+="/"+ f.originalname;
     fs.rename(oldPath, newPath, function (err) {
         if (err) {
           console.log( err+":Erro a mover o ficheiro")
         } 
       });
+    
 
   }).catch(e=>console.log(e));
   return true;
@@ -90,9 +92,9 @@ module.exports.ingest = function (f, req) {
 
     ret&= (manifest.limiteCaracteres >= fileName.length);
 
-    ret&= !manifest.nomesProibidos.includes(name);
+    ret&= !caseInsensitiveIncludes(manifest.nomesProibidos,name);
 
-    ret&= manifest.formatosInternos.includes(exte);
+    ret&= caseInsensitiveIncludes(manifest.formatosInternos,exte);
 
     name.split('').forEach(element => {
         ret&= !manifest.caracteresProibidos.includes(element);
@@ -101,12 +103,17 @@ module.exports.ingest = function (f, req) {
     
   }
 
+  function caseInsensitiveIncludes(stringArray, matchThis){
+    var regX= new RegExp(stringArray.join('|'),"i");
+    return regX.test(matchThis)
+  }
+
   module.exports.rmrf = function rmrf(dir_path) {
     if (fs.existsSync(dir_path)) {
         fs.readdirSync(dir_path).forEach(function(entry) {
             var entry_path = path.join(dir_path, entry);
             if (fs.lstatSync(entry_path).isDirectory()) {
-                rimraf(entry_path);
+                rmrf(entry_path);
             } else {
                 fs.unlinkSync(entry_path);
             }

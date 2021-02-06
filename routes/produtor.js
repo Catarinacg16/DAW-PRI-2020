@@ -13,8 +13,8 @@ var qs = require("query-string");
 var url = require("url");
 var { ingest } = require("./ingest");
 const { Console } = require("console");
+var { isAccessible,getUncompressedFromId, previewFacilitator} = require("./access");
 
-var { isAccessible} = require("./access");
 const utilizador = require("../model/utilizador");
 
 const Anuncios = require("../controller/anuncio");
@@ -44,7 +44,8 @@ router.get(/\/recurso\/[0-9a-zA-Z]*/, function (req, res, next) {
     .then((dados) => {
       User.lookUpId(dados.produtor)
         .then((resp) => {
-          res.render("Produtor/recurso", { recurso: dados, produtor: resp });
+          let ffp= previewFacilitator(dados._id);
+          res.render("Produtor/recurso", { recurso: dados, produtor: resp, path:ffp});
         })
         .catch((er) => res.render("error", { error: er }));
     })
