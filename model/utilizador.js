@@ -8,7 +8,6 @@ var utilizadorSchema = new mongoose.Schema({
   nivel: String,
   dataRegisto: Date,
   dataUltimoAcesso: Date,
-  visibilidade: String,
   password: String,
 });
 
