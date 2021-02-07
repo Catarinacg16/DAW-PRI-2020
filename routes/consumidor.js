@@ -11,8 +11,37 @@ router.get("/", function (req, res, next) {
     .then((dados) => {
       Anuncios.getAnuncio()
         .then((an) => {
-          res.render("Consumidor/index", { recursos: dados, notif: an });
+          //console.log(an);
+          if (an == null) {
+            var po = "Novo Recurso adicionado! ";
+            Recursos.lookUpLast().then((rec) => {
+              //console.log(rec);
+              Recursos.listByDown()
+                .then((top) => {
+                  res.render("Consumidor/index", {
+                    recursos: dados,
+                    notif: po,
+                    redi: rec[0],
+                    topRec: top,
+                    eu: req.user.email,
+                  });
+                })
+                .catch((e) => res.render("error", { error: e }));
+            });
+          } else {
+            Recursos.listByDown()
+              .then((top) => {
+                res.render("Consumidor/index", {
+                  recursos: dados,
+                  notif: an.anuncio,
+                  topRec: top,
+                  eu: req.user.email,
+                });
+              })
+              .catch((e) => res.render("error", { error: e }));
+          }
         })
+
         .catch((e) => res.render("error", { error: e }));
     })
     .catch((e) => res.render("error", { error: e }));
