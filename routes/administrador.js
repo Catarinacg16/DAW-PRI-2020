@@ -4,6 +4,8 @@ var router = express.Router();
 const Anuncios = require("../controller/anuncio");
 const Recursos = require("../controller/recurso");
 var multer = require("multer");
+var upload = multer({ dest: "../uploads/" });
+var fs = require("fs");
 var { ingest } = require("./ingest");
 var {
   isAccessible,
@@ -11,7 +13,6 @@ var {
   previewFacilitator,
 } = require("./access");
 
-var upload = multer({ dest: "../uploads/" });
 const { symlinkSync } = require("fs");
 
 /* GET Form registar utilizador*/
@@ -179,6 +180,30 @@ router.post("/editar/:id", upload.single("file"), function (req, res) {
     .catch((e) => res.render("error", { error: e }));
 });
 
+router.get("/profile", (req, res) => {
+  var pathAvatar = "/fileStore/avatares/" + req.user._id;
+  try {
+    if (!fs.existsSync(__dirname + "/../public" + pathAvatar)) {
+      pathAvatar = "/images/user.png";
+    }
+  } catch (err) {
+    console.error(err);
+  }
+  Recursos.lookUpProd(req.user.email)
+    .then((recs) => {
+      var ponto = Recursos.getPontuacaoMedia(recs);
+      var downs = Recursos.getNumDownloads(recs);
+      res.render("Administrador/profile", {
+        produtor: req.user,
+        recursos: recs,
+        pontuacao: ponto,
+        downs: downs,
+        path: pathAvatar,
+      });
+    })
+    .catch((e) => res.render("error", { error: e }));
+});
+
 router.get("/profile/:id", (req, res) => {
   Utilizador.lookUpID(req.params.id)
     .then((prod) => {
@@ -307,31 +332,32 @@ router.post("/editPerfil/:id", upload.single("file"), (req, res) => {
   }
 });
 
-
 router.get("/resultadosRec", function (req, res) {
   var queryObject = url.parse(req.url, true).query;
   var titulo = queryObject.search;
-  console.log(titulo)
+  console.log(titulo);
   Recursos.lookUpByTitulo(titulo)
     .then((dados) => {
       Utilizador.list()
         .then((prod) => {
-           console.log(dados)
-          res.render("Administrador/recursos", { recursos: dados,  produtores: prod, })
+          console.log(dados);
+          res.render("Administrador/recursos", {
+            recursos: dados,
+            produtores: prod,
+          });
         })
-        .catch((e) => res.render("error", { error: e }))
-    })  
-  .catch((e) => res.render("error", { error: e }));
+        .catch((e) => res.render("error", { error: e }));
+    })
+    .catch((e) => res.render("error", { error: e }));
 });
-
 
 router.get("/resultadosUser", function (req, res) {
   var queryObject = url.parse(req.url, true).query;
   var nome = queryObject.search;
-  console.log(nome)
+  console.log(nome);
   Utilizador.lookUpByNome(nome)
     .then((lista) => {
       res.render("Administrador/users", { users: lista });
-    })  
-  .catch((e) => res.render("error", { error: e }));
+    })
+    .catch((e) => res.render("error", { error: e }));
 });
