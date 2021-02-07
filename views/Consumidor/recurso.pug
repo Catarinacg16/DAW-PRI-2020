@@ -42,7 +42,7 @@ block content
                   |Autor :  
                   b=recurso.autor
                   span.w3-opacity 
-                    =recurso.dataRegisto
+                    =recurso.dataRegisto.toISOString().substr(0, 16).split('T').join(' ')
               .w3-container
                 p
                   |
@@ -100,7 +100,7 @@ block content
                     b=com.nome_utilizador
                     br
                     b=com.id_coment
-                    b=com.data
+                    b=com.data.toISOString().substr(0, 16).split('T').join(' ')
                     br
                     span=com.descricao
                     br

@@ -30,7 +30,7 @@ block content
                     tr
                       td=e.anuncio
                       td=e.autor
-                      td=e.dataCriacao 
+                      td=e.dataCriacao.toISOString().substr(0, 16).split('T').join(' ')
                       td 
                             -if(e.ativo == 1){
                                 span Sim

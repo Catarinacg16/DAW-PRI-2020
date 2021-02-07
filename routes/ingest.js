@@ -13,6 +13,9 @@ var { v4: uuid } = require("uuid");
 module.exports.ingest = function (f, req) {
     //VERIFICAÇAO
     
+    console.log("f:"+JSON.stringify(f))
+    console.log("req:"+JSON.stringify(req.body)+"User:"+JSON.stringify(req.user))
+
     let oldPath = f.path;
     if(!checkFileName(f.originalname)) return "Erro no nome";
   
@@ -24,6 +27,7 @@ module.exports.ingest = function (f, req) {
     var d = new Date().toISOString().substr(0, 16);
     req.body.dataRegisto = d;
     req.body.produtor=req.user.email;
+    console.log("ReqBody b4 insert"+JSON.stringify(req.body));
     Recursos.insert(req.body).then(data=>{
     var id = data._id;
     let newPath = __dirname + '/../public/fileStore/' + id;

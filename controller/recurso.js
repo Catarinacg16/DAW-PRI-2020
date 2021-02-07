@@ -28,18 +28,21 @@ module.exports.lookUpProd = function (email) {
 };
 
 //Retorna comentario
-module.exports.lookUpCom = function (com_id) {
-  var rec = Recurso.list();
-  return rec.map((i) => JSON.parse(i)).find((c) => c.id_coment === com_id);
-};
+module.exports.lookUpCom = function (com_id , newcom) {/*
+  return Recurso.findOne(
+    {"comentarios.id_coment": com_id},{ comentarios.comentarios: 1}},
+    {new: true}
+  )
+  */
+}
 
 module.exports.lookUpbyTag = function (taglist) {
-  console.log(taglist + "\n");
+  console.log(taglist + " " + taglist.length + "\n");
   return Recurso.find({
     $or: [
       { tags: { $in: taglist } },
       { autor: { $in: taglist } },
-      //{ titulo: {$in : taglist}}
+      { titulo: {$in : taglist}}
     ],
   }).exec();
 };
@@ -101,6 +104,7 @@ module.exports.lookUpbyData = function (data) {
 // Insere um novo recurso
 module.exports.insert = function (r) {
   var novoRecurso = new Recurso(r);
+  console.log(novoRecurso);
   return novoRecurso.save();
 };
 
@@ -154,3 +158,8 @@ module.exports.edit = function (id, r) {
 module.exports.lookUpLast = function () {
   return Recurso.find().sort({ dataRegisto: 1 }).exec();
 };
+
+module.exports.lookUpByTitulo = function (t) {
+  return Recurso.find({ titulo: t }).exec();
+};
+

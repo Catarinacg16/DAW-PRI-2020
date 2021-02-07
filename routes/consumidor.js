@@ -3,6 +3,11 @@ var router = express.Router();
 var Recursos = require("../controller/recurso");
 var User = require("../controller/utilizador");
 var url = require("url");
+var {
+  isAccessible,
+  getUncompressedFromId,
+  previewFacilitator,
+} = require("./access");
 
 const Anuncios = require("../controller/anuncio");
 /* GET home page. */
@@ -66,14 +71,16 @@ router.post("/recurso/:id", (req, res) => {
 
 router.get(/\/recurso\/[0-9a-zA-Z]*/, function (req, res, next) {
   var split = req.url.split("/")[2];
-  //console.log(split);
+  console.log(split);
   Recursos.lookUp(split)
     .then((dados) => {
       User.lookUpId(dados.produtor)
         .then((resp) => {
-          res.render("Consumidor/recurso", {
+          let ffp = previewFacilitator(dados._id);
+          res.render("Produtor/recurso", {
             recurso: dados,
-            consumidor: resp,
+            produtor: resp,
+            path: ffp,
           });
         })
         .catch((er) => res.render("error", { error: er }));

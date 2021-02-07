@@ -33,7 +33,7 @@ block content
                   |Autor :  
                   b=a.autor
                   span.w3-opacity 
-                    =a.dataRegisto
+                    =a.dataRegisto.toISOString().substr(0, 16).split('T').join(' ')
               .w3-container
                 p
                   |
@@ -71,7 +71,6 @@ block content
                 b Notificação do Sistema
               p
                 |
-
                 -if(notif=="Novo Recurso adicionado! "){
                     =notif 
                     a(href="/produtor/recurso/"+redi._id) Veja Aqui!

@@ -5,7 +5,7 @@ block content
         .w3-row  
           .w3-col.l4.w3-left
             br
-            form(action="/administrador/resultados" method="GET", enctype="multipart/form-data")
+            form(action="/administrador/resultadosUser" method="GET", enctype="multipart/form-data")
               input.w3-button.w3-border(type="search",name="search")
               input.w3-button.w3-border(type="submit",value="🔎")
           .w3-col.l4.w3-center
@@ -27,7 +27,7 @@ block content
                 td=e.email
                 td=e.filiacao 
                 td=e.nivel
-                td=e.dataRegisto
+                td=e.dataRegisto.toISOString().substr(0, 16).split('T').join(' ')
                 td 
                   button.w3-button.w3-purple.w3-border
                         a(href="/administrador/editProfile/"+e._id) Editar &raquo;

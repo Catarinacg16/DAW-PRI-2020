@@ -58,7 +58,7 @@ block content
                   |Autor :  
                   b=a.autor
                   span.w3-opacity 
-                    =a.dataRegisto
+                    =a.dataRegisto.toISOString().substr(0, 16).split('T').join(' ')
               .w3-container
                 p
                   |
