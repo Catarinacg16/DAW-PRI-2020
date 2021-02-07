@@ -1,20 +1,53 @@
-[
-  {
-    "nome": "JCR",
-    "email": "jcr@gmail.com",
-    "filiacao": "Docente",
-    "nivel": "produtor",
-    "dataRegisto": "21-12-2020",
-    "dataUltimoAcesso": "22-12-2018",
-    "password": "jcr"
+[{
+  "_id": {
+    "$oid": "5fe0e5114a7213e2afa69382"
   },
-  {
-    "nome": "admin",
-    "email": "admin@gmail.com",
-    "filiacao": "admin",
-    "nivel": "admin",
-    "dataRegisto": "21-12-2020",
-    "dataUltimoAcesso": "22-12-2020",
-    "password": "admin"
-  }
-]
+  "nome": "Tânia Filipa",
+  "email": "tania@gmail.com",
+  "filiacao": "estudante",
+  "nivel": "produtor",
+  "dataRegisto": {
+    "$date": "2020-12-21T00:00:00Z"
+  },
+  "dataUltimoAcesso": "22-12-2020",
+  "password": "tania"
+},{
+  "_id": {
+    "$oid": "5fe46f258a5cbe421d00eb35"
+  },
+  "nome": "ADMIN",
+  "email": "admin@gmail.com",
+  "filiacao": "estudante",
+  "nivel": "administrador",
+  "dataRegisto": {
+    "$date": "2020-12-21T00:00:00Z"
+  },
+  "dataUltimoAcesso": "22-12-2020",
+  "password": "admin"
+},{
+  "_id": {
+    "$oid": "60201cee2584645766985676"
+  },
+  "nivel": "administrador",
+  "nome": "Hugo Cunha",
+  "email": "hugo@email.com",
+  "filiacao": "estudante",
+  "password": "password",
+  "dataRegisto": {
+    "$date": "2021-02-07T17:01:00Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60201e3a2584645766985677"
+  },
+  "nivel": "consumidor",
+  "nome": "Catarina Gil",
+  "email": "catarina@mail.com",
+  "filiacao": "estudante",
+  "password": "password",
+  "dataRegisto": {
+    "$date": "2021-02-07T17:07:00Z"
+  },
+  "__v": 0
+}]

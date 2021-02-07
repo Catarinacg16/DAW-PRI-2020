@@ -66,6 +66,14 @@ router.get("/", function (req, res, next) {
 });
 
 router.get(/\/recurso\/[0-9a-zA-Z]*/, function (req, res, next) {
+  var pathAvatar = "/fileStore/avatares/" + req.user._id;
+  try {
+    if (!fs.existsSync(__dirname + "/../public" + pathAvatar)) {
+      pathAvatar = "/images/user.png";
+    }
+  } catch (err) {
+    console.error(err);
+  }
   var split = req.url.split("/")[2];
   console.log(split);
   Recursos.lookUp(split)
@@ -77,6 +85,7 @@ router.get(/\/recurso\/[0-9a-zA-Z]*/, function (req, res, next) {
             recurso: dados,
             produtor: resp,
             path: ffp,
+            avatar: pathAvatar
           });
         })
         .catch((er) => res.render("error", { error: er }));

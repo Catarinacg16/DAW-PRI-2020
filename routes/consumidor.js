@@ -70,6 +70,14 @@ router.post("/recurso/:id", (req, res) => {
 });
 
 router.get(/\/recurso\/[0-9a-zA-Z]*/, function (req, res, next) {
+  var pathAvatar = "/fileStore/avatares/" + req.user._id;
+  try {
+    if (!fs.existsSync(__dirname + "/../public" + pathAvatar)) {
+      pathAvatar = "/images/user.png";
+    }
+  } catch (err) {
+    console.error(err);
+  }
   var split = req.url.split("/")[2];
   console.log(split);
   Recursos.lookUp(split)
@@ -81,6 +89,7 @@ router.get(/\/recurso\/[0-9a-zA-Z]*/, function (req, res, next) {
             recurso: dados,
             produtor: resp,
             path: ffp,
+            avatar: pathAvatar
           });
         })
         .catch((er) => res.render("error", { error: er }));
@@ -126,22 +135,36 @@ module.exports = router;
 
 router.get("/resultados", function (req, res) {
   var queryObject = url.parse(req.url, true).query;
-  var tag = queryObject.search;
-  //remove espaços em branco
-  tag = tag.replace(/\s+/g, "");
-  //separa tags
+  var oldtag = queryObject.search;
+  var newList = [];
+  var tag = oldtag.split("#");
 
-  tag = tag.split("#");
-  console.log(tag);
   if (tag.length > 1) {
-    Recursos.lookUpbyTag(tag)
-      .then((dados) => res.render("Consumidor/index", { recursos: dados }))
-      .catch((e) => res.render("error", { error: e }));
-  } else {
-    Recursos.lookUpbyData(tag)
-      .then((dados) => res.render("Consumidor/index", { recursos: dados }))
-      .catch((e) => res.render("error", { error: e }));
-  }
+    if(oldtag.charAt(0)=="#" )
+      tag = tag.slice(1);
+
+    tag.forEach((str) => {
+      var n = str.length;
+      if (str.charAt(n - 1) == " ") {
+        str = str.substring(0, str.length - 1);
+      }
+      if (str.includes(" ")) {
+        newList.push(str.substr(0, str.indexOf(" ")));
+        newList.push(str.substr(str.indexOf(" ") + 1));
+      } else newList.push(str);
+    });
+  } else newList.push(tag);
+  //console.log("newloisrt" +newList);
+
+  Recursos.lookUpbyTag(newList)
+    .then((dados) => {
+      Recursos.listByDown()
+        .then((top) => {
+          res.render("Consumidor/index", { recursos: dados, topRec: top });
+        })
+        .catch((e) => res.render("error", { error: e }));
+    })
+    .catch((e) => res.render("error", { error: e }));
 });
 
 router.get("/download/:id", function (req, res) {
@@ -163,10 +186,19 @@ router.get("/logout", function (req, res, next) {
 });
 
 router.get("/profile", (req, res) => {
+  var pathAvatar = "/fileStore/avatares/" + req.user._id;
+  try {
+    if (!fs.existsSync(__dirname + "/../public" + pathAvatar)) {
+      pathAvatar = "/images/user.png";
+    }
+  } catch (err) {
+    console.error(err);
+  }
   Recursos.lookUpProd(req.user.email)
     .then((recs) => {
       res.render("Consumidor/profile", {
         produtor: req.user,
+        avatar: pathAvatar
       });
     })
     .catch((e) => res.render("error", { error: e }));
