@@ -305,3 +305,32 @@ router.post("/editPerfil/:id", upload.single("file"), (req, res) => {
     }
   }
 });
+
+
+router.get("/resultadosRec", function (req, res) {
+  var queryObject = url.parse(req.url, true).query;
+  var titulo = queryObject.search;
+  console.log(titulo)
+  Recursos.lookUpByTitulo(titulo)
+    .then((dados) => {
+      Utilizador.list()
+        .then((prod) => {
+           console.log(dados)
+          res.render("Administrador/recursos", { recursos: dados,  produtores: prod, })
+        })
+        .catch((e) => res.render("error", { error: e }))
+    })  
+  .catch((e) => res.render("error", { error: e }));
+});
+
+
+router.get("/resultadosUser", function (req, res) {
+  var queryObject = url.parse(req.url, true).query;
+  var nome = queryObject.search;
+  console.log(nome)
+  Utilizador.lookUpByNome(nome)
+    .then((lista) => {
+      res.render("Administrador/users", { users: lista });
+    })  
+  .catch((e) => res.render("error", { error: e }));
+});

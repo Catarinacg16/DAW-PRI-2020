@@ -60,3 +60,11 @@ module.exports.editP = function (id, b) {
     );
   }
 };
+
+module.exports.lookUpByNome = function (n) {
+  return Utilizador.find({ 
+    $or: [
+      { nome: n },
+      { email: n}
+    ]}).exec();
+};
