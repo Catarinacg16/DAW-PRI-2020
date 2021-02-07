@@ -37,12 +37,12 @@ module.exports.lookUpCom = function (com_id , newcom) {/*
 }
 
 module.exports.lookUpbyTag = function (taglist) {
-  console.log(taglist + "\n");
+  console.log(taglist + " " + taglist.length + "\n");
   return Recurso.find({
     $or: [
       { tags: { $in: taglist } },
       { autor: { $in: taglist } },
-      //{ titulo: {$in : taglist}}
+      { titulo: {$in : taglist}}
     ],
   }).exec();
 };
@@ -157,3 +157,8 @@ module.exports.edit = function (id, r) {
 module.exports.lookUpLast = function () {
   return Recurso.find().sort({ dataRegisto: 1 }).exec();
 };
+
+module.exports.lookUpByTitulo = function (t) {
+  return Recurso.find({ titulo: t }).exec();
+};
+

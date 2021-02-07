@@ -4,6 +4,7 @@ var router = express.Router();
 const Anuncios = require("../controller/anuncio");
 const Recursos = require("../controller/recurso");
 var multer = require("multer");
+var url = require("url");
 
 var upload = multer({ dest: "../uploads/" });
 const { symlinkSync } = require("fs");
@@ -294,4 +295,33 @@ router.post("/editPerfil/:id", upload.single("file"), (req, res) => {
         .catch((e) => res.render("error", { error: e }));
     }
   }
+});
+
+
+router.get("/resultadosRec", function (req, res) {
+  var queryObject = url.parse(req.url, true).query;
+  var titulo = queryObject.search;
+  console.log(titulo)
+  Recursos.lookUpByTitulo(titulo)
+    .then((dados) => {
+      Utilizador.list()
+        .then((prod) => {
+           console.log(dados)
+          res.render("Administrador/recursos", { recursos: dados,  produtores: prod, })
+        })
+        .catch((e) => res.render("error", { error: e }))
+    })  
+  .catch((e) => res.render("error", { error: e }));
+});
+
+
+router.get("/resultadosUser", function (req, res) {
+  var queryObject = url.parse(req.url, true).query;
+  var nome = queryObject.search;
+  console.log(nome)
+  Utilizador.lookUpByNome(nome)
+    .then((lista) => {
+      res.render("Administrador/users", { users: lista });
+    })  
+  .catch((e) => res.render("error", { error: e }));
 });

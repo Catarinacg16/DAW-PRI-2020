@@ -124,11 +124,13 @@ router.post("/recurso/:rec/:com", (req, res) => {
 
 router.get("/resultados", function (req, res) {
   var queryObject = url.parse(req.url, true).query;
-  var tag = queryObject.search;
+  var oldtag = queryObject.search;
   var newList = [];
-  tag = tag.split("#");
+  var tag = oldtag.split("#");
+
   if (tag.length > 1) {
-    tag = tag.slice(1);
+    if(oldtag.charAt(0)=="#" )
+      tag = tag.slice(1);
 
     tag.forEach((str) => {
       var n = str.length;
@@ -141,6 +143,7 @@ router.get("/resultados", function (req, res) {
       } else newList.push(str);
     });
   } else newList.push(tag);
+  console.log("newloisrt" +newList);
 
   Recursos.lookUpbyTag(newList)
     .then((dados) => {
