@@ -42,7 +42,10 @@ module.exports.isAccessible = function (folderPath) {
     let subtract = __dirname+"/../public"
     let shallowPath = deepPath.split(subtract)[1];
     var manifPath = __dirname + "/../public/fileStore/" + id + "/manifest-sha256.txt";
-    var firstFile = fs.readFileSync(manifPath).toString().split('\n')[0].split(' ')[1];
+    var ff =fs.readFileSync(manifPath).toString().split('\n')[0].split(' ');
+    ff[0]="";
+
+    var firstFile = ff.join(" ").trim();
     return shallowPath+firstFile;
     
   } 

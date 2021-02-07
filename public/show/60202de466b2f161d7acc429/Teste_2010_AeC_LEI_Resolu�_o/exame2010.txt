@@ -1,0 +1,65 @@
+RESOLUÇÃO 2010/2010 EPOCA NORMAL
+
+1.
+
+	1) 	|= exists(i in [0..n-1]) v[i] == x   => (exists(i in [k..n-1]) v[i] == x) [k\0]
+
+	2) 	|= exists(i in [k..n-1]) v[i] == x => exists(i in [k..n-1]) v[i] == x  
+
+	3) 	{(exists(i in [k..n-1]) v[i] == x) && v[k] != x } k = k+1 {(exists(i in [k..n-1]) v[i] == x)}
+		<=>
+		|= ((exists(i in [k..n-1]) v[i] == x) && v[k] != x ) => (exists(i in [k+1..n-1]) v[i] == x))
+
+	4)  (exists(i in [0..n-1]) v[i] == x  && v[k] == x) => v[k]==x
+
+2. 	O factor de carga de uma tabela é determinada por carga = n / m   onde n sao o numero de 
+entradas da tabela e m o tamanho da tabela. Uma vez que a tabela utiliza chaining então
+não tem limite maximo de carga.
+	Para uma pesquisa falhada temos no melhor caso, quando a posição de pesquisa está vazia Teta(1)
+e no pior caso e caso medio tempos teta(n).
+
+3.
+	a)
+		T(N)	| 0						, n = 0
+				| 2 * T((N-1)/2) + k	, n > 0
+
+		executa em tempo linear em caso medio
+
+	b)
+
+int maximo(Tree t) {
+	if (!t) return -1;
+	while(t->right) t = t->right;
+	return t->val;
+}
+
+		T (N) 	| 0						, n = 0
+				| T((N-1)/2) + k		, n > 0
+
+		constante no melhor caso
+		executa em tempo logaritmico no caso médio
+		linear no pior caso
+
+4.
+//ALGO DO GENERO
+Graph inverso(Graph origem, Graph inverso) {
+	int i, j;
+	Edge *aux, *new;
+	for(i = 0; i < MaxV; i++)
+		for( j = 0; j < MaxV; j++)
+			inverso[i][j] = NULL;
+	for( i = 0; i < MaxV; i++) {
+		aux = origem[i];
+		while(aux) {
+			new = malloc(sizeof(Edge));
+			new->dest = i;
+			new->cost = aux->cost
+			new->next = inverso[aux->dest];
+			inverso[aux->dest] = new;
+			aux = aux->next;
+		}
+	}
+	return inverso;
+}
+
+PARTE 2

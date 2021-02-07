@@ -4,6 +4,7 @@ var router = express.Router();
 const Anuncios = require("../controller/anuncio");
 const Recursos = require("../controller/recurso");
 var multer = require("multer");
+var { ingest } = require("./ingest");
 var {
   isAccessible,
   getUncompressedFromId,

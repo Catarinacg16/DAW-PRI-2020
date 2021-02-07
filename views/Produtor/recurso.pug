@@ -23,13 +23,9 @@ block content
             .w3-container.w3-padding.w3-light-gray
               h4.w3-center Tags do post
             .w3-container.w3-white
-              p
-                span.w3-tag.w3-black.w3-margin-bottom Teses
-                span.w3-tag.w3-light-grey.w3-small.w3-margin-bottom Exercicios Resolvidos
-                span.w3-tag.w3-light-grey.w3-small.w3-margin-bottom Testes
-                span.w3-tag.w3-light-grey.w3-small.w3-margin-bottom Material
-                span.w3-tag.w3-light-grey.w3-small.w3-margin-bottom Sebentas
-                span.w3-tag.w3-light-grey.w3-small.w3-margin-bottom Apontamentos
+              each qqc in recurso.tags
+                p
+                  span.w3-tag.w3-light-grey.w3-small.w3-margin-bottom=qqc
           // END Introduction Menu
         // Blog entries 
         .w3-col.l10.s12

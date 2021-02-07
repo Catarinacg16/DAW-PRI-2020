@@ -78,7 +78,7 @@ module.exports.ingest = function (f, req) {
                 fs.mkdirSync(thispath);
               fs.writeFileSync(thispath+ thiselemid+ ".zip",zip.readFile(e))
               ret &= checkZipRecursive(thispath+ thiselemid+ ".zip");
-              rmrf(thispath);
+              module.exports.rmrf(thispath);
             }
             else{
             if(!e.isDirectory) ret&=checkFileName(path);
