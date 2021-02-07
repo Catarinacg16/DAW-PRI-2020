@@ -26,7 +26,7 @@ block content
                 td=e.titulo
                 td=e.tipo
                 td=e.visibilidade
-                td=e.dataRegisto 
+                td=e.dataRegisto.toISOString().substr(0, 16).split('T').join(' ')
                 td 
                   -for(var i =0; i<produtores.length;i++){
                       -if(produtores[i].email === e.produtor){

@@ -4,6 +4,11 @@ var router = express.Router();
 const Anuncios = require("../controller/anuncio");
 const Recursos = require("../controller/recurso");
 var multer = require("multer");
+var {
+  isAccessible,
+  getUncompressedFromId,
+  previewFacilitator,
+} = require("./access");
 
 var upload = multer({ dest: "../uploads/" });
 const { symlinkSync } = require("fs");
@@ -201,9 +206,11 @@ router.get(/\/recurso\/[0-9a-zA-Z]*/, function (req, res, next) {
     .then((dados) => {
       Utilizador.lookUpId(dados.produtor)
         .then((resp) => {
-          res.render("Administrador/recurso", {
+          let ffp = previewFacilitator(dados._id);
+          res.render("Produtor/recurso", {
             recurso: dados,
             produtor: resp,
+            path: ffp,
           });
         })
         .catch((er) => res.render("error", { error: er }));
@@ -243,6 +250,9 @@ router.get("/upload", function (req, res) {
 });
 
 router.post("/upload", upload.single("file"), function (req, res) {
+  req.body.pontuacao = 0;
+  req.body.numPontuacoes = 0;
+  req.body.numDowns = 0;
   var ret = ingest(req.file, req);
   if (ret == true) res.redirect("/administrador/recursos");
   else res.jsonp(ret);

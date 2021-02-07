@@ -173,6 +173,9 @@ router.post("/editar/:id", upload.single("file"), function (req, res) {
 });
 
 router.post("/upload", upload.single("file"), function (req, res) {
+  req.body.pontuacao = 0;
+  req.body.numPontuacoes = 0;
+  req.body.numDowns = 0;
   var ret = ingest(req.file, req);
   if (ret == true) res.redirect("/produtor");
   else res.jsonp(ret);

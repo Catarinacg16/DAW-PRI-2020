@@ -27,7 +27,7 @@ block content
                 td=e.email
                 td=e.filiacao 
                 td=e.nivel
-                td=e.dataRegisto
+                td=e.dataRegisto.toISOString().substr(0, 16).split('T').join(' ')
                 td 
                   button.w3-button.w3-purple.w3-border
                         a(href="/administrador/editProfile/"+e._id) Editar &raquo;

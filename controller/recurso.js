@@ -101,6 +101,7 @@ module.exports.lookUpbyData = function (data) {
 // Insere um novo recurso
 module.exports.insert = function (r) {
   var novoRecurso = new Recurso(r);
+  console.log(novoRecurso);
   return novoRecurso.save();
 };
 
