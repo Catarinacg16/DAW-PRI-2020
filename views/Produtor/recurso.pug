@@ -104,12 +104,11 @@ block content
                     br
                     span=com.descricao
                     br
-                    .div(id=com.id_coment)
+                    .div(id="s"+com.id_coment)
                       input.w3-button.w3-light-gray(type="button" id="b"+com.id_coment value="Ver replies" onclick=`addi( ${com} )`)
                     p
                     .div(id="r"+com.id_coment)
-                      input.w3-button.w3-light-gray(type="button" onclick=`addReply(\"${recurso._id}\", ${com})` value="Responder ⤵️")                           
-                    hr
+                      input.w3-button.w3-light-gray(type="button", onclick=`addReply( \"${recurso._id}\","${com.id_coment}\"   )`, value="Responder ⤵️")          
                 .div
                 .w3-container
                   form(action="/produtor/recurso/"+recurso._id ,method="POST", enctype="form-data")

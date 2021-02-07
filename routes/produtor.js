@@ -64,6 +64,7 @@ router.get(/\/recurso\/[0-9a-zA-Z]*/, function (req, res, next) {
     .catch((e) => res.render("error", { error: e }));
 });
 
+//Adiciona comentario a um recurso
 router.post("/recurso/:id", (req, res) => {
   req.body.data = new Date().toISOString().substr(0, 16);
 
@@ -77,6 +78,26 @@ router.post("/recurso/:id", (req, res) => {
       Recursos.edit(req.params.id, dados)
         .then((e) => res.redirect("/produtor/recurso/" + req.params.id))
         .catch((e) => res.render("error", { error: e }));
+    })
+    .catch((e) => res.render("error", { error: e }));
+});
+
+//Adiciona Reply a um comentario
+router.post("/recurso/:rec/:com", (req, res) => {
+  req.body.data = new Date().toISOString().substr(0, 16);
+  console.log("Passei por aqui")
+  Recursos.lookUpCom(req.params.com)
+    .then((dados) => { console.log("Dados :"+dados);
+      res.redirect("/produtor/recurso/" + req.params.rec)
+      /*
+      req.body.id_coment = dados.comentarios.comentarios.length + 1;
+      req.body.id_utilizador = req.user.email;
+      req.body.nome_utilizador = req.user.nome;
+      dados.comentarios.push(req.body);
+      console.log(dados.comentarios);
+      Recursos.edit(req.params.id, dados)
+        .then((e) => res.redirect("/produtor/recurso/" + req.params.id))
+        .catch((e) => res.render("error", { error: e }));*/
     })
     .catch((e) => res.render("error", { error: e }));
 });
