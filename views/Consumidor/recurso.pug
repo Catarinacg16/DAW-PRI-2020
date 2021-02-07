@@ -25,7 +25,8 @@ block content
             .w3-container.w3-white
               each qqc in recurso.tags
                 p
-                  span.w3-tag.w3-light-grey.w3-small.w3-margin-bottom=qqc
+                  button.w3-button.w3-border.w3-tag.w3-light-grey.w3-small.w3-margin-bottom
+                    a(href="/consumidor/resultados?search=%23"+qqc)=qqc
           // END Introduction Menu
         // Blog entries 
         .w3-col.l10.s12
@@ -65,10 +66,14 @@ block content
                         - for (var i = 0; i < recurso.pontuacao; i++) {
                             span.fa.fa-star.checked
                         -}
-            .w3-card.w3-margin            
+            .w3-card.w3-margin.w3-center       
               .w3-container.w3-padding-white.w3-light-gray
-                | Preview 
-                embed(src=path, width="1000", height="500")       
+               h3 Preview 
+               .w3-ul.w3-hoverable.w3-white  
+                br
+                embed(src=path, width="1000", height="500")  
+                br
+                br         
             // END BLOG ENTRIES
             // Posts
             .w3-card.w3-margin
@@ -87,7 +92,7 @@ block content
                     label(for='e2') &star;
                     input#e1(name='stars' type='radio' onclick="window.location='/consumidor/rating/"+recurso._id+"/1'")
                     label(for='e1') &star;
-            .w3-card.w3-margin
+            .w3-card.w3-margin.w3-center
               .w3-container.w3-padding-white.w3-light-gray
                 h4 Comentarios
               ul.w3-ul.w3-white

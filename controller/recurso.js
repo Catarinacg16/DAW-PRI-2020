@@ -28,11 +28,16 @@ module.exports.lookUpProd = function (email) {
 };
 
 //Retorna comentario
+
 module.exports.lookUpCom = function (com_id ) {
+
   return Recurso.findOne(
     {"comentarios.id_coment": com_id}, {comentarios: 1}
   )
+
 }
+
+
 
 module.exports.lookUpbyTag = function (taglist) {
   console.log(taglist + " " + taglist.length + "\n");
@@ -40,7 +45,7 @@ module.exports.lookUpbyTag = function (taglist) {
     $or: [
       { tags: { $in: taglist } },
       { autor: { $in: taglist } },
-      { titulo: {$in : taglist}}
+      { titulo: { $in: taglist } },
     ],
   }).exec();
 };
@@ -127,6 +132,19 @@ module.exports.getNumDownloads = function (recursos) {
   return total;
 };
 
+//devolve numero de comentarios + replies
+module.exports.getNumComs = function (recursos) {
+  var total = 0;
+  recursos.forEach((element) => {
+    if (element["comentarios"].length > 0) {
+      total = total + 1;
+      total = total + parseInt(element["comentarios"].length);
+    }
+  });
+  total = total + 1;
+  return total;
+};
+
 //Insere comentário num recurso
 module.exports.insertCom = function (r, com) {
   return Recurso.findByIdAndUpdate(
@@ -153,6 +171,18 @@ module.exports.edit = function (id, r) {
   return Recurso.findByIdAndUpdate(id, r, { new: true });
 };
 
+module.exports.addReply = function (re, id, info) {
+  //console.log(re + "     " + id + "     " + info);
+  return Recurso.update(
+    { _id: re, "comentarios.id_coment": id },
+    {
+      $push: {
+        "comentarios.$.comentarios": JSON.parse(info),
+      },
+    }
+  ).exec();
+};
+
 module.exports.lookUpLast = function () {
   return Recurso.find().sort({ dataRegisto: 1 }).exec();
 };
@@ -160,4 +190,3 @@ module.exports.lookUpLast = function () {
 module.exports.lookUpByTitulo = function (t) {
   return Recurso.find({ titulo: t }).exec();
 };
-

@@ -4,6 +4,8 @@ var router = express.Router();
 const Anuncios = require("../controller/anuncio");
 const Recursos = require("../controller/recurso");
 var multer = require("multer");
+var upload = multer({ dest: "../uploads/" });
+var fs = require("fs");
 var { ingest } = require("./ingest");
 var {
   isAccessible,
@@ -11,8 +13,30 @@ var {
   previewFacilitator,
 } = require("./access");
 
-var upload = multer({ dest: "../uploads/" });
 const { symlinkSync } = require("fs");
+
+//Adiciona Reply a um comentario
+router.post("/recurso/:rec/:com", (req, res) => {
+  req.body.data = new Date().toISOString().substr(0, 16);
+  console.log("Passei por aqui");
+  req.body.id_utilizador = req.user.email;
+  req.body.nome_utilizador = req.user.nome;
+  Recursos.list()
+    .then((recursos) => {
+      var result = Recursos.getNumComs(recursos);
+      req.body.id_coment = result;
+      Recursos.addReply(
+        req.params.rec,
+        req.params.com,
+        JSON.stringify(req.body)
+      )
+        .then(() => {
+          res.redirect("/produtor/recurso/" + req.params.rec);
+        })
+        .catch((e) => res.render("error", { error: e }));
+    })
+    .catch((e) => res.render("error", { error: e }));
+});
 
 /* GET Form registar utilizador*/
 router.get("/registar", function (req, res, next) {
@@ -179,6 +203,30 @@ router.post("/editar/:id", upload.single("file"), function (req, res) {
     .catch((e) => res.render("error", { error: e }));
 });
 
+router.get("/profile", (req, res) => {
+  var pathAvatar = "/fileStore/avatares/" + req.user._id;
+  try {
+    if (!fs.existsSync(__dirname + "/../public" + pathAvatar)) {
+      pathAvatar = "/images/user.png";
+    }
+  } catch (err) {
+    console.error(err);
+  }
+  Recursos.lookUpProd(req.user.email)
+    .then((recs) => {
+      var ponto = Recursos.getPontuacaoMedia(recs);
+      var downs = Recursos.getNumDownloads(recs);
+      res.render("Administrador/profile", {
+        produtor: req.user,
+        recursos: recs,
+        pontuacao: ponto,
+        downs: downs,
+        path: pathAvatar,
+      });
+    })
+    .catch((e) => res.render("error", { error: e }));
+});
+
 router.get("/profile/:id", (req, res) => {
   Utilizador.lookUpID(req.params.id)
     .then((prod) => {
@@ -186,12 +234,14 @@ router.get("/profile/:id", (req, res) => {
       Recursos.lookUpProd(prod.email)
         .then((recs) => {
           var pathAvatar = "/fileStore/avatares/" + prod._id;
-          console.log(pathAvatar)
+          console.log(pathAvatar);
           try {
             if (!fs.existsSync(__dirname + "/../public" + pathAvatar)) {
               pathAvatar = "/images/user.png";
             }
-          } catch (err) { console.error(err); }
+          } catch (err) {
+            console.error(err);
+          }
 
           var ponto = Recursos.getPontuacaoMedia(recs);
           var downs = Recursos.getNumDownloads(recs);
@@ -200,7 +250,7 @@ router.get("/profile/:id", (req, res) => {
             recursos: recs,
             pontuacao: ponto,
             downs: downs,
-            avatar: pathAvatar
+            avatar: pathAvatar,
           });
         })
         .catch((e) => res.render("error", { error: e }));
@@ -216,21 +266,22 @@ router.get(/\/recurso\/[0-9a-zA-Z]*/, function (req, res, next) {
     .then((dados) => {
       Utilizador.lookUpId(dados.produtor)
         .then((resp) => {
-
           var pathAvatar = "/fileStore/avatares/" + resp._id;
-          console.log(pathAvatar)
+          console.log(pathAvatar);
           try {
             if (!fs.existsSync(__dirname + "/../public" + pathAvatar)) {
               pathAvatar = "/images/user.png";
             }
-          } catch (err) { console.error(err); }
+          } catch (err) {
+            console.error(err);
+          }
 
           let ffp = previewFacilitator(dados._id);
           res.render("Produtor/recurso", {
             recurso: dados,
             produtor: resp,
             path: ffp,
-            avatar: pathAvatar
+            avatar: pathAvatar,
           });
         })
         .catch((er) => res.render("error", { error: er }));
@@ -326,31 +377,32 @@ router.post("/editPerfil/:id", upload.single("file"), (req, res) => {
   }
 });
 
-
 router.get("/resultadosRec", function (req, res) {
   var queryObject = url.parse(req.url, true).query;
   var titulo = queryObject.search;
-  console.log(titulo)
+  console.log(titulo);
   Recursos.lookUpByTitulo(titulo)
     .then((dados) => {
       Utilizador.list()
         .then((prod) => {
-           console.log(dados)
-          res.render("Administrador/recursos", { recursos: dados,  produtores: prod, })
+          console.log(dados);
+          res.render("Administrador/recursos", {
+            recursos: dados,
+            produtores: prod,
+          });
         })
-        .catch((e) => res.render("error", { error: e }))
-    })  
-  .catch((e) => res.render("error", { error: e }));
+        .catch((e) => res.render("error", { error: e }));
+    })
+    .catch((e) => res.render("error", { error: e }));
 });
-
 
 router.get("/resultadosUser", function (req, res) {
   var queryObject = url.parse(req.url, true).query;
   var nome = queryObject.search;
-  console.log(nome)
+  console.log(nome);
   Utilizador.lookUpByNome(nome)
     .then((lista) => {
       res.render("Administrador/users", { users: lista });
-    })  
-  .catch((e) => res.render("error", { error: e }));
+    })
+    .catch((e) => res.render("error", { error: e }));
 });
