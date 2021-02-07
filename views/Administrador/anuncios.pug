@@ -4,7 +4,14 @@ block content
     //Colocar form num sitio mais bonitinho
     .w3-card-4.w3-margin.w3-white
       .w3-container
-        h1.w3-center Gestão de Anuncios
+        .w3-row  
+          .w3-col.l4.w3-left
+            br
+            form(action="/administrador/resultados" method="GET", enctype="multipart/form-data")
+              input.w3-button.w3-border(type="search",name="search")
+              input.w3-button.w3-border(type="submit",value="🔎")
+          .w3-col.l4.w3-center
+            h1 Gestão de Anúncios
     .w3-row 
       .w3-col.l9.s12
         .w3-card-4.w3-margin.w3-white

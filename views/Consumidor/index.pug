@@ -4,10 +4,14 @@ block content
     //Colocar form num sitio mais bonitinho
     .w3-card-4.w3-margin.w3-white
       .w3-container
-        h1 Página do Consumidor
-        form(action="/consumidor/resultados" method="GET", enctype="multipart/form-data")
-          input.form-control(type="text",placeholder="Search...",name="search")
-          input.btn.btn-lg.btn-primary(type="submit",value="🔎")
+        .w3-row  
+          .w3-col.l4.w3-left
+            br
+            form(action="/consumidor/resultados" method="GET", enctype="multipart/form-data")
+              input.w3-button.w3-border(type="search",name="search")
+              input.w3-button.w3-border(type="submit",value="🔎")
+          .w3-col.l4.w3-center
+            h1 Página do Consumidor
     .w3-row
         // Blog entries 
         .w3-col.l8.s12

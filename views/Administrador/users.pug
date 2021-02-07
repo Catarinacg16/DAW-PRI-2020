@@ -2,7 +2,14 @@ extends header
 block content
     .w3-card-4.w3-margin.w3-white
       .w3-container
-        h1.w3-center Gerir Utilizadores
+        .w3-row  
+          .w3-col.l4.w3-left
+            br
+            form(action="/administrador/resultados" method="GET", enctype="multipart/form-data")
+              input.w3-button.w3-border(type="search",name="search")
+              input.w3-button.w3-border(type="submit",value="🔎")
+          .w3-col.l4.w3-center
+            h1 Gestão de Utilizadores
     .w3-card-4.w3-margin.w3-white
       .w3-container
         br

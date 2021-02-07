@@ -153,3 +153,7 @@ module.exports.removeCom = function (re, id) {
 module.exports.edit = function (id, r) {
   return Recurso.findByIdAndUpdate(id, r, { new: true });
 };
+
+module.exports.lookUpLast = function () {
+  return Recurso.find().sort({ dataRegisto: 1 }).exec();
+};

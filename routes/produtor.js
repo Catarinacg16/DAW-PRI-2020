@@ -29,17 +29,37 @@ router.get("/", function (req, res, next) {
     .then((dados) => {
       Anuncios.getAnuncio()
         .then((an) => {
-          Recursos.listByDown()
-            .then((top) => {
-              res.render("Produtor/index", {
-                recursos: dados,
-                notif: an,
-                topRec: top,
-                eu: req.user.email,
-              });
-            })
-            .catch((e) => res.render("error", { error: e }));
+          //console.log(an);
+          if (an == null) {
+            var po = "Novo Recurso adicionado! ";
+            Recursos.lookUpLast().then((rec) => {
+              //console.log(rec);
+              Recursos.listByDown()
+                .then((top) => {
+                  res.render("Produtor/index", {
+                    recursos: dados,
+                    notif: po,
+                    redi: rec[0],
+                    topRec: top,
+                    eu: req.user.email,
+                  });
+                })
+                .catch((e) => res.render("error", { error: e }));
+            });
+          } else {
+            Recursos.listByDown()
+              .then((top) => {
+                res.render("Produtor/index", {
+                  recursos: dados,
+                  notif: an.anuncio,
+                  topRec: top,
+                  eu: req.user.email,
+                });
+              })
+              .catch((e) => res.render("error", { error: e }));
+          }
         })
+
         .catch((e) => res.render("error", { error: e }));
     })
     .catch((e) => res.render("error", { error: e }));
@@ -125,8 +145,10 @@ router.get("/resultados", function (req, res) {
   Recursos.lookUpbyTag(newList)
     .then((dados) => {
       Recursos.listByDown()
-            .then((top) => {res.render("Produtor/index", { recursos: dados, topRec:top })})
-            .catch((e) => res.render("error", { error: e }));
+        .then((top) => {
+          res.render("Produtor/index", { recursos: dados, topRec: top });
+        })
+        .catch((e) => res.render("error", { error: e }));
     })
     .catch((e) => res.render("error", { error: e }));
 });

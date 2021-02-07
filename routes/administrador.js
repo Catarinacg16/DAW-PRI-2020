@@ -231,6 +231,23 @@ router.get("/editProfile/:id", upload.single("file"), (req, res) => {
     .catch((e) => res.render("error", { error: e }));
 });
 
+router.get("/upload", function (req, res) {
+  var user = req.user.email;
+  console.log(user);
+  Recursos.lookUpByUser(user)
+    .then((dados) => {
+      res.render("Administrador/upload", { recursos: dados });
+      //console.log(dados);
+    })
+    .catch((e) => res.render("error", { error: e }));
+});
+
+router.post("/upload", upload.single("file"), function (req, res) {
+  var ret = ingest(req.file, req);
+  if (ret == true) res.redirect("/administrador/recursos");
+  else res.jsonp(ret);
+});
+
 router.post("/editPerfil/:id", upload.single("file"), (req, res) => {
   var id = req.params.id;
   if (req.file != null) {
