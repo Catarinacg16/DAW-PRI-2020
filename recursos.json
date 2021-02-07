@@ -1,78 +1,468 @@
-[
-  {
-    "tipo": "Sebenta",
-    "descricao": "Testes",
-    "titulo": "TestePontucao",
-    "dataCriacao": "01-07-2013",
-    "dataRegisto": "21-12-2020",
-    "visibilidade": "Público",
-    "numDowns": 0,
-    "autor": ["Luís Miguel Gomes dos Santos Reis Leitão"],
-    "produtor": "tania@gmail.com",
-    "pontuacao": 3,
-    "numPontuacoes": 2,
-    "comentarios": [
-      {
-        "id_coment": 1,
-        "id_utilizador": "tania@gmail.com",
-        "nome_utilizador": "Tânia Rocha",
-        "data": "21-12-2020",
-        "descricao": "primeiro comentario para teste",
-        "comentarios": [
-          {
-            "id_coment": 2,
-            "id_utilizador": "tania@gmail.com",
-            "nome_utilizador": "Tânia Rocha",
-            "data": "22-12-2020",
-            "descricao": "primeiro reply para teste",
-            "comentarios": []
-          }
-        ]
-      },
-      {
-        "id_coment": 3,
-        "id_utilizador": "tania@gmail.com",
-        "nome_utilizador": "Tânia Rocha",
-        "data": "21-12-2020",
-        "descricao": "segundo comentario para teste",
-        "comentarios": [
-          {
-            "id_coment": 4,
-            "id_utilizador": "tania@gmail.com",
-            "nome_utilizador": "Tânia Rocha",
-            "data": "21-12-2020",
-            "descricao": "segunda reply para teste",
-            "comentarios": [
-              {
-                "id_coment": 5,
-                "id_utilizador": "tania@gmail.com",
-                "nome_utilizador": "Tânia Rocha",
-                "data": "22-12-2020",
-                "descricao": " terceiraReply para teste",
-                "comentarios": []
-              }
-            ]
-          },
-          {
-            "id_coment": 6,
-            "id_utilizador": "tania@gmail.com",
-            "nome_utilizador": "Tânia Rocha",
-            "data": "21-12-2020",
-            "descricao": "terceiro comentario para teste",
-            "comentarios": [
-              {
-                "id_coment": 7,
-                "id_utilizador": "tania@gmail.com",
-                "nome_utilizador": "Tânia Rocha",
-                "data": "22-12-2020",
-                "descricao": "quarta reply para teste",
-                "comentarios": []
-              }
-            ]
-          }
-        ]
-      }
-    ],
-    "tags": ["teste", "pontuação"]
-  }
-]
+[{
+  "_id": {
+    "$oid": "602022e58d27ea5de2c9dcd0"
+  },
+  "autor": [
+    "JBB"
+  ],
+  "tags": [],
+  "visibilidade": "Público",
+  "tipo": "Resoluções",
+  "descricao": "Coleção de folhas de exercicios de Algoritmos e Complexidade de 2010-2011",
+  "titulo": "Exercicios de Algoritmos e Complexidade 2010",
+  "dataCriacao": {
+    "$date": "2010-01-01T00:00:00Z"
+  },
+  "pontuacao": 0,
+  "numPontuacoes": 0,
+  "numDowns": 0,
+  "dataRegisto": {
+    "$date": "2021-02-07T17:27:00Z"
+  },
+  "produtor": "tania@gmail.com",
+  "comentarios": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6020267d66b2f161d7acc423"
+  },
+  "autor": [
+    "JBB"
+  ],
+  "tags": [],
+  "visibilidade": "Público",
+  "tipo": "Resoluções",
+  "descricao": "Folha de exercicios de Algoritmos e Complexidade",
+  "titulo": "Exercicios de Algoritmos e Complexidade",
+  "dataCriacao": {
+    "$date": "2013-01-01T00:00:00Z"
+  },
+  "pontuacao": 4,
+  "numPontuacoes": 1,
+  "numDowns": 0,
+  "dataRegisto": {
+    "$date": "2021-02-07T17:42:00Z"
+  },
+  "produtor": "tania@gmail.com",
+  "comentarios": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "602027e866b2f161d7acc424"
+  },
+  "autor": [
+    "JBB"
+  ],
+  "tags": [
+    "Algoritmos e Complexidade",
+    "C",
+    "Prim"
+  ],
+  "visibilidade": "Público",
+  "tipo": "Aplicação",
+  "descricao": "Algoritmo de caminho mais curto de Prim em C",
+  "titulo": "Algoritmo de Prim em C",
+  "dataCriacao": {
+    "$date": "2013-04-01T23:00:00Z"
+  },
+  "pontuacao": 2,
+  "numPontuacoes": 1,
+  "numDowns": 0,
+  "dataRegisto": {
+    "$date": "2021-02-07T17:48:00Z"
+  },
+  "produtor": "tania@gmail.com",
+  "comentarios": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6020299866b2f161d7acc425"
+  },
+  "autor": [
+    "JBB"
+  ],
+  "tags": [
+    "Algoritmos e Complexidade",
+    "C",
+    "Quick Sort",
+    "Sort"
+  ],
+  "visibilidade": "Público",
+  "tipo": "Slides",
+  "descricao": "Algoritmo de Quick Sort",
+  "titulo": "Algoritmo Quick Sort",
+  "dataCriacao": {
+    "$date": "2014-02-12T00:00:00Z"
+  },
+  "pontuacao": 0,
+  "numPontuacoes": 0,
+  "numDowns": 0,
+  "dataRegisto": {
+    "$date": "2021-02-07T17:55:00Z"
+  },
+  "produtor": "tania@gmail.com",
+  "comentarios": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60202a2566b2f161d7acc426"
+  },
+  "autor": [
+    "JBB"
+  ],
+  "tags": [
+    "Algoritmos e Complexidade",
+    "C",
+    "Algoritmo",
+    "Introdução"
+  ],
+  "visibilidade": "Público",
+  "tipo": "Slides",
+  "descricao": "Definição de algoritmo",
+  "titulo": "O que é um Algoritmo?",
+  "dataCriacao": {
+    "$date": "2014-01-23T00:00:00Z"
+  },
+  "pontuacao": 0,
+  "numPontuacoes": 0,
+  "numDowns": 0,
+  "dataRegisto": {
+    "$date": "2021-02-07T17:57:00Z"
+  },
+  "produtor": "tania@gmail.com",
+  "comentarios": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60202a6866b2f161d7acc428"
+  },
+  "autor": [
+    "JBB"
+  ],
+  "tags": [
+    "Algoritmos e Complexidade",
+    "C",
+    "P vs NP",
+    "Complexidade"
+  ],
+  "visibilidade": "Público",
+  "tipo": "Slides",
+  "descricao": "Problemas NP Completos",
+  "titulo": "Problemas NP Completos",
+  "dataCriacao": {
+    "$date": "2014-04-16T23:00:00Z"
+  },
+  "pontuacao": 4,
+  "numPontuacoes": 1,
+  "numDowns": 7,
+  "dataRegisto": {
+    "$date": "2021-02-07T17:59:00Z"
+  },
+  "produtor": "tania@gmail.com",
+  "comentarios": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60202de466b2f161d7acc429"
+  },
+  "autor": [
+    "JBB"
+  ],
+  "tags": [
+    "Algoritmos e Complexidade",
+    "Teste Resolvido"
+  ],
+  "visibilidade": "Público",
+  "tipo": "Resoluções",
+  "descricao": "Resolução do teste de Algoritmos e Complexidade de 2009-2010",
+  "titulo": "Resolução do teste de Algoritmos e Complexidade de 2009",
+  "dataCriacao": {
+    "$date": "2008-11-07T00:00:00Z"
+  },
+  "pontuacao": 0,
+  "numPontuacoes": 0,
+  "numDowns": 0,
+  "dataRegisto": {
+    "$date": "2021-02-07T18:13:00Z"
+  },
+  "produtor": "tania@gmail.com",
+  "comentarios": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6020304466b2f161d7acc42a"
+  },
+  "autor": [
+    "Tânia"
+  ],
+  "tags": [
+    "Sistemas Distribuidos"
+  ],
+  "visibilidade": "Público",
+  "tipo": "Tese",
+  "descricao": "Coleção de Resolvidos de Sistemas Distribuidos",
+  "titulo": "Testes Resolvidos de Sistemas Distribuidos",
+  "dataCriacao": {
+    "$date": "2020-07-08T23:00:00Z"
+  },
+  "pontuacao": 0,
+  "numPontuacoes": 0,
+  "numDowns": 3,
+  "dataRegisto": {
+    "$date": "2021-02-07T18:24:00Z"
+  },
+  "produtor": "tania@gmail.com",
+  "comentarios": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6020316266b2f161d7acc42b"
+  },
+  "autor": [
+    "PRH"
+  ],
+  "tags": [
+    "PLC",
+    "Bibliografia",
+    "Livro",
+    "Gramáticas"
+  ],
+  "visibilidade": "Privado",
+  "tipo": "Artigo",
+  "descricao": "Bibliografia para o mestrado de Processamento de Liguagens e Conhecimento",
+  "titulo": "Livro do Mestrado de PLC",
+  "dataCriacao": {
+    "$date": "2021-02-19T00:00:00Z"
+  },
+  "pontuacao": 0,
+  "numPontuacoes": 0,
+  "numDowns": 4,
+  "dataRegisto": {
+    "$date": "2021-02-07T18:28:00Z"
+  },
+  "produtor": "tania@gmail.com",
+  "comentarios": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "602031e866b2f161d7acc42c"
+  },
+  "autor": [
+    "JCR"
+  ],
+  "tags": [
+    "Bibliografia",
+    "PL",
+    "Sebenta"
+  ],
+  "visibilidade": "Público",
+  "tipo": "Artigo",
+  "descricao": "Bibliografia da Unidade Curricular de Processamento de linguagens do 3º ano",
+  "titulo": "Livro de PL",
+  "dataCriacao": {
+    "$date": "2019-05-10T23:00:00Z"
+  },
+  "pontuacao": 5,
+  "numPontuacoes": 0,
+  "numDowns": 30,
+  "dataRegisto": {
+    "$date": "2021-02-07T18:31:00Z"
+  },
+  "produtor": "tania@gmail.com",
+  "comentarios": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "602032f566b2f161d7acc42d"
+  },
+  "autor": [
+    "Hugo Cunha"
+  ],
+  "tags": [
+    "MD"
+  ],
+  "visibilidade": "Privado",
+  "tipo": "Relatório",
+  "descricao": "Relatório do miniteste 3 de Mineração de dados ",
+  "titulo": "Relatório 3 de MD 2021",
+  "dataCriacao": {
+    "$date": "2021-01-07T00:00:00Z"
+  },
+  "pontuacao": 0,
+  "numPontuacoes": 0,
+  "numDowns": 0,
+  "dataRegisto": {
+    "$date": "2021-02-07T18:35:00Z"
+  },
+  "produtor": "hugo@email.com",
+  "comentarios": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "602033b166b2f161d7acc42e"
+  },
+  "autor": [
+    "Hugo Cunha",
+    "Maria Pires",
+    "Susana Marques",
+    "Maria Miguel"
+  ],
+  "tags": [
+    "AI"
+  ],
+  "visibilidade": "Público",
+  "tipo": "Artigo",
+  "descricao": "Esquema da arquitetura da 2ª fase do projeto de Agentes Inteligentes",
+  "titulo": "Esquema da Arquitetura de AI",
+  "dataCriacao": {
+    "$date": "2020-12-20T00:00:00Z"
+  },
+  "pontuacao": 0,
+  "numPontuacoes": 0,
+  "numDowns": 0,
+  "dataRegisto": {
+    "$date": "2021-02-07T18:38:00Z"
+  },
+  "produtor": "hugo@email.com",
+  "comentarios": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "602034e780ee9770ac1de22c"
+  },
+  "autor": [
+    "Hugo Cunha"
+  ],
+  "tags": [
+    "VC",
+    "C++"
+  ],
+  "visibilidade": "Público",
+  "tipo": "Aplicação",
+  "descricao": "Tracker em C++ da Unidade curricular de Visão por Computador",
+  "titulo": "Tracker de Markings para o Projeto Andarilho",
+  "dataCriacao": {
+    "$date": "2021-01-16T00:00:00Z"
+  },
+  "pontuacao": 0,
+  "numPontuacoes": 0,
+  "numDowns": 0,
+  "dataRegisto": {
+    "$date": "2021-02-07T18:43:00Z"
+  },
+  "produtor": "hugo@email.com",
+  "comentarios": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6020363080ee9770ac1de22d"
+  },
+  "autor": [
+    "S. Bradner"
+  ],
+  "tags": [
+    "RFC"
+  ],
+  "visibilidade": "Público",
+  "tipo": "Artigo",
+  "descricao": "Documento do RFC 2119 : \"MUST\", \"MUST NOT\", \"REQUIRED\", \"SHALL\", \"SHALL NOT\", \"SHOULD\", \"SHOULD NOT\", \"RECOMMENDED\", \"MAY\", and \"OPTIONAL\"",
+  "titulo": "RFC 2119",
+  "dataCriacao": {
+    "$date": "1997-06-30T23:00:00Z"
+  },
+  "pontuacao": 0,
+  "numPontuacoes": 0,
+  "numDowns": 0,
+  "dataRegisto": {
+    "$date": "2021-02-07T18:49:00Z"
+  },
+  "produtor": "hugo@email.com",
+  "comentarios": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6020374db716d172cc068027"
+  },
+  "autor": [
+    "Hungria"
+  ],
+  "tags": [
+    "Algoritmos e Complexidade",
+    "Sort",
+    "Bubble Sort"
+  ],
+  "visibilidade": "Público",
+  "tipo": "Tese",
+  "descricao": "Bubblesort with Hungarian Csángó folk dance",
+  "titulo": "Bubblesort folk dance",
+  "dataCriacao": {
+    "$date": "2002-09-09T23:00:00Z"
+  },
+  "pontuacao": 0,
+  "numPontuacoes": 0,
+  "numDowns": 0,
+  "dataRegisto": {
+    "$date": "2021-02-07T18:54:00Z"
+  },
+  "produtor": "hugo@email.com",
+  "comentarios": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60203a22b716d172cc068028"
+  },
+  "autor": [
+    "Halliday",
+    "Resnick"
+  ],
+  "tags": [
+    "Eletromagnetismo",
+    "Fisica",
+    "Portugues"
+  ],
+  "visibilidade": "Público",
+  "tipo": "Artigo",
+  "descricao": "Sebenta de Eletromagnetismo Edição 8",
+  "titulo": "Livro de Eletromagnetismo",
+  "dataCriacao": {
+    "$date": "2009-01-01T00:00:00Z"
+  },
+  "pontuacao": 0,
+  "numPontuacoes": 0,
+  "numDowns": 0,
+  "dataRegisto": {
+    "$date": "2021-02-07T19:06:00Z"
+  },
+  "produtor": "hugo@email.com",
+  "comentarios": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60203b0ee2da027844dd1be0"
+  },
+  "autor": [
+    "Halliday",
+    "Resnick"
+  ],
+  "tags": [
+    "Eletromagnetismo",
+    "Fisica",
+    "Portugues"
+  ],
+  "visibilidade": "Público",
+  "tipo": "Artigo",
+  "descricao": "Sebenta de Eletromagnetismo Edição 8",
+  "titulo": "Livro de Eletromagnetismo",
+  "dataCriacao": {
+    "$date": "2009-01-01T00:00:00Z"
+  },
+  "pontuacao": 0,
+  "numPontuacoes": 0,
+  "numDowns": 0,
+  "dataRegisto": {
+    "$date": "2021-02-07T19:10:00Z"
+  },
+  "produtor": "hugo@email.com",
+  "comentarios": [],
+  "__v": 0
+}]

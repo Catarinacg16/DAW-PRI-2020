@@ -210,6 +210,14 @@ router.get("/profile/:id", (req, res) => {
       console.log(prod);
       Recursos.lookUpProd(prod.email)
         .then((recs) => {
+          var pathAvatar = "/fileStore/avatares/" + prod._id;
+          console.log(pathAvatar)
+          try {
+            if (!fs.existsSync(__dirname + "/../public" + pathAvatar)) {
+              pathAvatar = "/images/user.png";
+            }
+          } catch (err) { console.error(err); }
+
           var ponto = Recursos.getPontuacaoMedia(recs);
           var downs = Recursos.getNumDownloads(recs);
           res.render("Administrador/profile", {
@@ -217,6 +225,7 @@ router.get("/profile/:id", (req, res) => {
             recursos: recs,
             pontuacao: ponto,
             downs: downs,
+            avatar: pathAvatar
           });
         })
         .catch((e) => res.render("error", { error: e }));
@@ -232,11 +241,21 @@ router.get(/\/recurso\/[0-9a-zA-Z]*/, function (req, res, next) {
     .then((dados) => {
       Utilizador.lookUpId(dados.produtor)
         .then((resp) => {
+
+          var pathAvatar = "/fileStore/avatares/" + resp._id;
+          console.log(pathAvatar)
+          try {
+            if (!fs.existsSync(__dirname + "/../public" + pathAvatar)) {
+              pathAvatar = "/images/user.png";
+            }
+          } catch (err) { console.error(err); }
+
           let ffp = previewFacilitator(dados._id);
           res.render("Produtor/recurso", {
             recurso: dados,
             produtor: resp,
             path: ffp,
+            avatar: pathAvatar
           });
         })
         .catch((er) => res.render("error", { error: er }));
@@ -258,7 +277,7 @@ router.get("/editProfile/:id", upload.single("file"), (req, res) => {
     .then((dados) => {
       res.render("Administrador/editProfile", {
         user: dados,
-        path: pathAvatar,
+        avatar: pathAvatar,
       });
     })
     .catch((e) => res.render("error", { error: e }));
