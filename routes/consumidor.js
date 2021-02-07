@@ -52,6 +52,29 @@ router.get("/", function (req, res, next) {
     .catch((e) => res.render("error", { error: e }));
 });
 
+//Adiciona Reply a um comentario
+router.post("/recurso/:rec/:com", (req, res) => {
+  req.body.data = new Date().toISOString().substr(0, 16);
+  console.log("Passei por aqui");
+  req.body.id_utilizador = req.user.email;
+  req.body.nome_utilizador = req.user.nome;
+  Recursos.list()
+    .then((recursos) => {
+      var result = Recursos.getNumComs(recursos);
+      req.body.id_coment = result;
+      Recursos.addReply(
+        req.params.rec,
+        req.params.com,
+        JSON.stringify(req.body)
+      )
+        .then(() => {
+          res.redirect("/produtor/recurso/" + req.params.rec);
+        })
+        .catch((e) => res.render("error", { error: e }));
+    })
+    .catch((e) => res.render("error", { error: e }));
+});
+
 router.post("/recurso/:id", (req, res) => {
   req.body.data = new Date().toISOString().substr(0, 16);
 
@@ -89,7 +112,7 @@ router.get(/\/recurso\/[0-9a-zA-Z]*/, function (req, res, next) {
             recurso: dados,
             produtor: resp,
             path: ffp,
-            avatar: pathAvatar
+            avatar: pathAvatar,
           });
         })
         .catch((er) => res.render("error", { error: er }));
@@ -140,8 +163,7 @@ router.get("/resultados", function (req, res) {
   var tag = oldtag.split("#");
 
   if (tag.length > 1) {
-    if(oldtag.charAt(0)=="#" )
-      tag = tag.slice(1);
+    if (oldtag.charAt(0) == "#") tag = tag.slice(1);
 
     tag.forEach((str) => {
       var n = str.length;
@@ -198,7 +220,7 @@ router.get("/profile", (req, res) => {
     .then((recs) => {
       res.render("Consumidor/profile", {
         produtor: req.user,
-        avatar: pathAvatar
+        avatar: pathAvatar,
       });
     })
     .catch((e) => res.render("error", { error: e }));

@@ -85,7 +85,7 @@ router.get(/\/recurso\/[0-9a-zA-Z]*/, function (req, res, next) {
             recurso: dados,
             produtor: resp,
             path: ffp,
-            avatar: pathAvatar
+            avatar: pathAvatar,
           });
         })
         .catch((er) => res.render("error", { error: er }));
@@ -115,19 +115,21 @@ router.post("/recurso/:id", (req, res) => {
 router.post("/recurso/:rec/:com", (req, res) => {
   req.body.data = new Date().toISOString().substr(0, 16);
   console.log("Passei por aqui");
-  var dados = Recursos.lookUpCom(req.params.com)
-    .then((dados) => {
-      console.log("Dados :" + dados);
-      res.redirect("/produtor/recurso/" + req.params.rec);
-      /*
-      req.body.id_coment = dados.comentarios.comentarios.length + 1;
-      req.body.id_utilizador = req.user.email;
-      req.body.nome_utilizador = req.user.nome;
-      dados.comentarios.push(req.body);
-      console.log(dados.comentarios);
-      Recursos.edit(req.params.id, dados)
-        .then((e) => res.redirect("/produtor/recurso/" + req.params.id))
-        .catch((e) => res.render("error", { error: e }));*/
+  req.body.id_utilizador = req.user.email;
+  req.body.nome_utilizador = req.user.nome;
+  Recursos.list()
+    .then((recursos) => {
+      var result = Recursos.getNumComs(recursos);
+      req.body.id_coment = result;
+      Recursos.addReply(
+        req.params.rec,
+        req.params.com,
+        JSON.stringify(req.body)
+      )
+        .then(() => {
+          res.redirect("/produtor/recurso/" + req.params.rec);
+        })
+        .catch((e) => res.render("error", { error: e }));
     })
     .catch((e) => res.render("error", { error: e }));
 });

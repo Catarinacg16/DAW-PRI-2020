@@ -15,6 +15,29 @@ var {
 
 const { symlinkSync } = require("fs");
 
+//Adiciona Reply a um comentario
+router.post("/recurso/:rec/:com", (req, res) => {
+  req.body.data = new Date().toISOString().substr(0, 16);
+  console.log("Passei por aqui");
+  req.body.id_utilizador = req.user.email;
+  req.body.nome_utilizador = req.user.nome;
+  Recursos.list()
+    .then((recursos) => {
+      var result = Recursos.getNumComs(recursos);
+      req.body.id_coment = result;
+      Recursos.addReply(
+        req.params.rec,
+        req.params.com,
+        JSON.stringify(req.body)
+      )
+        .then(() => {
+          res.redirect("/produtor/recurso/" + req.params.rec);
+        })
+        .catch((e) => res.render("error", { error: e }));
+    })
+    .catch((e) => res.render("error", { error: e }));
+});
+
 /* GET Form registar utilizador*/
 router.get("/registar", function (req, res, next) {
   res.render("Administrador/registar");
@@ -211,12 +234,14 @@ router.get("/profile/:id", (req, res) => {
       Recursos.lookUpProd(prod.email)
         .then((recs) => {
           var pathAvatar = "/fileStore/avatares/" + prod._id;
-          console.log(pathAvatar)
+          console.log(pathAvatar);
           try {
             if (!fs.existsSync(__dirname + "/../public" + pathAvatar)) {
               pathAvatar = "/images/user.png";
             }
-          } catch (err) { console.error(err); }
+          } catch (err) {
+            console.error(err);
+          }
 
           var ponto = Recursos.getPontuacaoMedia(recs);
           var downs = Recursos.getNumDownloads(recs);
@@ -225,7 +250,7 @@ router.get("/profile/:id", (req, res) => {
             recursos: recs,
             pontuacao: ponto,
             downs: downs,
-            avatar: pathAvatar
+            avatar: pathAvatar,
           });
         })
         .catch((e) => res.render("error", { error: e }));
@@ -241,21 +266,22 @@ router.get(/\/recurso\/[0-9a-zA-Z]*/, function (req, res, next) {
     .then((dados) => {
       Utilizador.lookUpId(dados.produtor)
         .then((resp) => {
-
           var pathAvatar = "/fileStore/avatares/" + resp._id;
-          console.log(pathAvatar)
+          console.log(pathAvatar);
           try {
             if (!fs.existsSync(__dirname + "/../public" + pathAvatar)) {
               pathAvatar = "/images/user.png";
             }
-          } catch (err) { console.error(err); }
+          } catch (err) {
+            console.error(err);
+          }
 
           let ffp = previewFacilitator(dados._id);
           res.render("Produtor/recurso", {
             recurso: dados,
             produtor: resp,
             path: ffp,
-            avatar: pathAvatar
+            avatar: pathAvatar,
           });
         })
         .catch((er) => res.render("error", { error: er }));
