@@ -28,12 +28,10 @@ module.exports.lookUpProd = function (email) {
 };
 
 //Retorna comentario
-module.exports.lookUpCom = function (com_id , newcom) {/*
+module.exports.lookUpCom = function (com_id ) {
   return Recurso.findOne(
-    {"comentarios.id_coment": com_id},{ comentarios.comentarios: 1}},
-    {new: true}
+    {"comentarios.id_coment": com_id}, {comentarios: 1}
   )
-  */
 }
 
 module.exports.lookUpbyTag = function (taglist) {

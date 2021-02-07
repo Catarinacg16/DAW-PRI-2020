@@ -20,7 +20,25 @@
     "$date": "2021-02-07T17:27:00Z"
   },
   "produtor": "tania@gmail.com",
-  "comentarios": [],
+  "comentarios": [
+		{
+			"descricao" : "Adorei! ",
+			"data" : "2021-02-07T17:27:00Z",
+			"id_coment" : 1,
+			"id_utilizador" : "tania@gmail.com",
+			"nome_utilizador" : "Tânia Filipa",
+			"comentarios" : [
+        {
+          "descricao" : "Adorei! ",
+          "data" : "2021-02-07T17:27:00Z",
+          "id_coment" : 11,
+          "id_utilizador" : "tania@gmail.com",
+          "nome_utilizador" : "Tânia Filipa",
+          "comentarios" : []
+        }
+    ]
+		}
+	],
   "__v": 0
 },{
   "_id": {
@@ -54,12 +72,12 @@
     "JBB"
   ],
   "tags": [
-    "Algoritmos e Complexidade",
+    "AlgoritmosEComplexidade",
     "C",
     "Prim"
   ],
   "visibilidade": "Público",
-  "tipo": "Aplicação",
+  "tipo": "Tese",
   "descricao": "Algoritmo de caminho mais curto de Prim em C",
   "titulo": "Algoritmo de Prim em C",
   "dataCriacao": {
@@ -82,13 +100,13 @@
     "JBB"
   ],
   "tags": [
-    "Algoritmos e Complexidade",
+    "AlgoritmosEComplexidade",
     "C",
-    "Quick Sort",
+    "QuickSort",
     "Sort"
   ],
   "visibilidade": "Público",
-  "tipo": "Slides",
+  "tipo": "Tese",
   "descricao": "Algoritmo de Quick Sort",
   "titulo": "Algoritmo Quick Sort",
   "dataCriacao": {
@@ -111,13 +129,13 @@
     "JBB"
   ],
   "tags": [
-    "Algoritmos e Complexidade",
+    "AlgoritmosEComplexidade",
     "C",
     "Algoritmo",
     "Introdução"
   ],
   "visibilidade": "Público",
-  "tipo": "Slides",
+  "tipo": "Tese",
   "descricao": "Definição de algoritmo",
   "titulo": "O que é um Algoritmo?",
   "dataCriacao": {
@@ -140,13 +158,13 @@
     "JBB"
   ],
   "tags": [
-    "Algoritmos e Complexidade",
+    "AlgoritmosEComplexidade",
     "C",
-    "P vs NP",
+    "PvsNP",
     "Complexidade"
   ],
   "visibilidade": "Público",
-  "tipo": "Slides",
+  "tipo": "Tese",
   "descricao": "Problemas NP Completos",
   "titulo": "Problemas NP Completos",
   "dataCriacao": {
@@ -169,11 +187,11 @@
     "JBB"
   ],
   "tags": [
-    "Algoritmos e Complexidade",
-    "Teste Resolvido"
+    "AlgoritmosEComplexidade",
+    "TesteResolvido"
   ],
   "visibilidade": "Público",
-  "tipo": "Resoluções",
+  "tipo": "Tese",
   "descricao": "Resolução do teste de Algoritmos e Complexidade de 2009-2010",
   "titulo": "Resolução do teste de Algoritmos e Complexidade de 2009",
   "dataCriacao": {
@@ -196,7 +214,7 @@
     "Tânia"
   ],
   "tags": [
-    "Sistemas Distribuidos"
+    "SistemasDistribuidos"
   ],
   "visibilidade": "Público",
   "tipo": "Tese",
@@ -409,60 +427,104 @@
   "__v": 0
 },{
   "_id": {
-    "$oid": "60203a22b716d172cc068028"
+    "$oid": "60205846b810e97e4308faff"
   },
   "autor": [
-    "Halliday",
-    "Resnick"
+    "Hugo Cunha"
   ],
   "tags": [
-    "Eletromagnetismo",
-    "Fisica",
-    "Portugues"
+    "SRCR"
   ],
   "visibilidade": "Público",
-  "tipo": "Artigo",
-  "descricao": "Sebenta de Eletromagnetismo Edição 8",
-  "titulo": "Livro de Eletromagnetismo",
+  "tipo": "Relatório",
+  "descricao": "Relatório da Unidade curricular de Sistemas de Representação e Raciocinio de 2020",
+  "titulo": "Relatório de SRCR 2020",
   "dataCriacao": {
-    "$date": "2009-01-01T00:00:00Z"
+    "$date": "2020-05-18T23:00:00Z"
   },
   "pontuacao": 0,
   "numPontuacoes": 0,
   "numDowns": 0,
   "dataRegisto": {
-    "$date": "2021-02-07T19:06:00Z"
+    "$date": "2021-02-07T21:14:00Z"
   },
   "produtor": "hugo@email.com",
   "comentarios": [],
   "__v": 0
 },{
   "_id": {
-    "$oid": "60203b0ee2da027844dd1be0"
+    "$oid": "602059f4b810e97e4308fb00"
   },
   "autor": [
-    "Halliday",
-    "Resnick"
+    "Paulo J Azevedo"
   ],
   "tags": [
-    "Eletromagnetismo",
-    "Fisica",
-    "Portugues"
+    "MD"
   ],
   "visibilidade": "Público",
-  "tipo": "Artigo",
-  "descricao": "Sebenta de Eletromagnetismo Edição 8",
-  "titulo": "Livro de Eletromagnetismo",
+  "tipo": "Slides",
+  "descricao": "Slides sobre Regras de Associação da Unidade Curricular de Mineração de Dados",
+  "titulo": "MD : Regras de Associação",
   "dataCriacao": {
-    "$date": "2009-01-01T00:00:00Z"
+    "$date": "2021-01-03T00:00:00Z"
   },
   "pontuacao": 0,
   "numPontuacoes": 0,
   "numDowns": 0,
   "dataRegisto": {
-    "$date": "2021-02-07T19:10:00Z"
+    "$date": "2021-02-07T21:21:00Z"
   },
   "produtor": "hugo@email.com",
+  "comentarios": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60205e18b810e97e4308fb02"
+  },
+  "autor": [
+    "JCR"
+  ],
+  "tags": [
+    "DAW"
+  ],
+  "visibilidade": "Público",
+  "tipo": "Exames",
+  "descricao": "Teste de 2021 de Desenvolvimento de aplicaçoes Web",
+  "titulo": "Teste 2021 DAW",
+  "dataCriacao": {
+    "$date": "2021-01-16T00:00:00Z"
+  },
+  "pontuacao": 0,
+  "numPontuacoes": 0,
+  "numDowns": 0,
+  "dataRegisto": {
+    "$date": "2021-02-07T21:39:00Z"
+  },
+  "produtor": "hugo@email.com",
+  "comentarios": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "602062e9f41d3c8da2b21848"
+  },
+  "autor": [
+    "SGTF"
+  ],
+  "tags": [],
+  "visibilidade": "Público",
+  "tipo": "Relatório",
+  "descricao": "Relatório da reunião do Steering Committee da Smart Grid Task Force",
+  "titulo": "Relatório da reuniãod e 2019 do SGTF-SC da UE ",
+  "dataCriacao": {
+    "$date": "2019-06-20T23:00:00Z"
+  },
+  "pontuacao": 0,
+  "numPontuacoes": 0,
+  "numDowns": 1,
+  "dataRegisto": {
+    "$date": "2021-02-07T22:00:00Z"
+  },
+  "produtor": "john@mail.com",
   "comentarios": [],
   "__v": 0
 }]

@@ -50,4 +50,17 @@
     "$date": "2021-02-07T17:07:00Z"
   },
   "__v": 0
+},{
+  "_id": {
+    "$oid": "60205a7db810e97e4308fb01"
+  },
+  "nivel": "produtor",
+  "nome": "John",
+  "email": "john@mail.com",
+  "filiacao": "docente",
+  "password": "password",
+  "dataRegisto": {
+    "$date": "2021-02-07T21:24:00Z"
+  },
+  "__v": 0
 }]
